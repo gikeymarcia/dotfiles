@@ -38,5 +38,5 @@ comfy and familiar to my personal configs. see `~/.scripts/gcloud`
 
 In the spirit of open-source, feel free to fork an play with any of what's here.
 If you find ways you can improve or expand functionality I'm always interested
-to see what you've done. I hope these files are useful to your in your computing
+to see what you've done. I hope these files are useful to you in your computing
 journey.
