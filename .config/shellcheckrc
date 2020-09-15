@@ -1,0 +1,8 @@
+# Allow using `which` since it gives full paths and is common enough
+disable=SC2230
+#
+# don't complain when I source files
+disable=SC1090
+#
+# allow checking exit code -eq 0 (it isn't a problem and conda uses it)
+disable=SC2181

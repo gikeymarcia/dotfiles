@@ -1,0 +1,22 @@
+#!/bin/bash
+# Mikey Garcia, @gikeymarcia
+# aliases for my root user
+
+# preferred flags for common system commands
+alias ls="ls --color=auto --group-directories-first"
+alias la="ls --color=auto --group-directories-first -lhAH"
+alias ll="ls --color=auto --group-directories-first -lh1FH"
+alias mv="mv -v"
+alias cp="cp -v"
+alias rm="rm -v"
+alias mkdir="mkdir -pv"
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias chmod="chmod -v"
+alias du="du -h"
+alias less="less -R"
+alias xclip="xclip -sel clip"
+alias vim="nvim"
+
+# run script chooser
+alias rs="find ~/.scripts/* -type f -name '*.sh' | fzf -i --height=30 --layout=reverse | xargs -r bash"

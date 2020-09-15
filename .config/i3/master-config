@@ -1,0 +1,428 @@
+# Mikey Garcia, @gikeymarcia
+# i3 config file (v4)
+#                     _
+# _ __ ___   __ _ ___| |_ ___ _ __
+#| '_ ` _ \ / _` / __| __/ _ \ '__|
+#| | | | | | (_| \__ \ ||  __/ |
+#|_| |_| |_|\__,_|___/\__\___|_|
+#
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+
+### Mod-Keys
+set $win Mod4
+set $alt Mod1
+#        Control
+#        Return
+#   108  Alt_R
+#   105  Control_R
+
+# STARTUP with i3
+# environment values
+exec        --no-startup-id xrdb -merge $HOME/.Xresources
+exec_always --no-startup-id xmodmap $HOME/.Xmodmap
+exec_always --no-startup-id numlockx on
+exec_always --no-startup-id $HOME/.scripts/power-settings/normal.sh
+# system UI components
+exec        --no-startup-id $HOME/.scripts/system/set-wallpaper.sh
+exec        --no-startup-id $HOME/.scripts/launchers/notification-manager.sh
+exec_always --no-startup-id $HOME/.scripts/launchers/status-bar.sh
+exec_always --no-startup-id $HOME/.scripts/launchers/compositor.sh on
+exec_always --no-startup-id $HOME/.scripts/launchers/network-manager-tray.sh
+exec        --no-startup-id $HOME/.scripts/launchers/nightmode.sh
+# important user tools
+exec_always --no-startup-id $HOME/.scripts/launchers/keepassxc.themed.sh
+exec        --no-startup-id $HOME/.dropbox-dist/dropboxd
+
+
+### PROGRAM SHORTCUTS -- Windows + (KEY)
+# (ENTER) open a terminal
+bindsym $win+Return         exec --no-startup-id alacritty
+bindsym $win+Shift+Return   exec --no-startup-id urxvt
+bindsym Control+$win+Return exec --no-startup-id $HOME/.scripts/dmenu/change-terminal-xcolors.sh
+# (d)menu -- run command
+bindsym $win+d exec --no-startup-id $HOME/.scripts/launchers/run-menu.sh
+# (D)ate -- gnome-calendar
+bindsym $win+Shift+d exec --no-startup-id gnome-calendar
+# (w)eb browsers
+bindsym $win+w       exec firefox
+bindsym $win+Shift+w exec brave-browser
+# (p)rivate web browsers
+bindsym $win+p       exec brave-browser    --incognito
+bindsym $win+Shift+p exec firefox          --private-window
+# (c)hat apps
+bindsym $win+c exec --no-startup-id $HOME/.scripts/launchers/chat-apps.sh
+#bindsym $win+Shift+c exec --no-startup-id killall telegram-desktop
+# (t)orrents -- deluge
+bindsym $win+t workspace $ws4;\
+               exec deluge
+# (m)edia-selector
+bindsym $win+Control+m exec --no-startup-id $HOME/.scripts/launchers/media-launcher.sh
+# (y)outube playlist selector
+bindsym $win+y exec --no-startup-id $HOME/.scripts/launchers/youtube-playlists.sh
+# ( ' " ) screenkey
+bindsym $win+apostrophe         exec --no-startup-id $HOME/.scripts/launchers/keystrokes.sh set
+bindsym $win+Shift+apostrophe   exec --no-startup-id $HOME/.scripts/launchers/keystrokes.sh choose
+# (s)tatus bar ON, (S)tatus bar OFF
+bindsym $win+s       exec --no-startup-id $HOME/.scripts/launchers/status-bar.sh toggle
+bindsym $win+Shift+s exec --no-startup-id $HOME/.scripts/launchers/status-bar.sh
+# (x) kill application
+#bindsym $win+x       exec --no-startup-id xkill
+
+
+### MY SCRIPTS
+# (b)ookmark open in terminal / (B)ookmark path to clipboard+primary
+bindsym $win+b exec --no-startup-id "$HOME/.scripts/dmenu/bookmark-to-term.sh"
+bindsym $win+Shift+b exec --no-startup-id "$HOME/.scripts/dmenu/bookmark-to-clipboard.sh"
+# (g)oogle services -- open in chrome app-mode
+bindsym $win+Control+g exec --no-startup-id "$HOME/.scripts/launchers/google-services.sh"
+
+### MEDIA KEYS
+# volume control
+bindcode 121 exec --no-startup-id pulseaudio-ctl mute
+bindcode 122 exec --no-startup-id pulseaudio-ctl down
+bindcode 123 exec --no-startup-id pulseaudio-ctl up
+# screen backlight control
+bindcode 232 exec --no-startup-id $HOME/.scripts/commands/macbook-backlight.sh down
+bindcode 233 exec --no-startup-id $HOME/.scripts/commands/macbook-backlight.sh up
+# keyboard LED backlight control
+bindcode 237 exec --no-startup-id $HOME/.scripts/commands/macbook-keyboard-led.sh down
+bindcode 238 exec --no-startup-id $HOME/.scripts/commands/macbook-keyboard-led.sh up
+
+### SYSTEM COMMANDS
+bindsym $win+Shift+q   exit
+bindsym $win+Control+r restart
+bindsym $win+Control+c exec --no-startup-id $HOME/.scripts/launchers/compositor.sh
+bindsym $win+Control+w exec --no-startup-id $HOME/.scripts/system/set-wallpaper.sh choose
+bindsym $win+Control+n exec --no-startup-id $HOME/.scripts/launchers/nightmode.sh toggle
+bindsym $win+F12       exec --no-startup-id $HOME/.scripts/launchers/i3lock.sh
+
+### MANAGE SYSTEM COMPONENTS -- $win + i
+mode "Mr. Manager" {
+        # (d)unst notification daemon ON, (D)unst OFF
+        bindsym d       exec --no-startup-id $HOME/.scripts/launchers/notification-manager.sh
+        bindsym Shift+d exec --no-startup-id $HOME/.scripts/launchers/notification-manager.sh off
+
+        # back to normal: Enter or Escape or Space
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym space  mode "default"
+}
+bindsym $win+i mode "Mr. Manager"
+
+mode "GiGi" {
+        # (?) soundboard
+        bindsym a  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh build-a-snowman.mp3
+        bindsym b  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh \
+                                            cats-meow.mp3 \
+                                            buddy-the-elf.mp3 \
+                                            buddy-elf-burp.mp3
+        bindsym c  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh cookie-monster.mp3
+        bindsym d  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh long-dog-barking.mp3; \
+                   exec --no-startup-id $HOME/.scripts/system/set-wallpaper.sh samedog--2560x1600.jpg
+        bindsym e  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh elephant.mp3
+        bindsym f  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh fireworks.mp3; \
+                   exec --no-startup-id $HOME/.scripts/system/set-wallpaper.sh newyear2010--2560x1600.jpg
+        bindsym g  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh random
+        bindsym h  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh \
+                                            janet-hi-there-good-place.mp3 \
+                                            hey.mp3 \
+                                            horse.mp3
+        bindsym i  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh nacho-stretchy-pants.mp3
+        bindsym j  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh \
+                                            let-it-go.mp3 \
+                                            nightmare-before-christmas-whats-this.mp3
+        bindsym k  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh krusty-the-clown.mp3
+        bindsym l  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh \
+                                            thriller.mp3 \
+                                            laughing.mp3
+        bindsym m  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh mean-one-Mr.Grinch.mp3
+        bindsym n  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh \
+                                            nacho-libre.mp3 \
+                                            nacho-libre-corn.mp3
+        bindsym o  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh owl-hoot.mp3
+        bindsym p  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh coco-un-poco-loco.mp3
+        bindsym q  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh quail.mp3
+        bindsym r  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh ready-for-some-football.mp3
+        bindsym s  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh slithery-snake.mp3
+        bindsym t  exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh \
+                                            backup-beep.mp3 \
+                                            baby-laughing.mp3 \
+                                            tick-tock.mp3
+        bindsym v exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh vroom.mp3
+        bindsym w exec --no-startup-id $HOME/.scripts/system/set-wallpaper.sh                              # (w)allpaper change (random)
+        bindsym x exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh xylophone.mp3
+        bindsym z exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh zipper.mp3
+
+        # kill sound
+        bindsym BackSpace  exec --no-startup-id killall mpg123
+
+        # volume
+        bindcode 122 exec --no-startup-id pulseaudio-ctl down
+        bindcode 123 exec --no-startup-id pulseaudio-ctl up
+
+        # back to normal
+        bindsym $win+Shift+g mode "default"
+}
+bindsym $win+Shift+g mode "GiGi"
+
+### Window Manipulation
+# QUIT/CLOSE/KILL focused window
+bindsym $win+Shift+c kill
+### Focusing windows
+# focus direction -- $win + [h,j,k,l]
+bindsym $win+h focus left
+bindsym $win+j focus down
+bindsym $win+k focus up
+bindsym $win+l focus right
+# focus output -- $win + [Left,Right] (arrow keys)
+bindsym $win+Right focus output right
+bindsym $win+Left  focus output left
+# focus parent/child container -- $win + [Up,Down] (arrow keys)
+bindsym $win+Up    focus parent
+bindsym $win+Down  focus child
+
+## MOVING WINDOWS -- $win + Shift + [h,j,k,l]
+bindsym $win+Shift+h move left
+bindsym $win+Shift+j move down
+bindsym $win+Shift+k move up
+bindsym $win+Shift+l move right
+# move window to output -- $win + Shift + [Left,Right] (arrow keys)
+bindsym $win+Shift+Right move output right; focus output right
+bindsym $win+Shift+Left  move output left;  focus output left
+
+## THE HIDDEN SCRATCHPAD
+bindsym $win+a floating toggle
+bindsym $win+Shift+a move scratchpad
+
+
+### ALTERING WINDOW PROPERTIES
+### Resize window binding mode -- $win + r ... [h,j,k,l,
+###                                             H,J,K,L]
+mode "Resize" {
+        # gross control mode
+        bindsym h       resize shrink width  5 px or 5 ppt
+        bindsym j       resize shrink height 5 px or 5 ppt
+        bindsym k       resize grow   height 5 px or 5 ppt
+        bindsym l       resize grow   width  5 px or 5 ppt
+        # fine-grain control mode
+        bindsym Shift+h resize shrink width  1 px or 1 ppt
+        bindsym Shift+j resize shrink height 1 px or 1 ppt
+        bindsym Shift+k resize grow   height 1 px or 1 ppt
+        bindsym Shift+l resize grow   width  1 px or 1 ppt
+        # back to normal: Enter or Escape or Space
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym space  mode "default"
+}
+bindsym $win+r mode "Resize"
+### Fullscreen focused window -- $win + f
+bindsym $win+f fullscreen toggle
+### Alter window -- Alt + $win + [n,b,f,0,l,s,t,d,h,v]
+# decoration: (n)amed (b)order (f)rame i.e.,fat border (0) nothing
+bindsym $alt+$win+n border normal 1
+bindsym $alt+$win+b border pixel 1
+bindsym $alt+$win+f border pixel 4
+bindsym $alt+$win+0 border pixel 0
+# layout: (l)ayout toggle, (s)tacking, (t)abbed, (d)efault--hoizontal split
+bindsym $win+space layout toggle splith splitv tabbed stacking
+bindsym $alt+$win+s layout stacking
+bindsym $alt+$win+t layout tabbed
+bindsym $alt+$win+d layout splith
+# split: (h)orizontal, (v)ertical [where the next window will go]
+bindsym $alt+$win+h split h
+bindsym $alt+$win+v split v
+
+
+### CUSTOM WINDOW RULES
+# assign apps to specific workspaces
+for_window [class="^discord$"]          move container workspace $ws9
+# for_window [class="^TelegramDesktop$"]  move container workspace $ws9
+for_window [class="^yakyak$"]           move container workspace $ws9
+for_window [title="^WhatsApp$"]         move container workspace $ws9
+for_window [title="^MikeyPasswords\.kdbx.*$"] move scratchpad
+# fat border for certain apps
+# vlc media info popup needs stronger visual indicator
+for_window [title="^Current Media Information$"] border pixel 4
+for_window [class="Deluge"]             border pixel 3
+for_window [class="Pick-colour-picker"] border pixel 3
+for_window [class="keepassxc"]          border pixel 3
+for_window [class="Pavucontrol"]        border pixel 3
+for_window [class="^TelegramDesktop$"]  border pixel 3
+for_window [class="yakyak"]             border pixel 3
+for_window [class="Gnome-calendar"]     border pixel 3
+
+
+### Workspaces
+# naming workspaces
+# left (on desktop)
+set $ws1 1:🐧
+set $ws2 2:🧠
+set $ws3 3:📝
+set $ws4 4:🔊
+set $ws5 5:⛔
+# right (on desktop)
+set $ws6 6:🏠
+set $ws7 7:💽
+set $ws8 8:🧘
+set $ws9 9:💬
+set $ws0 0:💰
+set $ws_remote ssh:🌐
+set $ws_virus COVID-19
+
+### Workspaces -- $win + [0-9, `, -, ~ ]
+bindsym $win+1 workspace $ws1
+bindsym $win+2 workspace $ws2
+bindsym $win+3 workspace $ws3
+bindsym $win+4 workspace $ws4
+bindsym $win+5 workspace $ws5
+bindsym $win+6 workspace $ws6
+bindsym $win+7 workspace $ws7
+bindsym $win+8 workspace $ws8
+bindsym $win+9 workspace $ws9
+bindsym $win+0 workspace $ws0
+bindsym $win+grave workspace $ws_remote
+bindsym $win+minus workspace $ws_virus
+### swtich to paired desktop work contexts -- $win + [F1,F2,F3,F5,F8,F12]
+# key       F1       F2      F3      F5      F8         F12
+# use       home     order   chat    media   system     random
+# desktops  6 1      8 3     3 9     5 4     remote 7   2 5
+# bindsym $win+F1  workspace $ws6;       workspace $ws1
+# bindsym $win+F2  workspace $ws8;       workspace $ws3
+# bindsym $win+F3  workspace $ws3;       workspace $ws9
+# bindsym $win+F5  workspace $ws5;       workspace $ws4
+# bindsym $win+F8  workspace $ws_remote; workspace $ws7
+# bindsym $win+F12 workspace $ws2;       workspace $ws5
+### Shift to workspace -- Shift + $win + [0-9]
+bindsym $win+Shift+1     move container to workspace $ws1;       workspace $ws1
+bindsym $win+Shift+2     move container to workspace $ws2;       workspace $ws2
+bindsym $win+Shift+3     move container to workspace $ws3;       workspace $ws3
+bindsym $win+Shift+4     move container to workspace $ws4;       workspace $ws4
+bindsym $win+Shift+5     move container to workspace $ws5;       workspace $ws5
+bindsym $win+Shift+6     move container to workspace $ws6;       workspace $ws6
+bindsym $win+Shift+7     move container to workspace $ws7;       workspace $ws7
+bindsym $win+Shift+8     move container to workspace $ws8;       workspace $ws8
+bindsym $win+Shift+9     move container to workspace $ws9;       workspace $ws9
+bindsym $win+Shift+0     move container to workspace $ws0;       workspace $ws0
+bindsym $win+Shift+grave move container to workspace $ws_remote; workspace $ws_remote
+bindsym $win+Shift+minus move container to workspace $ws_virus;  workspace $ws_virus
+### Shift to work context -- $win + [F1,F2,F3,F5,F8,F12]
+bindsym $win+Shift+F1  move container to workspace $ws1; workspace $ws1
+bindsym $win+Shift+F2  move container to workspace $ws3; workspace $ws3
+bindsym $win+Shift+F3  move container to workspace $ws9; workspace $ws9
+bindsym $win+Shift+F5  move container to workspace $ws4; workspace $ws4
+bindsym $win+Shift+F8  move container to workspace $ws7; workspace $ws7
+bindsym $win+Shift+F12 move container to workspace $ws5; workspace $ws5
+### Move container to workspace -- $win + Control + [0-9]
+bindsym $win+Control+1     move container to workspace $ws1
+bindsym $win+Control+2     move container to workspace $ws2
+bindsym $win+Control+3     move container to workspace $ws3
+bindsym $win+Control+4     move container to workspace $ws4
+bindsym $win+Control+5     move container to workspace $ws5
+bindsym $win+Control+6     move container to workspace $ws6
+bindsym $win+Control+7     move container to workspace $ws7
+bindsym $win+Control+8     move container to workspace $ws8
+bindsym $win+Control+9     move container to workspace $ws9
+bindsym $win+Control+0     move container to workspace $ws0
+bindsym $win+Control+grave move container to workspace $ws_remote
+bindsym $win+Control+minus move container to workspace $ws_virus
+
+### Relative window switching
+# next workspace on output -- $win + [n,N]
+bindsym $win+n       workspace next_on_output
+bindsym $win+Shift+n workspace prev_on_output
+# previously active workspace -- $win + o
+bindsym $win+o       workspace back_and_forth
+# workspace settings
+workspace_auto_back_and_forth yes
+
+
+### Floating Window Manipulation
+# Mouse+$win to move floating windows
+floating_modifier $win
+mode "Float On" {
+    # toggle tiling / floating
+    bindsym $win+a floating toggle
+
+    # change focus between tiling / floating windows
+    bindsym f focus mode_toggle
+
+    # resize floating window
+    bindsym $win+$alt+h resize shrink width  25 px
+    bindsym $win+$alt+j resize grow   height 25 px
+    bindsym $win+$alt+k resize shrink height 25 px
+    bindsym $win+$alt+l resize grow   width  25 px
+
+    # move floating window
+    bindsym $win+Shift+h move left  30 px
+    bindsym $win+Shift+j move down  30 px
+    bindsym $win+Shift+k move up    30 px
+    bindsym $win+Shift+l move right 30 px
+
+    # back to normal: Enter or Escape or Space
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym space  mode "default"
+}
+bindsym $win+Shift+f mode "Float On"
+
+
+### Mouse settings
+focus_follows_mouse no
+mouse_warping output
+
+
+### Visual Settings
+font pango:DejaVuSansMono Nerd Font 10
+force_display_urgency_hint 2000 ms
+### The Default Window
+#workspace_layout [stacking, tabbed, default]
+workspace_layout tabbed
+hide_edge_borders vertical
+new_window pixel 1
+## Xcolors!!
+set_from_resource $cursorColor2 i3wm.cursorColor2   #82007d
+set_from_resource $foreground   i3wm.foreground     #c5c8c6
+set_from_resource $background   i3wm.background     #0d0e0f
+# black
+set_from_resource $black1       i3wm.color0  #1b1e20
+set_from_resource $black2       i3wm.color8  #1b1e20
+# red
+set_from_resource $red1         i3wm.color1  #cc342b
+set_from_resource $red2         i3wm.color9  #dc1f12
+# green
+set_from_resource $green1       i3wm.color2  #198844
+set_from_resource $green2       i3wm.color10 #2bd56d
+# yellow
+set_from_resource $yello1       i3wm.color3  #fba922
+set_from_resource $yello2       i3wm.color11 #d2be0a
+# blue
+set_from_resource $blue1        i3wm.color4  #161c99
+set_from_resource $blue2        i3wm.color12 #9cb6f0
+# magenta
+set_from_resource $magen1       i3wm.color5  #af3cf7
+set_from_resource $magen2       i3wm.color13 #a36ac7
+# cyan
+set_from_resource $cyan1        i3wm.color6  #03d2f6
+set_from_resource $cyan2        i3wm.color14 #39b1ed
+# white
+set_from_resource $white1       i3wm.color7  #c5c8c6
+set_from_resource $white2       i3wm.color15 #ffffff
+# from polybar setup ~/.config/polybar/config
+set $highlight      #005fd7
+set $hi-back        #e6e1dc
+set $dim-grey       #666666
+set $fcs-alt        #F400A3
+set $hi-back-alt    #a2c4f0
+set $urgent-bg      #283747
+set $urgent-line    #283747
+
+## Window-Color-Scheme   label-border   label-bg        label-text  indicator   child-border
+client.focused           $highlight     $hi-back        $highlight  $black1     $highlight
+client.unfocused         $black1        $black2         $white2     $white2     $black2
+client.focused_inactive  $highlight     $hi-back-alt    $black2     $white2     $black2
+client.urgent            $red1          $black1         $red1       $black1     $red1
+client.placeholder       $black1        $black2         $dim-grey   $white2     $black2
+client.background        $background

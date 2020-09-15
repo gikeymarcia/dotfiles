@@ -1,0 +1,6 @@
+.config/duckdns/duck.sh
+.config/keepassxc/MikeyPasswords.kdbx
+.kaggle/kaggle.json
+.ssh/authorized_keys
+.ssh/config
+.ssh/macbook_id_ed25519.pub

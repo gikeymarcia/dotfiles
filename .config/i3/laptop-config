@@ -1,0 +1,15 @@
+# i3 config file (v4)
+#  _             _
+# | | __ _ _ __ | |_ ___  _ __
+# | |/ _` | '_ \| __/ _ \| '_ \
+# | | (_| | |_) | || (_) | |_) |
+# |_|\__,_| .__/ \__\___/| .__/
+#         |_|            |_|
+#
+# keycode 108 -- Alt_R
+bindcode $win+108 scratchpad show, resize set 1950 1200, move position center
+#
+# placing workspaces
+set $dsply eDP-1
+set $hdmi HDMI-1
+workspace $ws1 output $dsply

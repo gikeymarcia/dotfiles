@@ -1,0 +1,24 @@
+# dracula.dark
+background="#282A36"
+foreground="#F8F8F2"
+cursor="#00f451"
+mouse_background=""
+mouse_foreground=""
+highlight="#1d3146"
+border="#282A36"
+color0="#000000"  # black
+color1="#FF5555"  # red
+color2="#50FA7B"  # green
+color3="#F1FA8C"  # yellow
+color4=" #BD93F9" # blue
+color5="#FF79C6"  # magenta
+color6="#8BE9FD"  # cyan
+color7="#BFBFBF"  # white
+color8="#4D4D4D"  # br_black
+color9="#FF6E67"  # br_red
+color10="#5AF78E" # br_green
+color11="#F4F99D" # br_yellow
+color12="#CAA9FA" # br_blue
+color13="#FF92D0" # br_magenta
+color14="#9AEDFE" # br_cyan
+color15="#E6E6E6" # br_white

@@ -1,0 +1,66 @@
+h    ~
+
+## source code
+sc   ~/.scripts
+cmd  ~/.scripts/commands
+fai  ~/Documents/git_repos/fast-ai
+repo ~/Documents/git_repos
+
+## library locations
+dh   ~/library/dharma
+pc   ~/library/podcasts
+lec  ~/library/lectures
+y    ~/library/misc-videos/workouts/yoga
+mu   ~/library/music
+mo   ~/library/movies
+hm   ~/library/misc-videos/homemovies
+tv   ~/library/tv-shows
+ab   ~/library/audiobooks
+ss   ~/library/sound-shields
+
+## captain's log
+ll   ~/dll
+jrn  ~/dll/writing/journals
+pln  ~/dll/plans/days
+U    ~/dll/logs/.U
+q    ~/dll/inputs/quotes
+
+## documents
+dl   ~/Downloads
+dt   ~/Desktop
+dl   ~/Dropbox
+whf  ~/Desktop/coronavirus
+shel ~/Desktop/shell-tests
+iso  ~/Documents/iso-images
+usb  /mnt/thumb-drive
+deb  ~/Documents/debs
+c    ~/Documents/courses
+nlp  ~/Documents/courses/nlp
+ai   ~/Documents/courses/ai-for-programmers
+lal  ~/Documents/courses/computational-linear-algebra
+w    ~/library/pictures/wallpapers
+tor  ~/Torrents/seeding
+
+## TV Shows
+#tbil ~/library/tv-shows/billions/Season-04/
+
+## dotfiles
+cfg  ~/.config
+i3   ~/.config/i3
+vim  ~/.vim
+plg  ~/.vim/plug-config
+fnt  ~/.fonts
+not  ~/.notes
+urx  ~/.urxvt/ext
+dyn  ~/.dynamic-colors/colorschemes
+sysd ~/.system-files/systemd-unit-files
+
+
+## system locations
+apt  /etc/apt
+sysd /usr/lib/systemd/user
+mnt  /mnt
+log  /var/log
+del  /var/lib/deluge/.config/deluge
+ss   /var/lib/samba/usershares
+udev /etc/udev/rules.d

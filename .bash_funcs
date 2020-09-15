@@ -1,0 +1,53 @@
+#!/bin/bash
+# Mikey Garcia, @gikeymarcia
+# common tasks / making the shell comfy
+
+# mkdir and cd into it
+mcd () {
+    mkdir -pv "$1"
+    cd "$1" || echo "could not cd to '$1'"
+}
+
+# grep for details of running processes
+seegrep () {
+    pids=$(pgrep "$1")
+    if [ -n "$pids" ]; then
+        echo "$pids" | xargs ps
+    fi
+    unset pids
+}
+
+# make new executable shell script file
+touchx () {
+    if [ -z "$1" ]; then
+        echo "must give a filename."
+    else
+        touch "$1"
+        chmod -v +x "$1"
+        echo "#!/bin/bash" >> "$1"
+        $EDITOR "$1"
+    fi
+}
+
+# search for packages, pick one, show details
+apts () {
+    pkg=$(apt-cache search "$1" | fzf --prompt="which package?")
+    p=$(printf "%s" "$pkg" | awk '{print $1}')
+    if [ -n "$p" ]; then
+        apt show "$p"
+        echo "$pkg"
+        ~/.scripts/commands/get-clip.sh "$p"
+    fi
+    unset p
+    unset pkg
+}
+
+# sort a file and show the diff
+sort_file () {
+    if [ -r "$1" ]; then
+        cp -v "$1" /tmp/unsorted_version
+        sort "$1"  > /tmp/sorted_version
+        mv -v /tmp/sorted_version "$1"
+        diff -u /tmp/unsorted_version "$1"
+    fi
+}

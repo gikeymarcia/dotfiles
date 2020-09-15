@@ -1,0 +1,5 @@
+! Mikey Garcia, @gikeymarcia
+URxvt.font:             xft:Monofur Nerd Font Mono-24:style=Book:antialias=true:hinting=true
+URxvt.boldFont:         xft:Monofurbold Nerd Font Mono-24:style=bold:antialias=true:hinting=true
+URxvt.italicFont:       xft:Monofuritalic Nerd Font Mono-24:style=italic:antialias=true:hinting=true
+URxvt.bolditalicFont:   xft:UbuntuMono Nerd Font Mono-24:style=Bold Italic:antialias=true:hinting=true

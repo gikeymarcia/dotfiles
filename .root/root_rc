@@ -1,0 +1,80 @@
+#!/bin/bash
+# shellcheck shell=bash
+# shellcheck disable=SC2154,SC2020
+
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+source-existing () {
+    [ -r "$1" ] && . "$1"
+}
+
+### BASH OPTIONS
+## https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
+set -o vi               # enable VI-mode
+shopt -s cdspell        # spellcheck/autocorrect
+shopt -s autocd         # automatically cd into directories
+shopt -s dotglob        # match hidden files with glob matching
+shopt -s dirspell       # spellcheck/autocorrect
+shopt -s checkwinsize   # update window LINES and COLUMNS after each command
+# history options
+shopt -s cmdhist        # multi-line commands record to one line
+shopt -s histappend     # append to instead of overwrite history file
+HISTSIZE=15000
+HISTFILESIZE=1000000
+HISTIGNORE='ls:ll:clear'
+HISTCONTROL=ignoreboth:erasedups
+
+
+### make GNU utils more friendly
+# make less more friendly for non-text input files, see lesspipe(1)
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# enable color support for ls
+if [ -x /usr/bin/dircolors ]; then
+    # shellcheck disable=SC2015
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+fi
+
+
+### PIMP MY BASH PROMPT
+# set variable identifying working chroot
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # COLOR PROMPT
+    source-existing ~/.bash_color_codes     # BASH color escape sequences
+    TIME="$White\A$Color_Off"
+    USERatCOMP="${BIRed}\u@\h${Color_Off}"
+    PROMPT_LOC="${BBlue}\w${BIWhite} #${Color_Off}"
+    # shellcheck disable=SC2154
+    PS1=" $TIME ${debian_chroot:+($debian_chroot)}${USERatCOMP}${PROMPT_LOC} ${Color_Off}"
+else
+    # NO COLOR PROMPT
+    PS1=' \A ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+
+# set window title for xterm, rxvt, and st terminals
+case "$TERM" in
+xterm*|rxvt*|st*|alacritty)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable programmable completion features
+if ! shopt -oq posix; then source-existing /usr/share/bash-completion/bash_completion ; fi
+
+# my customizations
+echo "with great-POWER-comes great-RESPONSIBILITY" | tr '-' '\n\n' | figlet | lolcat
+source-existing ~/.fzf.bash
+source-existing ~/.bash_aliases
+bind -f ~/.binds

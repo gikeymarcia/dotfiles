@@ -1,0 +1,36 @@
+! Mikey Garcia, @gikeymarcia
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--ExtraLight.otf: Hasklug Nerd Font Mono,Hasklig ExtraLight:style=ExtraLight,Regular
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--ExtraLight Italic.otf: Hasklug Nerd Font Mono,Hasklig ExtraLight:style=ExtraLight Italic,Italic
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Semibold Italic.otf: Hasklug Nerd Font Mono,Hasklig Semibold:style=Semibold Italic,Italic
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Semibold.otf: Hasklug Nerd Font Mono,Hasklig Semibold:style=Semibold,Regular
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Light Italic.otf: Hasklug Nerd Font Mono,Hasklig Light:style=Light Italic,Italic
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Black Italic.otf: Hasklug Nerd Font Mono,Hasklig Black:style=Black Italic,Italic
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Light.otf: Hasklug Nerd Font Mono,Hasklig Light:style=Light,Regular
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Medium Italic.otf: Hasklug Nerd Font Mono,Hasklig Medium:style=Medium Italic,Italic
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Medium.otf: Hasklug Nerd Font Mono,Hasklig Medium:style=Medium,Regular
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Black.otf: Hasklug Nerd Font Mono,Hasklig Black:style=Black,Regular
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Bold.otf: Hasklug Nerd Font Mono:style=Bold
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Bold Italic.otf: Hasklug Nerd Font Mono:style=Bold Italic
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono--Italic.otf: Hasklug Nerd Font Mono:style=Italic
+!   ~/.fonts/hasklug/mono/Hasklug.Nerd.Font.Mono.Complete.otf: Hasklug Nerd Font Mono:style=Regular
+
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Bold.otf: Hasklug Nerd Font:style=Bold
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Italic.otf: Hasklug Nerd Font:style=Italic
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font.Complete.otf: Hasklug Nerd Font:style=Regular
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Bold_Italic.otf: Hasklug Nerd Font:style=Bold Italic
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Black.otf: Hasklug Nerd Font,Hasklig Black:style=Black,Regular
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Light.otf: Hasklug Nerd Font,Hasklig Light:style=Light,Regular
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Medium.otf: Hasklug Nerd Font,Hasklig Medium:style=Medium,Regular
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Semibold.otf: Hasklug Nerd Font,Hasklig Semibold:style=Semibold,Regular
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Black_Italic.otf: Hasklug Nerd Font,Hasklig Black:style=Black Italic,Italic
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Light_Italic.otf: Hasklug Nerd Font,Hasklig Light:style=Light Italic,Italic
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--ExtraLight.otf: Hasklug Nerd Font,Hasklig ExtraLight:style=ExtraLight,Regular
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Medium_Italic.otf: Hasklug Nerd Font,Hasklig Medium:style=Medium Italic,Italic
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--Semibold_Italic.otf: Hasklug Nerd Font,Hasklig Semibold:style=Semibold Italic,Italic
+!   ~/.fonts/hasklug/Hasklug.Nerd.Font--ExtraLight_Italic.otf: Hasklug Nerd Font,Hasklig ExtraLight:style=ExtraLight Italic,Italic
+
+
+URxvt.font:             xft:Hasklug Nerd Font Mono-14:style=Medium:antialias=true:hinting=true
+URxvt.boldFont:         xft:Hasklug Nerd Font Mono-14:style=Bold:antialias=true:hinting=true
+URxvt.italicFont:       xft:Hasklug Nerd Font Mono-14:style=Light Italic:antialias=true:hinting=true
+URxvt.bolditalicFont:   xft:Hasklug Nerd Font Mono-14:style=Bold Italic:antialias=true:hinting=true

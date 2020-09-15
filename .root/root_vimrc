@@ -1,0 +1,105 @@
+colorscheme desert
+
+" MYVIMRC
+let mapleader  =","         " use the comma character as leader
+let maplocalleader=" "      " use the space character as localleader
+
+"" allow italics -- https://jsatk.us/posts/a-descent-into-madness-with-vim-tmux-and-italics/
+set t_ZH=[3m
+set t_ZR=[23m
+set colorcolumn=80
+set background=dark
+highlight ColorColumn ctermbg=darkgrey guibg=lightgrey
+set showcmd                  " show command in bottom bar
+set lazyredraw               " redraw only when we need to.
+set linebreak                " don't break up words during line wrapping
+" hightlight position with <leader>h
+highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
+highlight cursorline   cterm=NONE ctermbg=red ctermfg=white
+nnoremap <Leader>h :set cursorline! cursorcolumn!<CR>
+
+" swap file madness
+set noswapfile
+set nobackup
+set undodir=~/.vim/undo
+set undofile
+
+
+" TAB stop settings
+set tabstop=4           " # of spaces per TAB read from file
+set softtabstop=4       " # of spaces inserted when TAB is pressed
+set shiftwidth=4        " # of spaces inserted when TAB is pressed
+set expandtab           " turn all TAB->4(space)
+set smartindent         " auto indent to correct level
+
+" IDE-like environment variables
+syntax on                   " enable syntax highlighting
+set relativenumber          " left panel numbering relative to cursor position
+set wildmenu                " visual autocomplete for command menu
+set showmatch               " highlight matching {},(),[]
+set browsedir=buffer        " set working directory based on opening file location
+set iskeyword-=_            " include _ as a word separator
+" markdown stuff
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'vim', 'css' , 'json']
+nnoremap <Leader>m :w<CR>:!$HOME/.scripts/pandoc/markdown-preview.sh % &<CR><CR>
+nnoremap <Leader>dm /^_date modified:.*<CR>C_date modified: <ESC>:read !date +"\%Y-\%m-\%d"<CR>kJA_<ESC>:nohlsearch<CR>
+
+" search settings
+set incsearch               " search as characters are entered
+set hlsearch                " highlight search matches
+set ignorecase              " will use case insensitive search if you use capital letters
+set smartcase               " will use case insensitive search if you use capital letters
+nnoremap <Leader><Leader> :nohlsearch<CR>
+
+
+" custom keybindings
+" ------------------
+"visual mode
+" yank to clipboard
+vnoremap <C-y> "+y<CR>
+
+" insert mode
+" paste from clipboard
+inoremap <C-v> <C-r>+
+
+" normal mode
+nnoremap <Up> gk
+nnoremap <Down> gj
+nnoremap <Right> :bn<CR>
+nnoremap <Left> :bp<CR>
+nnoremap <Leader>s :source ~/.vimrc<CR>
+nnoremap <localLeader>l :set linebreak!<CR>
+" splits
+set splitbelow splitright
+nnoremap <Leader>f :sp<CR>:Files<CR>
+"" change window
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+"" wrap words
+nnoremap <Leader>" ciW""<Esc>P
+nnoremap <Leader>' ciW''<Esc>P
+nnoremap <Leader>( ciW()<Esc>P
+nnoremap <Leader>< ciW<><Esc>P
+nnoremap <Leader>` ciW``<Esc>P
+"" spellcheck
+nnoremap <F7> :set spell!<CR>
+
+" file shortcuts
+nnoremap <Leader><Localleader><Localleader> :edit!<CR>
+
+" manual syntax highlighting
+map <F11> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+
+" auto-commands
+" check shell scripts for common mistakes
+autocmd BufWritePost *.sh,~/.bashrc,~/.bash_env :!shellcheck -x %
+" remove trailing white space before writing file
+let blacklist = ['patch', 'diff']
+autocmd BufWritePre * if index(blacklist, &ft) < 0 | :%s/\s\+$//e
+
+"disable annoying things
+nnoremap o o<Esc>i
+nnoremap O O<Esc>i

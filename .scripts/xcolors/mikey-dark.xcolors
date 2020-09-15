@@ -1,0 +1,34 @@
+!!! Xcolors
+! Mikey Garcia, @gikeymarcia
+! my own variant on a dark theme
+*foreground:   #c5c8c6
+*background:   #080808
+! extras
+! *underlineColor: #221199
+! *highlightColor: #1d3146
+! *cursorColor:  #00f451
+! *cursorColor2: #82007d
+! black
+*color0:       #000000
+*color8:       #1b1e20
+! red
+*color1:       #cc342b
+*color9:       #dc1f12
+! green
+*color2:       #198844
+*color10:      #16bf4a
+! yellow
+*color3:       #fba922
+*color11:      #d2be0a
+! blue
+*color4:       #161c99
+*color12:      #9cb6f0
+! magenta
+*color5:       #af3cf7
+*color13:      #a36ac7
+! cyan
+*color6:       #03d2f6
+*color14:      #39b1ed
+! white
+*color7:       #c5c8c6
+*color15:      #ffffff

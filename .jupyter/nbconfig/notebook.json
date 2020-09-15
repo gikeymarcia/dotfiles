@@ -1,0 +1,18 @@
+{
+  "load_extensions": {
+    "nbextensions_configurator/config_menu/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "help_panel/help_panel": true,
+    "codefolding/main": true,
+    "execute_time/ExecuteTime": true,
+    "livemdpreview/livemdpreview": true,
+    "hinterland/hinterland": true,
+    "code_font_size/code_font_size": true,
+    "varInspector/main": true,
+    "vim_binding/vim_binding": true
+  },
+  "Notebook": {
+    "Header": true,
+    "Toolbar": false
+  }
+}

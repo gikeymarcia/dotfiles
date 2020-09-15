@@ -1,0 +1,15 @@
+autopep8
+beautifulsoup4
+black
+flake8
+jedi
+#jupyterlab
+matplotlib
+meson
+#notebook
+numpy
+pandas
+torch
+torchvision
+ueberzug
+yapf

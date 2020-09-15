@@ -1,0 +1,5 @@
+! Mikey Garcia, @gikeymarcia
+URxvt.font:             xft:UbuntuMono Nerd Font Mono-14:style=Regular:antialias=true:hinting=true
+URxvt.boldFont:         xft:UbuntuMono Nerd Font Mono-14:style=Bold:antialias=true:hinting=true
+URxvt.italicFont:       xft:UbuntuMono Nerd Font Mono-14:style=Italic:antialias=true:hinting=true
+URxvt.bolditalicFont:   xft:UbuntuMono Nerd Font Mono-14:style=Bold Italic:antialias=true:hinting=true

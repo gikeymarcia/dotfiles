@@ -1,0 +1,4 @@
+#!/bin/sh
+. ~/.bash_env
+
+mesg n 2> /dev/null || true

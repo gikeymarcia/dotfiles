@@ -1,0 +1,17 @@
+! Mikey Garcia, @gikeymarcia
+
+!! Mono
+!   ~/.fonts/mononoki/mononoki-Regular_Nerd_Font_Complete_Mono.ttf: mononoki Nerd Font Mono:style=Regular
+!   ~/.fonts/mononoki/mononoki_Bold_Nerd_Font_Complete_Mono.ttf: mononoki Nerd Font Mono:style=Bold
+!   ~/.fonts/mononoki/mononoki_Italic_Nerd_Font_Complete_Mono.ttf: mononoki Nerd Font Mono:style=Italic
+!   ~/.fonts/mononoki/mononoki_Bold_Italic_Nerd_Font_Complete_Mono.ttf: mononoki Nerd Font Mono:style=BoldItalic
+
+!! regular
+!   ~/.fonts/mononoki/mononoki-Regular_Nerd_Font_Complete.ttf: mononoki Nerd Font:style=Regular
+!   ~/.fonts/mononoki/mononoki_Bold_Nerd_Font_Complete.ttf: mononoki Nerd Font:style=Bold
+!   ~/.fonts/mononoki/mononoki_Italic_Nerd_Font_Complete.ttf: mononoki Nerd Font:style=Italic
+!   ~/.fonts/mononoki/mononoki_Bold_Italic_Nerd_Font_Complete.ttf: mononoki Nerd Font:style=BoldItalic
+URxvt.font:             xft:mononoki Nerd Font Mono-13:style=Regular:antialias=true:hinting=true
+URxvt.boldFont:         xft:mononoki Nerd Font Mono-13:style=Bold:antialias=true:hinting=true
+URxvt.italicFont:       xft:mononoki Nerd Font Mono-13:style=Italic:antialias=true:hinting=true
+URxvt.bolditalicFont:   xft:mononoki Nerd Font Mono-13:style=Bold Italic:antialias=true:hinting=true

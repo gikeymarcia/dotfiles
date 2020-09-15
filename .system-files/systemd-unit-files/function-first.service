@@ -1,0 +1,8 @@
+[Unit]
+Description=Function keys first, media second
+
+[Service]
+ExecStart=/home/mikey/.scripts/system/mac-function-keys-first.sh
+
+[Install]
+WantedBy=multi-user.target

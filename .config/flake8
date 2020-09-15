@@ -1,0 +1,5 @@
+[flake8]
+# https://flake8.pycqa.org/en/latest/user/configuration.html
+ignore = E231, E226
+exclude = .git,__pycache__,docs/source/conf.py,old,build,dist
+max-complexity = 10

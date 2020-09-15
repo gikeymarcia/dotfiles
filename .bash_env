@@ -1,0 +1,23 @@
+#!/bin/sh
+# Mikey Garcia, @gikeymarcia
+# environment variables
+
+# apps
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export TERMCMD="alacritty"
+export FILE_MANAGER="ranger"
+# preferences
+export NMON="cMMM"
+export FZF_DEFAULT_OPTS="--extended --cycle --layout=reverse --height=70% --ansi -m"
+export DMENU_FONT="mononoki Nerd Font Mono-17:style=Regular:antialias=true:hinting=true"
+export DMENU_COLORS='-sf #e6e1dc -sb #005fd7 -nf white -nb #2b2b2b'
+
+# custom manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# clipmenu
+export CM_IGNORE_WINDOW="KeePassXC$"
+export CM_DIR=~/.cache/clipmenud/
+export CM_HISTLENGTH=30
+export CM_OWN_CLIPBOARD=1

@@ -1,0 +1,5 @@
+! Mikey Garcia, @gikeymarcia
+URxvt.font:             xft:Hack Nerd Font Mono-12:style=Regular:antialias=true:hinting=true
+URxvt.boldFont:         xft:Hack Nerd Font-12:style=Bold:antialias=true:hinting=true
+URxvt.italicFont:       xft:Hack Nerd Font-12:style=Italic:antialias=true:hinting=true
+URxvt.bolditalicFont:   xft:Hack Nerd Font-12:style=Bold Italic:antialias=true:hinting=true

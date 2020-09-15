@@ -1,0 +1,23 @@
+# i3 config file (v4)
+#     _           _    _
+#  __| | ___  ___| | _| |_ ___  _ __
+# / _` |/ _ \/ __| |/ / __/ _ \| '_ \
+#| (_| |  __/\__ \   <| || (_) | |_) |
+# \__,_|\___||___/_|\_\\__\___/| .__/
+#
+# keycode 108 -- Alt_R
+bindcode $win+108 scratchpad show, resize set 1600 950, move position center
+#
+# placing workspaces
+set $mon-L HDMI-0
+set $mon-R DVI-0
+workspace $ws1  output $mon-L
+workspace $ws2  output $mon-L
+workspace $ws3  output $mon-L
+workspace $ws4  output $mon-L
+workspace $ws5  output $mon-L
+workspace $ws6  output $mon-R
+workspace $ws7  output $mon-R
+workspace $ws8  output $mon-R
+workspace $ws9  output $mon-R
+workspace $ws0  output $mon-R

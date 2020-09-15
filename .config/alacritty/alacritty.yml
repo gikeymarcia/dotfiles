@@ -1,0 +1,52 @@
+background_opacity: 0.9
+colors:
+  bright:
+    black: '#37474f'
+    blue: '#81d4fa'
+    cyan: '#26a69a'
+    green: '#9ccc65'
+    magenta: '#ad1457'
+    red: '#ffa74d'
+    white: '#eceff1'
+    yellow: '#ffa000'
+  normal:
+    black: '#263238'
+    blue: '#03a9f4'
+    cyan: '#009688'
+    green: '#8bc34a'
+    magenta: '#e91e63'
+    red: '#ff9800'
+    white: '#cfd8dc'
+    yellow: '#ffc107'
+  primary:
+    background: '#263238'
+    foreground: '#eceff1'
+cursor:
+  style: Block
+  unfocused_hollow: true
+font:
+  bold:
+    family: Hasklug Nerd Font Mono
+    style: Bold
+  bold_italic:
+    family: Hasklug Nerd Font Mono
+    style: Bold Italic
+  italic:
+    family: Hasklug Nerd Font Mono
+    style: Light Italic
+  normal:
+    family: Hasklug Nerd Font Mono
+    style: Medium
+  size: 14
+live_config_reload: true
+mouse:
+  hide_when_typing: true
+  launcher:
+    args:
+    - -private
+    program: firefox
+scrolling:
+  history: 1000
+selection:
+  save_to_clipboard: true
+  semantic_escape_chars: ",\u2502`|:\"'.-_ ()[]{}<>\t"

@@ -1,0 +1,16 @@
+$include /etc/inputrc
+
+# tell me if I'm in insert or VI command mode
+set show-mode-in-prompt on
+set vi-ins-mode-string "+(ins)"
+set vi-cmd-mode-string ":(cmd)"
+
+# auto-completion visual niceties
+set colored-stats On
+set visible-stats On
+set mark-symlinked-directories On
+# make auto-completions friendlier to use [https://www.topbug.net/blog/2017/07/31/inputrc-for-humans/]
+set completion-ignore-case On
+set completion-prefix-display-length 3
+set show-all-if-ambiguous On
+set show-all-if-unmodified On

@@ -1,0 +1,35 @@
+! Mikey Garcia, @gikeymarcia
+!    _  __
+!   | |/ /________  _________  __  _______________  _____
+!   |   // ___/ _ \/ ___/ __ \/ / / / ___/ ___/ _ \/ ___/
+!  /   |/ /  /  __(__  ) /_/ / /_/ / /  / /__/  __(__  )
+! /_/|_/_/   \___/____/\____/\__,_/_/   \___/\___/____/
+Xft.dpi: 125
+! FONTS and COLORS
+#include "/home/mikey/.scripts/xcolors/material-dark.xcolors"
+#include "/home/mikey/.scripts/xfonts/jet-brains-NF.xfonts"
+
+! +-+-+-+-+-+
+! |u|r|x|v|t|
+! +-+-+-+-+-+
+URxvt.letterSpace: -1
+URxvt.lineSpace: 1
+URxvt.scrollBar: false
+URxvt.cursorBlink: true
+URxvt.internalBorder: 3
+!!! Extension -- ~/.urxvt/ext/ OR /usr/lib/x86_64-linux-gnu/urxvt/perl/
+URxvt.perl-ext: font-size
+URxvt.font-size.step: 2
+URxvt.perl-ext-common:
+!!! Keymaps
+URxvt.tripleclickwords: true
+!!! Disable features
+! disable Ctrl+Shift character insert modes
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.print-pipe: "cat > /dev/null"
+URxvt.skipBuiltinGlyphs: true
+!!! SCROLLBACK
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true

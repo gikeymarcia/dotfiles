@@ -1,0 +1,5 @@
+! Mikey Garcia, @gikeymarcia
+URxvt.font:             xft:SauceCodePro Nerd Font Mono-13:style=Regular:antialias=true:hinting=true
+URxvt.boldFont:         xft:SauceCodePro Nerd Font Mono-13:style=Bold:antialias=true:hinting=true
+URxvt.italicFont:       xft:SauceCodePro Nerd Font Mono-13:style=Light Italic:antialias=true:hinting=true
+URxvt.bolditalicFont:   xft:SauceCodePro Nerd Font Mono-13:style=Bold Italic:antialias=true:hinting=true

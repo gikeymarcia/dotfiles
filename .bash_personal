@@ -1,0 +1,27 @@
+#!/bin/bash
+# shellcheck shell=bash
+# Mikey Garcia, @gikeymarcia
+
+# paths
+export DLL=~/dll
+export QUOTES=$DLL/inputs/quotes
+export WORDS=$DLL/inputs/words
+export DOTFILES=~/.config/dotfiles/
+export SOUNDS=~/.config/notificaton-sounds
+export WALLPAPERS=~/library/pictures/wallpapers
+export COURSES=~/Documents/courses
+
+
+# probabalistic welcome message
+welcome () {
+    upper=25
+    case "$(seq "$upper" | shuf -n 1)" in
+        "1" ) display-dhammapada ;;
+        "2" ) ~/.scripts/commands/random-quote.sh ;;
+        "3" ) ~/.scripts/commands/random-quote.sh lol ;;
+    esac
+}
+
+case "$-" in
+    *i*) welcome ;;
+esac

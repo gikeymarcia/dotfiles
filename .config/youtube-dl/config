@@ -1,0 +1,11 @@
+--ignore-errors
+--restrict-filenames
+--playlist-random
+
+# uncomment below for audio only
+#-x
+#--audio-format mp3
+
+#-o ./%(uploader)s--%(id)s.%(ext)s
+-o ./%(uploader)s--%(id)s--%(title)s.%(ext)s
+

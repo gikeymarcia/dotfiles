@@ -1,0 +1,3 @@
+#	Reconstructed via infocmp from file: /lib/terminfo/s/screen-256color
+screen-256color-italic|GNU Screen with 256 colors and italics,
+    ritm=\E[23m, rmso=\E[27m, sitm=\E[3m, smso=\E[7m, use=screen-256color,

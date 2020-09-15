@@ -1,0 +1,5 @@
+[user]
+	email = gikeymarcia@gmail.com
+	name = Mikey Garcia
+[core]
+	editor = /usr/bin/nvim

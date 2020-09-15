@@ -1,0 +1,24 @@
+# pretty-and-pastel
+background="#fdf6e3"
+foreground="#c5c8c6"
+cursor="#00f451"
+mouse_background=""
+mouse_foreground=""
+highlight="#1d3146"
+border="#080808"
+color0="#00f451" # black
+color1="#cc342b" # red
+color2="#198844" # green
+color3="#fba922" # yellow
+color4="#161c99" # blue
+color5="#af3cf7" # magenta
+color6="#03d2f6" # cyan
+color7="#c5c8c6" # white
+color8="#00f451" # brblack
+color9="#dc1f12" # brred
+color10="#16bf4a" # brgreen
+color11="#d2be0a" # bryellow
+color12="#9cb6f0" # brblue
+color13="#a36ac7" # brmagenta
+color14="#39b1ed" # brcyan
+color15="#ffffff" # brwhite

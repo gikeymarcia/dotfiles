@@ -1,0 +1,24 @@
+[Unit]
+Description=Clipmenu-daemon
+
+[Service]
+User=mikey
+Group=mikey
+Environment=XAUTHORITY=/home/mikey/.Xauthority
+Environment=DISPLAY=:0
+Environment=CM_IGNORE_WINDOW="KeePassXC$"
+Environment=CM_DIR=/home/mikey/.cache/clipmenud
+ExecStart=/usr/bin/clipmenud
+Restart=always
+RestartSec=500ms
+
+MemoryDenyWriteExecute=yes
+NoNewPrivileges=yes
+ProtectControlGroups=yes
+ProtectKernelTunables=yes
+RestrictAddressFamilies=
+RestrictRealtime=yes
+
+[Install]
+WantedBy=graphical.target
+# https://askubuntu.com/questions/676007/how-do-i-make-my-systemd-service-run-via-specific-user-and-start-on-boot

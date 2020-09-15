@@ -1,0 +1,5 @@
+# I am not using this since moving to anaconda
+jupyter
+jupyter-nbconvert
+jupyter-notebook
+python3-ipykernel
