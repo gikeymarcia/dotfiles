@@ -146,7 +146,8 @@ tar -czf "$HOME/$tarball" \
     ".config/bind/my-bindings" \
     ".kaggle/kaggle.json" \
     ".fzf.bash" \
-    "Documents/git_repos/fzf/shell/key-bindings.bash" \
+    ".fzf/completion.bash" \
+    ".fzf/key-bindings.bash" \
     ".terminfo/s/screen-256color-italic" \
     ".vimrc" \
     ".tmux.conf" \

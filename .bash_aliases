@@ -28,6 +28,10 @@ alias grab=~/.scripts/commands/grab.sh
 alias srch=~/.scripts/commands/search.sh
 alias pull=~/.scripts/commands/pull.sh
 
+# git
+alias gs="git status"
+alias ga="git add -v"
+
 # program shorcuts
 alias clipmenu="env CM_LAUNCHER=fzf clipmenu"
 alias vim="nvim"
@@ -47,8 +51,8 @@ alias t=~/.scripts/tmux/tmux-quick-launcher.sh
 
 # manage dotfiles -- https://www.atlassian.com/git/tutorials/dotfiles
 # shellcheck disable=SC2139
-alias config="/usr/bin/git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME"
-alias pubcfg="/usr/bin/git --git-dir=$HOME/.config/pub-dotfiles/ --work-tree=$HOME"
+alias config='/usr/bin/git --git-dir=$DOTFILES --work-tree=$HOME'
+alias pubcfg='/usr/bin/git --git-dir=$PUB_DOTFILES --work-tree=$HOME'
 alias con=~/.scripts/dotfiles/config.sh
 alias rs=~/.scripts/commands/run-script.sh
 alias es=~/.scripts/dotfiles/edit-config-file.sh

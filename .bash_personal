@@ -7,6 +7,7 @@ export DLL=~/dll
 export QUOTES=$DLL/inputs/quotes
 export WORDS=$DLL/inputs/words
 export DOTFILES=~/.config/dotfiles/
+export PUB_DOTFILES=~/.config/pub-dotfiles/
 export SOUNDS=~/.config/notificaton-sounds
 export WALLPAPERS=~/library/pictures/wallpapers
 export COURSES=~/Documents/courses

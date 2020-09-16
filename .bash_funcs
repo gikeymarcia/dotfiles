@@ -2,6 +2,18 @@
 # Mikey Garcia, @gikeymarcia
 # common tasks / making the shell comfy
 
+# cd with bells and whistles
+# cd to files, preview dir contents
+function c (){
+    if [ -z "$1" ]; then    target=$HOME
+    elif [ -d "$1" ]; then  target=$1
+    elif [ -f "$1" ]; then target=$(dirname "$1")
+    fi
+    cd "$target" || return
+    ls --color=auto -F
+    echo "~"
+    pwd
+}
 # mkdir and cd into it
 mcd () {
     mkdir -pv "$1"

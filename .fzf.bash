@@ -1,14 +1,9 @@
 #!/bin/bash
-# Setup fzf
-# ---------
-if [[ ! "$PATH" == *$HOME/Documents/git_repos/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}$HOME/Documents/git_repos/fzf/bin"
-fi
-
+# I linked the completion.bash and key-bindings.bash from fzf git repo
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "$HOME/Documents/git_repos/fzf/shell/completion.bash" 2> /dev/null
+[[ $- == *i* ]] && source "$HOME/.fzf/completion.bash" 2> /dev/null
 
 # Key bindings
 # ------------
-source "$HOME/Documents/git_repos/fzf/shell/key-bindings.bash"
+source "$HOME/.fzf/key-bindings.bash"

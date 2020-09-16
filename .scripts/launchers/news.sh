@@ -11,7 +11,7 @@ sources+=("NewDiscourses            https://newdiscourses.com/")
 sources+=("AOUnityPhoenix           https://twitter.com/AoUnityPhoenix")
 sources+=("MarginalRevolution       https://marginalrevolution.com")
 sources+=("ArticlesOfUnity          https://discuss.articlesofunity.org")
-sources+=("IQAir                    https://www.iqair.com/us/air-quality-map?lat=34.09836&lng=-117.92383&zoomLevel=10")
+sources+=("IQAir                    https://www.iqair.com/us/air-quality-map?lat=34.05836&lng=-118.02883&zoomLevel=11")
 
 choices () {
     for link in "${sources[@]}"; do echo "$link"; done
