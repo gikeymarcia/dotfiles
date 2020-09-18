@@ -2,15 +2,13 @@
 # Mikey Garcia, @gikeymarcia config for qtile v0.16.0
 # development: view logs with
 # tail -f ~/.local/share/qtile/qtile.log
-
 import os
 import subprocess
 from typing import List  # noqa: F401
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Screen
+from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 from libqtile import hook
-
 #                                  _                    __ _
 #   __ _  ___ _ __   ___ _ __ __ _| |   ___ ___  _ __  / _(_) __ _
 #  / _` |/ _ \ '_ \ / _ \ '__/ _` | |  / __/ _ \| '_ \| |_| |/ _` |
@@ -27,7 +25,7 @@ follow_mouse_focus = False
 bring_front_click = True
 
 
-# shorthang for launching my scripts and accepting paramaters
+# shorthand for launching my scripts and accepting paramaters
 def script(syspath, param=None):
     if param is None:
         return os.path.expanduser(syspath)
@@ -58,9 +56,187 @@ clr = {
     "dim_red": "#641400",
     "dim_orange": "#4d3715",
 }
+#  _              _     _           _ _
+# | | _____ _   _| |__ (_)_ __   __| (_)_ __   __ _ ___
+# | |/ / _ \ | | | '_ \| | '_ \ / _` | | '_ \ / _` / __|
+# |   <  __/ |_| | |_) | | | | | (_| | | | | | (_| \__ \
+# |_|\_\___|\__, |_.__/|_|_| |_|\__,_|_|_| |_|\__, |___/
+#           |___/                             |___/
+keys = [
+    # quick-switch between groups
+    Key([mod], "o", lazy.screen.toggle_group(), desc="desktop quick toggle"),
+    Key([mod], "n", lazy.screen.next_group(), desc="next desktop"),
+    Key([mod, "shift"], "n", lazy.screen.prev_group(), desc="prev desktop"),
+    # traversing the stack
+    Key([mod], "k", lazy.layout.up(), desc="focus up stack"),
+    Key([mod], "j", lazy.layout.down(), desc="focus down stack"),
+    Key([mod], "h", lazy.layout.left(), desc="focus left"),
+    Key([mod], "l", lazy.layout.right(), desc="focus right"),
+    # rearrange the stack
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move upward"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move downward"),
+    Key([mod, "shift"], "h", lazy.layout.swap_left(), desc="Move pane left"),
+    Key([mod, "shift"], "l", lazy.layout.swap_right(), desc="Move pane right"),
+    # manipulate layout
+    Key([mod, "shift"], "space", lazy.prev_layout(), desc="previous layout"),
+    Key([mod], "space", lazy.next_layout(), desc="next layout"),
+    Key([mod], "BackSpace", lazy.layout.normalize(), desc="reset layout"),
+    Key([mod], "m", lazy.layout.maximize(), desc="mazimize"),
+    Key([mod], "Tab", lazy.layout.flip(), desc="flip master and stack"),
+    # resizing
+    Key([mod, "control"], "h", lazy.layout.shrink(), desc="shrink window"),
+    Key([mod, "control"], "l", lazy.layout.grow(), desc="grow window"),
+    # window actions
+    Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "F11", lazy.window.toggle_fullscreen(),
+        desc="toggle fullscreen"),
+    Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack"),
+    # programs
+    Key([mod], "Return", lazy.spawn(terminal), desc="Alacritty terminal"),
+    Key([mod], "d", lazy.spawn(script("~/.scripts/launchers/run-menu.sh")),
+        desc="dmenu_run launcher"),
+    Key([mod], "p", lazy.spawn("firefox -private"), desc="firefox -private"),
+    Key([mod, "shift"], "p", lazy.spawn("brave-browser --incognito"),
+        desc="brave-browser incognito"),
+    Key([mod], "w", lazy.spawn("firefox"), desc="firefox"),
+    Key([mod, "shift"], "w", lazy.spawn("brave-browser"),
+        desc="brave-browser"),
+    Key([mod], "F10",
+        lazy.spawn(script("~/.scripts/launchers/keepassxc.themed.sh")),
+        desc="keepassxc"),
+    Key([mod], "F5",
+        lazy.spawn(script("~/.scripts/commands/VPN.sh")),
+        desc="nordvpn"),
+    # hardware
+    Key([], "XF86AudioRaiseVolume",
+        lazy.spawn(script("~/.scripts/system/volume-control.sh", "up")),
+        desc="increase volume"),
+    Key([], "XF86AudioLowerVolume",
+        lazy.spawn(script("~/.scripts/system/volume-control.sh", "down")),
+        desc="decrease volume"),
+    Key([], "XF86AudioMute",
+        lazy.spawn(script("~/.scripts/system/volume-control.sh", "mute")),
+        desc="mute volume"),
+    Key([], "XF86MonBrightnessUp",
+        lazy.spawn(script("~/.scripts/commands/macbook-backlight.sh", "up")),
+        desc="screen backlight up"),
+    Key([], "XF86MonBrightnessDown",
+        lazy.spawn(script("~/.scripts/commands/macbook-backlight.sh", "down")),
+        desc="screen backlight down"),
+    Key([], "XF86KbdBrightnessUp",
+        lazy.spawn(
+            script("~/.scripts/commands/macbook-keyboard-led.sh", "up")),
+        desc="keyboard backlight up"),
+    Key([], "XF86KbdBrightnessDown",
+        lazy.spawn(
+            script("~/.scripts/commands/macbook-keyboard-led.sh", "down")),
+        desc="keyboard backlight down"),
+    # mr. manager
+    Key([mod], "F8", lazy.spawn("alacritty -t htop -e htop"), desc="htop"),
+    Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
+    Key([mod, "control"], "w",
+        lazy.spawn(script("~/.scripts/system/set-wallpaper.sh", "choose")),
+        desc="change wallpaper"),
+    Key([mod, "control"], "Return",
+        lazy.spawn(script("~/.scripts/dmenu/change-terminal-xcolors.sh")),
+        desc="change terminal colors and fonts"),
+    Key([mod, "control"], "c",
+        lazy.spawn(script("~/.scripts/launchers/compositor.sh")),
+        desc="change compositor profile"),
+    Key([mod], "F12",
+        lazy.spawn(script("~/.scripts/launchers/i3lock.sh")),
+        desc="lock desktop"),
+    Key([mod, "control"], "v",
+        lazy.spawn(script("~/.scripts/launchers/clipboard-manager.sh")),
+        desc="toggle clipboard manager"),
+    Key([mod, "control"], "n",
+        lazy.spawn(script("~/.scripts/launchers/nightmode.sh", "toggle")),
+        desc="toggle nightmode colors"),
+    Key([mod], "Escape",
+        lazy.spawn(script("~/.scripts/launchers/keystrokes.sh", "toggle")),
+        desc="toggle screenkey"),
+    # selectors
+    Key([mod], "F1", lazy.spawn(script("~/.scripts/launchers/news.sh")),
+        desc="open a news source"),
+    Key([mod], "c", lazy.spawn(script("~/.scripts/launchers/chat-apps.sh")),
+        desc="launch a chat app"),
+    Key([mod], "y",
+        lazy.spawn(script("~/.scripts/launchers/youtube-playlists.sh")),
+        desc="youtube playlists"),
+    Key([mod, "control"], "g",
+        lazy.spawn(script("~/.scripts/launchers/google-services.sh")),
+        desc="google services"),
+    Key([mod, "control"], "m",
+        lazy.spawn(script("~/.scripts/launchers/media-launcher.sh")),
+        desc="media launcher"),
+    Key([mod], "v",
+        lazy.spawn(
+            script("~/.scripts/launchers/clipboard-manager.sh", "choose")),
+        desc="choose clipboard"),
+]
+#   __ _ _ __ ___  _   _ _ __  ___
+#  / _` | '__/ _ \| | | | '_ \/ __|
+# | (_| | | | (_) | |_| | |_) \__ \
+#  \__, |_|  \___/ \__,_| .__/|___/
+#  |___/                |_| desktops / workspaces
+default_layouts = [
+    layout.MonadTall(**{
+        "border_focus": clr["hilight"],
+        "border_width": my["border_width"],
+        "margin": my["margin"],
+    }),
+    layout.MonadWide(**{
+        "border_focus": clr["hilight"],
+        "border_width": my["border_width"],
+        "margin": my["margin"],
+    }),
+    layout.Max(),
+]
+my_groups = [
+    {"name": "1", "label": "1", "layouts": default_layouts},
+    {"name": "2", "label": "2", "layouts": default_layouts},
+    {"name": "3", "label": "3", "layouts": default_layouts},
+    {"name": "4", "label": "4", "layouts": default_layouts},
+    {"name": "5", "label": "5",
+        "layouts": default_layouts + [layout.Matrix()]},
+    {"name": "6", "label": "6", "layouts": default_layouts},
+    {"name": "7", "label": "7", "layouts": default_layouts},
+    {"name": "8", "label": "8", "layouts": default_layouts},
+    {
+        "name": "9", "label": "9",
+        "matches": [Match(wm_class=['KeePassXC', 'TelegramDesktop', 'Slack'])],
+        "layout": "matrix",
+        "layouts": default_layouts + [layout.Matrix()]
+    },
+    {"name": "0", "label": "0", "layouts": default_layouts},
+]
 
-# widget settings
-my_widgets = {
+groups = [Group(**g) for g in my_groups]
+for i in groups:
+    keys.extend([
+        # mod + group_key = switch screen to group
+        Key([mod], i.name, lazy.group[i.name].toscreen(),
+            desc="Switch to group {}".format(i.label)),
+        # mod + shift + group_key = move current window to group
+        Key([mod, "shift"], i.name,
+            lazy.window.togroup(i.name, switch_group=False),
+            desc="Switch window to group {}".format(i.label)),
+    ])
+
+#     __                  ___                 _     __           __
+#    / /_  ____ ______   ( _ )      _      __(_)___/ /___ ____  / /______
+#   / __ \/ __ `/ ___/  / __ \/|   | | /| / / / __  / __ `/ _ \/ __/ ___/
+#  / /_/ / /_/ / /     / /_/  <    | |/ |/ / / /_/ / /_/ /  __/ /_(__  )
+# /_.___/\__,_/_/      \____/\/    |__/|__/_/\__,_/\__, /\___/\__/____/
+# widgets and bar settings                        /____/
+widget_defaults = dict(
+    font=my["font"],
+    fontsize=my["fontsize"],
+    padding=3,
+)
+widget_cfg = {
     "GroupBox": {
         "active": clr["foreground"],
         "inactive": "#404040",
@@ -140,217 +316,21 @@ my_widgets = {
     },
 }
 
-#  _              _     _           _ _
-# | | _____ _   _| |__ (_)_ __   __| (_)_ __   __ _ ___
-# | |/ / _ \ | | | '_ \| | '_ \ / _` | | '_ \ / _` / __|
-# |   <  __/ |_| | |_) | | | | | (_| | | | | | (_| \__ \
-# |_|\_\___|\__, |_.__/|_|_| |_|\__,_|_|_| |_|\__, |___/
-#           |___/                             |___/
-keys = [
-    # quick-switch between groups
-    Key([mod], "o", lazy.screen.toggle_group(), desc="desktop quick toggle"),
-    Key([mod], "n", lazy.screen.next_group(), desc="next desktop"),
-    Key([mod, "shift"], "n", lazy.screen.prev_group(), desc="prev desktop"),
-    # traversing the stack
-    Key([mod], "k", lazy.layout.up(), desc="focus up stack"),
-    Key([mod], "j", lazy.layout.down(), desc="focus down stack"),
-    Key([mod], "h", lazy.layout.left(), desc="focus left"),
-    Key([mod], "l", lazy.layout.right(), desc="focus right"),
-    # rearrange the stack
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move upward"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move downward"),
-    Key([mod, "shift"], "h", lazy.layout.swap_left(), desc="Move pane left"),
-    Key([mod, "shift"], "l", lazy.layout.swap_right(), desc="Move pane right"),
-    # manipulate layout
-    Key([mod, "shift"], "space", lazy.prev_layout(), desc="previous layout"),
-    Key([mod], "space", lazy.next_layout(), desc="next layout"),
-    Key([mod], "BackSpace", lazy.layout.normalize(), desc="reset layout"),
-    Key([mod], "m", lazy.layout.maximize(), desc="mazimize"),
-    Key([mod], "Tab", lazy.layout.flip(), desc="flip master and stack"),
-    # resizing
-    Key([mod, "control"], "h", lazy.layout.shrink(), desc="shrink window"),
-    Key([mod, "control"], "l", lazy.layout.grow(), desc="grow window"),
-    # window actions
-    Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "F11", lazy.window.toggle_fullscreen(),
-        desc="toggle fullscreen"),
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
-        desc="Toggle between split and unsplit sides of stack"),
-    # programs
-    Key([mod], "Return", lazy.spawn(terminal), desc="Alacritty terminal"),
-    Key([mod], "d", lazy.spawn(script("~/.scripts/launchers/run-menu.sh")),
-        desc="dmenu_run launcher"),
-    Key([mod], "p", lazy.spawn("firefox -private"), desc="firefox -private"),
-    Key([mod, "shift"], "p", lazy.spawn("brave-browser --incognito"),
-        desc="brave-browser incognito"),
-    Key([mod], "w", lazy.spawn("firefox"), desc="firefox"),
-    Key([mod, "shift"], "w", lazy.spawn("brave-browser"),
-        desc="brave-browser"),
-    Key([mod], "F10",
-        lazy.spawn(script("~/.scripts/launchers/keepassxc.themed.sh")),
-        desc="keepassxc"),
-    Key([mod], "F5",
-        lazy.spawn(script("~/.scripts/commands/VPN.sh")),
-        desc="nordvpn"),
-    # hardware
-    Key([], "XF86AudioRaiseVolume",
-        lazy.spawn(script("~/.scripts/system/volume-control.sh", "up")),
-        desc="increase volume"),
-    Key([], "XF86AudioLowerVolume",
-        lazy.spawn(script("~/.scripts/system/volume-control.sh", "down")),
-        desc="decrease volume"),
-    Key([], "XF86AudioMute",
-        lazy.spawn(script("~/.scripts/system/volume-control.sh", "mute")),
-        desc="mute volume"),
-    Key([], "XF86MonBrightnessUp",
-        lazy.spawn(script("~/.scripts/commands/macbook-backlight.sh", "up")),
-        desc="screen backlight up"),
-    Key([], "XF86MonBrightnessDown",
-        lazy.spawn(script("~/.scripts/commands/macbook-backlight.sh", "down")),
-        desc="screen backlight down"),
-    Key([], "XF86KbdBrightnessUp",
-        lazy.spawn(
-            script("~/.scripts/commands/macbook-keyboard-led.sh", "up")),
-        desc="keyboard backlight up"),
-    Key([], "XF86KbdBrightnessDown",
-        lazy.spawn(
-            script("~/.scripts/commands/macbook-keyboard-led.sh", "down")),
-        desc="keyboard backlight down"),
-    # mr. manager
-    Key([mod], "F8", lazy.spawn("alacritty -t htop -e htop"), desc="htop"),
-    Key([mod], "r", lazy.spawncmd(), desc="lazy.spawncmd widget"),
-    Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
-    Key([mod, "control"], "w",
-        lazy.spawn(script("~/.scripts/system/set-wallpaper.sh", "choose")),
-        desc="change wallpaper"),
-    Key([mod, "control"], "Return",
-        lazy.spawn(script("~/.scripts/dmenu/change-terminal-xcolors.sh")),
-        desc="change terminal colors and fonts"),
-    Key([mod, "control"], "c",
-        lazy.spawn(script("~/.scripts/launchers/compositor.sh")),
-        desc="change compositor profile"),
-    Key([mod], "F12",
-        lazy.spawn(script("~/.scripts/launchers/i3lock.sh")),
-        desc="lock desktop"),
-    Key([mod, "control"], "v",
-        lazy.spawn(script("~/.scripts/launchers/clipboard-manager.sh")),
-        desc="toggle clipboard manager"),
-    Key([mod, "control"], "n",
-        lazy.spawn(script("~/.scripts/launchers/nightmode.sh", "toggle")),
-        desc="toggle nightmode colors"),
-    Key([mod], "Escape",
-        lazy.spawn(script("~/.scripts/launchers/keystrokes.sh", "toggle")),
-        desc="toggle screenkey"),
-    # selectors
-    Key([mod], "F1", lazy.spawn(script("~/.scripts/launchers/news.sh")),
-        desc="open a news source"),
-    Key([mod], "c", lazy.spawn(script("~/.scripts/launchers/chat-apps.sh")),
-        desc="launch a chat app"),
-    Key([mod], "y",
-        lazy.spawn(script("~/.scripts/launchers/youtube-playlists.sh")),
-        desc="youtube playlists"),
-    Key([mod, "control"], "g",
-        lazy.spawn(script("~/.scripts/launchers/google-services.sh")),
-        desc="google services"),
-    Key([mod, "control"], "m",
-        lazy.spawn(script("~/.scripts/launchers/media-launcher.sh")),
-        desc="media launcher"),
-    Key([mod], "v",
-        lazy.spawn(
-            script("~/.scripts/launchers/clipboard-manager.sh", "choose")),
-        desc="choose clipboard"),
-]
-# UNUSED STUFF from keys = []
-# Swap panes of split stack
-# Key([mod, "shift"], "space", lazy.layout.rotate(),
-#     desc="Swap panes of split stack"),
-# Toggle between split and unsplit sides of stack.
-# Split = all windows displayed
-# Unsplit = 1 window displayed, like Max layout, but still with
-# multiple stack panes
-
-#   __ _ _ __ ___  _   _ _ __  ___
-#  / _` | '__/ _ \| | | | '_ \/ __|
-# | (_| | | | (_) | |_| | |_) \__ \
-#  \__, |_|  \___/ \__,_| .__/|___/
-#  |___/                |_| desktops / workspaces
-layouts = [
-    layout.MonadTall(**{
-        "border_focus": clr["hilight"],
-        "border_width": my["border_width"],
-        "margin": my["margin"],
-    }),
-    layout.MonadWide(**{
-        "border_focus": clr["hilight"],
-        "border_width": my["border_width"],
-        "margin": my["margin"],
-    }),
-    layout.Max(),
-    # layout.Matrix(),
-    # layout.Zoomy(**{"columnwidth": 500,}),
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Columns(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.VerticalTile(),
-]
-
-my_groups = [
-    {"name": "1", "label": "1"},
-    {"name": "2", "label": "2"},
-    {"name": "3", "label": "3"},
-    {"name": "4", "label": "4"},
-    {"name": "5", "label": "5"},
-    {"name": "6", "label": "6"},
-    {"name": "7", "label": "7"},
-    {"name": "8", "label": "8"},
-    {"name": "9", "label": "9"},
-    {"name": "0", "label": "0"},
-]
-
-default_group_settings = {
-    "layouts": layouts,
-}
-
-groups = [Group(g["name"], label=g["label"], **default_group_settings)
-          for g in my_groups]
-
-for i in groups:
-    keys.extend([
-        # mod + group_key = switch screen to group
-        Key([mod], i.name, lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
-        # mod + shift + group_key = move current window to group
-        Key([mod, "shift"], i.name,
-            lazy.window.togroup(i.name, switch_group=False),
-            desc="Switch window to group {}".format(i.label)),
-    ])
-
-widget_defaults = dict(
-    font=my["font"],
-    fontsize=my["fontsize"],
-    padding=3,
-)
-extension_defaults = widget_defaults.copy()
-
 my_bar = [
-    widget.GroupBox(**my_widgets["GroupBox"]),
-    widget.Sep(**my_widgets["Sep"]),
-    widget.Prompt(**my_widgets["Prompt"]),
-    widget.TaskList(**my_widgets["TaskList"]),
-    widget.CurrentLayoutIcon(**my_widgets["CurrentLayoutIcon"]),
-    # widget.CurrentLayout(**my_widgets['CurrentLayout']),
-    widget.Battery(**my_widgets["Battery"]),
-    # widget.Volume(**my_widgets['Volume']),
-    widget.Pomodoro(**my_widgets["Pomodoro"]),
-    widget.Systray(**my_widgets["Systray"]),
-    widget.Clock(**my_widgets["Clock"]),
-    # widget.Chord(**my_widgets['Chord']),
-    # widget.WindowName(**my_widgets['WindowName']),
-    # widget.QuickExit(),
+    widget.GroupBox(**widget_cfg["GroupBox"]),
+    widget.Sep(**widget_cfg["Sep"]),
+    widget.Prompt(**widget_cfg["Prompt"]),
+    widget.TaskList(**widget_cfg["TaskList"]),
+    widget.CurrentLayoutIcon(**widget_cfg["CurrentLayoutIcon"]),
+    # widget.CurrentLayout(**widget_cfg['CurrentLayout']),
+    widget.Battery(**widget_cfg["Battery"]),
+    # widget.Volume(**widget_cfg['Volume']),
     # widget.Backlight(),
+    widget.Pomodoro(**widget_cfg["Pomodoro"]),
+    widget.Systray(**widget_cfg["Systray"]),
+    widget.Clock(**widget_cfg["Clock"]),
+    # widget.Chord(**widget_cfg['Chord']),
+    # widget.WindowName(**widget_cfg['WindowName']),
 ]
 
 screens = [
@@ -359,8 +339,7 @@ screens = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1",
-         lazy.window.set_position_floating(),
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(),
          start=lazy.window.get_size()),
@@ -389,16 +368,9 @@ floating_layout = layout.Floating(
     ]
 )
 
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
-wmname = "LG3D"
-
+# set to 'LG3D' by default for Java UI toolki reasons. Changing to true WM name
+# until something breaks
+wmname = "qtile"
 #              _            _             _
 #   __ _ _   _| |_ ___  ___| |_ __ _ _ __| |_
 #  / _` | | | | __/ _ \/ __| __/ _` | '__| __|
@@ -441,8 +413,7 @@ def restart_qtile():
 
 
 # TODO -- list of issues to fix/address with config
-# hack qtile tasklist.py to add unfocused_foreground unfocused_background
-
+# low priority -- add unfocused_foreground unfocused_background to tasklist.py
 #                             _       _     _
 #   ___ ___  _ __  _   _ _ __(_) __ _| |__ | |_
 #  / __/ _ \| '_ \| | | | '__| |/ _` | '_ \| __|

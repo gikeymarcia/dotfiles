@@ -1,7 +1,8 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # script called by fzf --preview="" to intelligently preview selections
-# dependencies: bat figlet poppler-utils media-metadata.sh random-quote.sh
+# dependencies: bat figlet cowsay poppler-utils
+# dependencies: media-metadata.sh random-quote.sh
 
 # IDEA -- maybe this should be a python3 script
 

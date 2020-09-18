@@ -9,18 +9,14 @@
 . ~/.bash_personal
 cd ~ || exit 1
 
-REFRESH_RATE="10"
-[ -n "$1" ] && REFRESH_RATE="$1"
-
+refresh_rate="10"
+[ -n "$1" ] && refresh_rate="$1"
 config="/usr/bin/git --git-dir=$DOTFILES --work-tree=$HOME --no-optional-locks"
-export config
 
-while true
-do
+while true; do
     $config branch -a
     $config branch --show-current | figlet | lolcat
     $config status -s
-
-    sleep "$REFRESH_RATE"
+    sleep "$refresh_rate"
     clear
 done

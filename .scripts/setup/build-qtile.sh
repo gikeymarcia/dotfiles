@@ -1,34 +1,26 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # script to build and install qtile window manager from pip3
-# dependencies: git
+# dependencies: pip3
 # http://docs.qtile.org/en/latest/manual/install/index.html#installing-from-source
 
 apt_dependencies="libxcb-render0-dev libffi-dev libpangocairo-1.0-0 python-dbus"
 # shellcheck disable=SC2086
 sudo apt install $apt_dependencies
-pip3 install cairocffi xcffib
+# https://github.com/qtile/qtile/issues/994#issuecomment-497984551
+pip3 install xcffib
+pip3 install --no-cache-dir cairocffi
+pip3 install --no-cache-dir qtile
 
 set -o nounset    # error when referencing undefined variable
 set -o errexit    # exit when command fails
-
-qtile_repo=~/Documents/git_repos/qtile
-if [ ! -d $qtile_repo/.git ]; then
-    mkdir -pv "$qtile_repo"
-    git clone git://github.com/qtile/qtile.git "$qtile_repo"
-fi
-
-cd $qtile_repo
-git pull
-pip3 install qtile
-
 
 # write xsession file
 tmpx=/tmp/qtile.desktop
 cat > $tmpx <<EOF
 [Desktop Entry]
 Name=Qtile
-Comment=Qtile pythonic dynamic window manager
+Comment=Qtile the pythonic dynamic window manager
 Exec=$(which qtile)
 Type=Application
 Keywords=wm;tiling

@@ -8,7 +8,7 @@ echo "$target"
 
 if [ -n "$target" ]; then
     if [ -n "$TMUX" ]; then
-        tmux set-buffer "$target"
+        tmux set-buffer -a -- "$target"
         printf "\nCaptured '%s' to tmux buffer.\n" "$target"
     elif [ -n "$DISPLAY" ]; then
         xclip -selection clipboard <(printf "%s" "$target")

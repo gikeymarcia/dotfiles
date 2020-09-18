@@ -1,6 +1,7 @@
 #!/bin/sh
-#
+# Mikey Garcia, @gikeymarcia
 # list child directories from current location (or param) and cd to them
+# dependencies: fd fzf fzf-preview.sh
 
 if [ -z "$1" ]; then
     target="$(pwd)"
