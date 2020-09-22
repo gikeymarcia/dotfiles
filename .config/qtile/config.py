@@ -25,7 +25,7 @@ follow_mouse_focus = False
 bring_front_click = True
 
 
-# shorthand for launching my scripts and accepting paramaters
+# shorthand for launching my scripts and accepting parameters
 def script(syspath, param=None):
     if param is None:
         return os.path.expanduser(syspath)
@@ -199,14 +199,20 @@ my_groups = [
     {"name": "2", "label": "2", "layouts": default_layouts},
     {"name": "3", "label": "3", "layouts": default_layouts},
     {"name": "4", "label": "4", "layouts": default_layouts},
-    {"name": "5", "label": "5",
-        "layouts": default_layouts + [layout.Matrix()]},
+    {
+        "name": "5", "label": "5",
+        "layouts": default_layouts + [layout.Matrix()],
+        "layout": "matrix",
+    },
     {"name": "6", "label": "6", "layouts": default_layouts},
     {"name": "7", "label": "7", "layouts": default_layouts},
     {"name": "8", "label": "8", "layouts": default_layouts},
     {
         "name": "9", "label": "9",
-        "matches": [Match(wm_class=['KeePassXC', 'TelegramDesktop', 'Slack'])],
+        "matches": [
+            Match(wm_class=['TelegramDesktop', 'Slack']),
+            Match(title=["Mikey's Passwords - KeePassXC"]),
+        ],
         "layout": "matrix",
         "layouts": default_layouts + [layout.Matrix()]
     },

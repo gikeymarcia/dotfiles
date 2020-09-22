@@ -1,5 +1,10 @@
 #!/bin/bash
+# Mikey Garcia, @gikeymarcia
 # use fzf to remove entries from bash history
+# dependencies: fzf figlet
+# environment:
+#   note: you have to source this script from bash. I do this with an alias--
+#         alias rhist='source ~/.scripts/commands/delete-history-entry.sh'
 
 entry=$(history | grep -v "\*" | fzf --height=90% --tac +m)
 if [ -z "$entry" ] ; then

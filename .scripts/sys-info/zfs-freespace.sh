@@ -1,7 +1,7 @@
 #!/bin/sh
 # Mikey Garcia, @gikeymarcia
 # fzf check zpool storage use
-# dependencies: zfsutils-linux
+# dependencies: zfsutils-linux fzf
 
 pool=$(zpool list)
 datasets=$(zfs list)

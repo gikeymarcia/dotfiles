@@ -4,7 +4,7 @@
 # ''  send output to terminal
 # v   open result in $EDITOR
 # *   refresh output each ${1} second
-# dependencies:
+# environment: $EDITOR
 
 get_ssh () {
     tac <(grep 'sshd' /var/log/auth.log)

@@ -1,7 +1,9 @@
 #!/bin/bash
-#
+# Mikey Garcia, @gikeymarcia
 # fzf choose from a bookmark file @ ~/.config/bookmarks-dirs.dirs
 # moves you to that directory either in the shell or with a file manager
+# dependencies: fzf bookmark-paths.sh bookmark-preview.sh
+# environment: $FILE_MANAGER $EDITOR
 
 # TODO expand this thing to do lots of stuff
 # bm mv = move to bookmark
@@ -10,8 +12,8 @@
 # bm ranger = launch ranger at bookmark
 
 selection=$(
-    ~/.scripts/sys-info/bookmark_paths.sh | sort -k 2 |
-    fzf --height=100% --preview="~/.scripts/commands/bookmark-preview.sh {}" |
+    bookmark-paths.sh | sort -k 2 |
+    fzf --height=100% --preview="bookmark-preview.sh {}" |
     awk '{print $2}' | sed "s ^~ $HOME "
 )
 

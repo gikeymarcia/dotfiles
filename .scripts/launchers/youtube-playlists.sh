@@ -1,21 +1,24 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # launch browser directly into a youtube playlist
-# dependencies: brave-browser
+# dependencies: brave-browser dmenu
+# environment: $DMENU_FONT $DMENU_COLORS
 
 # list of short names and associated youtube playlist URLs
+playlists+=("Now!                      https://www.youtube.com/playlist?list=PLpJPyYfmqUWyUm2cLj9g-ZRwR4SzOXWab")
+playlists+=("Sound_Shields             https://www.youtube.com/playlist?list=PLpJPyYfmqUWwlm9XejjZEGpXjEVxAKCkw")
+playlists+=("Podcast_Q                 https://www.youtube.com/playlist?list=PLpJPyYfmqUWxhA8hzu6-1RvQA9sgANm1Q")
+playlists+=("Linux_Q                   https://www.youtube.com/playlist?list=PLpJPyYfmqUWwFDQRvzPVXJh2s49kN5YAl")
+playlists+=("Yoga_Q                    https://www.youtube.com/playlist?list=PLpJPyYfmqUWwy0Hx9H00TssUDejdmXlMI")
+playlists+=("Meditation_Q              https://www.youtube.com/playlist?list=PLpJPyYfmqUWzLZ3pyIYW74n3qgZQq5g3i")
+playlists+=("Upon_Waking_Up            https://www.youtube.com/playlist?list=PLpJPyYfmqUWwXld2xZ9JF0_PTZc0PvvdN")
+playlists+=("Dharma_Q                  https://www.youtube.com/playlist?list=PLpJPyYfmqUWywmVbpwFsr8c_WHkvFOWhE")
+playlists+=("SciNerd_Q                 https://www.youtube.com/playlist?list=PLpJPyYfmqUWwEbcootVaPmx4aq_Vt-8rz")
+playlists+=("Gigi                      https://www.youtube.com/playlist?list=PLpJPyYfmqUWwJ9SwDkNGLqOR6MrknyVOR")
+# courses / topics
 playlists+=("MissingSemester           https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J")
 playlists+=("Linear_Algebra_course     https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D")
 playlists+=("Essence_of_linear_algebra https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab")
-playlists+=("Meditation_Q              https://www.youtube.com/playlist?list=PLpJPyYfmqUWzLZ3pyIYW74n3qgZQq5g3i")
-playlists+=("Upon_Waking_Up            https://www.youtube.com/playlist?list=PLpJPyYfmqUWwXld2xZ9JF0_PTZc0PvvdN")
-playlists+=("Sound_Shields             https://www.youtube.com/playlist?list=PLpJPyYfmqUWwlm9XejjZEGpXjEVxAKCkw")
-playlists+=("Yoga_Q                    https://www.youtube.com/playlist?list=PLpJPyYfmqUWwy0Hx9H00TssUDejdmXlMI")
-playlists+=("Dharma_Q                  https://www.youtube.com/playlist?list=PLpJPyYfmqUWywmVbpwFsr8c_WHkvFOWhE")
-playlists+=("Gigi                      https://www.youtube.com/playlist?list=PLpJPyYfmqUWwJ9SwDkNGLqOR6MrknyVOR")
-playlists+=("SciNerd_Q                 https://www.youtube.com/playlist?list=PLpJPyYfmqUWwEbcootVaPmx4aq_Vt-8rz")
-playlists+=("Linux_Q                   https://www.youtube.com/playlist?list=PLpJPyYfmqUWwFDQRvzPVXJh2s49kN5YAl")
-playlists+=("Now!                      https://www.youtube.com/playlist?list=PLpJPyYfmqUWyUm2cLj9g-ZRwR4SzOXWab")
 
 yt_pls () {
     for name in "${playlists[@]}"; do echo "$name"; done

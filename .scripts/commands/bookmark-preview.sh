@@ -1,8 +1,11 @@
-#!/usr/bin/env bash
-#
-# fzf preview contents for ~/.scripts/commands/bookmark-actions.sh
+#!/bin/bash
+# Mikey Garcia, @gikeymarcia
+# bookmark-actions.sh preview (fzf --preview="bookmark-preview.sh {}")
 # Arguments:
 #   ~/.config/bookmarks-dirs.dir entry (shrt /path/to/dir)
+# dmenu select a bookmark path and open in terminal file manager
+# dependencies: dmenu figlet tree random-quote.sh
+# environment:
 
 try_local_library () {
     library="$HOME/library"
@@ -19,8 +22,8 @@ fzf_dir_preview () {
 missing_directory () {
     texts="nope M.I.A. K.I.A. R.I.P P.O.W. who-dat? huh?! 0_o? nah 404 lulz"
     msg=$(printf "%s" "$texts" | tr " " "\n" | shuf -n 1)
-    figlet "$msg" | lolcat
-    ~/.scripts/commands/random-quote.sh
+    figlet "$msg"
+    random-quote.sh
 }
 
 [ -n "$1" ] && prev_path=$(echo "$1" | awk '{print $2}' | sed -E "s ^~ $HOME g")

@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-#
+# Mikey Garcia, @gikeymarcia
 # fzf select which instances of VLC to kill
+# dependencies: fzf
 
 pids=$(pgrep vlc)
 if [ -n "$pids" ]; then
     selection=$(printf "%s" "$pids" | xargs ps | fzf --header-lines=1 \
-        --prompt="choose kill targets:  " | sed -E "s/^([0-9]+).*$/\1/g" )
+        --prompt="choose kill targets:  " | sed -E "s/^ ?([0-9]+).*$/\1/g" )
     if [ -n "$selection" ]; then
         kill "$selection"
         sleep 1

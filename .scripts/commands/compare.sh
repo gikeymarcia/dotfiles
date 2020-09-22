@@ -1,6 +1,8 @@
 #!/bin/sh
-#
+# Mikey Garcia, @gikeymarcia
 # compare two files using sha256sum hash and report match/mismatch
+# dependencies: figlet lolcat
+# environment:
 
 check1=$(sha256sum "$1")
 hash1=$(printf "%s" "$check1" | awk '{print $1}' )
@@ -18,4 +20,7 @@ else
     echo "files differ." | lolcat
     ls -lH1h "$file1"
     ls -lH1h "$file2"
+    echo "-"
+    file "$file1"
+    file "$file2"
 fi

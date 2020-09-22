@@ -3,7 +3,8 @@
 # script to display the status of my dotfiles repo
 # accepts numeric parameter defining refresh rate (in seconds)
 # default 10s refresh rate if none passed
-# dependencies: $DOTFILES git figlet lolcat
+# dependencies: git figlet lolcat
+# environment: $DOTFILES
 
 
 . ~/.bash_personal

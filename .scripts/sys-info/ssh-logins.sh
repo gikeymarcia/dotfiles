@@ -4,6 +4,7 @@
 # ''  send output to terminal
 # v   open result in $EDITOR
 # *   refresh output each ${1} second
+# environment: $EDITOR
 
 
 get_logins () {
