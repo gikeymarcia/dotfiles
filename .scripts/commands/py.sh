@@ -1,11 +1,17 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
-# "autocmd BufWritePost *.py :!python3 %"
+# launch nvim with python script in buffer and autocommand set to run the
+# script each time the file is written
+# dependencies: python bat
+# environment: $EDITOR
 
+# if file exists and > 0 size
 if [ -s "$1" ]; then
     filename=$1
 elif [ -z "$1" ]; then
-    filename="$(mktemp --suffix=.py)"
+    scratchdir=/tmp/py-scratch/
+    [ ! -d "$scratchdir" ] && mkdir -pv "$scratchdir"
+    filename="$(mktemp --tmpdir="$scratchdir" --suffix=.py)"
 elif [ -n "$1" ]; then
     filename="./$1"
 fi

@@ -19,15 +19,13 @@ stylesheet_web=https://gist.githubusercontent.com/dashed/6714393/raw/ae966d9d080
 stylesheet=~/.scripts/pandoc/github-pandoc.css
 stylesheet=~/.scripts/pandoc/mikey-pandoc.css
 
-if [ -r "$stylesheet" ]; then
-    pandoc --metadata pagetitle="$pagetitle" -V lang=en \
-        --css="$stylesheet" \
-        "$markdown" --to=html5 -s -o "$html_preview"
-else
-    pandoc --metadata pagetitle="$pagetitle" -V lang=en \
-        --css="$stylesheet_web" \
-        "$markdown" --to=html5 -s -o "$html_preview"
-fi
+# use local stylesheet if available
+css=$stylesheet_web
+[ -r "$stylesheet" ] && css=$stylesheet
+
+pandoc --metadata pagetitle="$pagetitle" -V lang=en \
+    --css="$css" --self-contained \
+    "$markdown" --to=html5 -s -o "$html_preview"
 
 # launch preview
 firefox -private "$html_preview" &

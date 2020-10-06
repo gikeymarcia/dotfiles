@@ -26,18 +26,18 @@ cursor:
   unfocused_hollow: true
 font:
   bold:
-    family: Hasklug Nerd Font Mono
+    family: DejaVuSansMono Nerd Font
     style: Bold
   bold_italic:
-    family: Hasklug Nerd Font Mono
-    style: Bold Italic
+    family: DejaVuSansMono Nerd Font Mono
+    style: Bold Oblique
   italic:
-    family: Hasklug Nerd Font Mono
-    style: Light Italic
+    family: DejaVuSansMono Nerd Font
+    style: Oblique
   normal:
-    family: Hasklug Nerd Font Mono
-    style: Medium
-  size: 14
+    family: DejaVuSansMono Nerd Font Mono
+    style: Book
+  size: 12
 live_config_reload: true
 mouse:
   hide_when_typing: true

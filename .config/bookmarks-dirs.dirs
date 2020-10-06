@@ -1,5 +1,8 @@
 h    ~
 
+## jobs
+sta  ~/Desktop/magicstat
+
 ## source code
 sc   ~/.scripts
 cmd  ~/.scripts/commands

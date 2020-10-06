@@ -14,6 +14,12 @@ function c (){
     echo "~"
     pwd
 }
+
+# open files and background
+o () {
+    xdg-open "$1" &
+}
+
 # mkdir and cd into it
 mcd () {
     mkdir -pv "$1"

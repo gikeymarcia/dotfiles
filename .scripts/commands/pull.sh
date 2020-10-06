@@ -1,6 +1,8 @@
 #!/bin/sh
 # Mikey Garcia, @gikeymarcia
 # search a filetree and copy a file/directory to current working directory
+# dependencies: fd-find fzf
+# environment:
 
 target="$1"
 [ -z "$1" ] && target="$(pwd)"

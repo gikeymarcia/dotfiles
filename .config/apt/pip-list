@@ -9,6 +9,7 @@ meson
 #notebook
 numpy
 pandas
+td-watson
 torch
 torchvision
 ueberzug

@@ -88,8 +88,7 @@ keys = [
     Key([mod, "control"], "l", lazy.layout.grow(), desc="grow window"),
     # window actions
     Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "F11", lazy.window.toggle_fullscreen(),
-        desc="toggle fullscreen"),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack"),
     # programs
@@ -133,6 +132,8 @@ keys = [
             script("~/.scripts/commands/macbook-keyboard-led.sh", "down")),
         desc="keyboard backlight down"),
     # mr. manager
+    Key([mod], "F3", lazy.spawn(script("~/.scripts/commands/screenshot.sh")),
+        desc="take a screenshot and autosave output"),
     Key([mod], "F8", lazy.spawn("alacritty -t htop -e htop"), desc="htop"),
     Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
@@ -419,6 +420,7 @@ def restart_qtile():
 
 
 # TODO -- list of issues to fix/address with config
+# set WM_CLASS on bar so I can target it with my compositor (picom)
 # low priority -- add unfocused_foreground unfocused_background to tasklist.py
 #                             _       _     _
 #   ___ ___  _ __  _   _ _ __(_) __ _| |__ | |_

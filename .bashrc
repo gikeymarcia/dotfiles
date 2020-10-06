@@ -70,7 +70,10 @@ HISTCONTROL=ignoreboth:erasedups
 #PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # enable programmable completion features
-if ! shopt -oq posix; then source-existing /usr/share/bash-completion/bash_completion ; fi
+if ! shopt -oq posix; then
+    source-existing /usr/share/bash-completion/bash_completion
+    source-existing ~/.config/completion/watson.completion
+fi
 
 # enable ls color support
 eval "$(dircolors -b)"

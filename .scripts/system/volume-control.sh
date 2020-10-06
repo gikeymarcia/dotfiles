@@ -13,10 +13,10 @@ report_volume () {
     muted=$(printf "%s" "$status" | awk '{print $2}')
     length=1500
     if [ "$muted" = "yes" ]; then
-        notify-send -t $length -a system "Volume" "MUTED @ $vol" \
+        notify-send -t $length -a system "Volume" "🔇 <b>@</b> $vol" \
             -h string:x-canonical-private-synchronous:system-volume
     else
-        notify-send -t $length -a system "Volume" "$vol" \
+        notify-send -t $length -a system "Volume" "🔊 $vol" \
             -h string:x-canonical-private-synchronous:system-volume
     fi
 }
