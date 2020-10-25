@@ -8,6 +8,8 @@ Environment=XAUTHORITY=/home/mikey/.Xauthority
 Environment=DISPLAY=:0
 Environment=CM_IGNORE_WINDOW="KeePassXC$"
 Environment=CM_DIR=/home/mikey/.cache/clipmenud
+Environment=CM_SELECTIONS=clipboard
+Environment=CM_MAX_CLIPS=500
 ExecStart=/usr/bin/clipmenud
 Restart=always
 RestartSec=500ms

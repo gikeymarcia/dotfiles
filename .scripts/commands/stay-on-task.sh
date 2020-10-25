@@ -4,6 +4,7 @@
 # pass a message and it will be displayed with each reminder
 
 # TODO -- let the script show me when to stop
+# TODO -- make running display a shout of instructions and latest timestamp
 
 # initialize
 date_form="+%H%M %U"
@@ -22,6 +23,8 @@ do
     notify-send -t 7500 "$message" "$timetable" -a priority
     mpg123 -q --no-control --preframes 1 "$SOUNDS/cash-register.mp3"
     sleep "$interval"
+    clear
+    echo "$message" | figlet | lolcat
     now=$(date "$date_form")
     duration=$((duration + 3))
     echo "$now -- working for $duration minutes"

@@ -2,6 +2,7 @@
 # Mikey Garcia, @gikeymarcia config for qtile v0.16.0
 # development: view logs with
 # tail -f ~/.local/share/qtile/qtile.log
+# docs @ http://docs.qtile.org/en/latest/manual/config/index.html
 import os
 import subprocess
 from typing import List  # noqa: F401
@@ -137,6 +138,9 @@ keys = [
     Key([mod], "F8", lazy.spawn("alacritty -t htop -e htop"), desc="htop"),
     Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
+    Key([mod, "control"], "s",
+        lazy.spawn(script("~/.scripts/qtile/toggle-bar.py")),
+        desc="toggle status bar visibility"),
     Key([mod, "control"], "w",
         lazy.spawn(script("~/.scripts/system/set-wallpaper.sh", "choose")),
         desc="change wallpaper"),
@@ -163,7 +167,7 @@ keys = [
         desc="open a news source"),
     Key([mod], "c", lazy.spawn(script("~/.scripts/launchers/chat-apps.sh")),
         desc="launch a chat app"),
-    Key([mod], "y",
+    Key([mod, "control"], "y",
         lazy.spawn(script("~/.scripts/launchers/youtube-playlists.sh")),
         desc="youtube playlists"),
     Key([mod, "control"], "g",
@@ -217,7 +221,7 @@ my_groups = [
         "layout": "matrix",
         "layouts": default_layouts + [layout.Matrix()]
     },
-    {"name": "0", "label": "0", "layouts": default_layouts},
+    {"name": "0", "label": "!?!", "layouts": default_layouts},
 ]
 
 groups = [Group(**g) for g in my_groups]

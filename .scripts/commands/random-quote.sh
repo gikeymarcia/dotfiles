@@ -1,6 +1,8 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # display a formatted quote from $QUOTES directory
+# dependencies: cowsay fd
+# environment: $QUOTES
 
 max_words=450
 wrap_len=60
@@ -33,13 +35,11 @@ processed_quote=$(printf "%s" "$trimmed_quote" |
     sed "s :link\n  " |
     sed "s :date\s  "
 )
-clear
+
 if [ "$1" = "lol" ]; then
     cowpath=~/.config/cowsay/cows
-    randcow=$(shuf -n 1 <(ls -1 "$cowpath"))
-    printf "\n%s\n" "$processed_quote" |
-        cowsay -W "$wrap_len" -f "$randcow" |
-        lolcat -F 0.05
+    randcow=$(fd -e cow . "$cowpath" | shuf -n 1)
+    cowsay -W "$wrap_len" -f "$randcow" "$processed_quote" | lolcat -F 0.05
 else
     printf "\n%s\n" "$processed_quote" |
         fold -s -w "$wrap_len" | sed "s/^/$padding/"

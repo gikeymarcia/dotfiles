@@ -25,6 +25,7 @@ add_to_path ~/.scripts/commands
 add_to_path ~/.scripts/dotfiles
 add_to_path ~/.scripts/digital-life-log
 add_to_path ~/.scripts/tmux
+add_to_path ~/.scripts/pandoc
 add_to_path ~/.scripts/sys-info
 # dynamic-colors
 add_to_path ~/.dynamic-colors/bin

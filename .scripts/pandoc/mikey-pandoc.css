@@ -451,7 +451,8 @@ p {
   margin:1em 0
 }
 a {
-  color:#4183c4;
+  color:#4C6A8A; /* began with watson documentation banner */
+  /*color:#4183c4; */
   text-decoration:none
 }
 body {
@@ -494,15 +495,18 @@ h3 {
 }
 h4 {
   font-size:16px;
-  color:#333
+  color:#333;
+  font-style: italic;
 }
 h5 {
   font-size:14px;
   color:#333
 }
 h6 {
-  color:#777;
-  font-size:14px
+  color:#5E6068;
+  color:#333;
+  font-size:14px;
+  font-style: italic;
 }
 p,blockquote,table,pre {
   margin:15px 0

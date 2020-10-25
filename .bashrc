@@ -73,10 +73,11 @@ HISTCONTROL=ignoreboth:erasedups
 if ! shopt -oq posix; then
     source-existing /usr/share/bash-completion/bash_completion
     source-existing ~/.config/completion/watson.completion
+    eval "$(pandoc --bash-completion)"
 fi
 
 # enable ls color support
-eval "$(dircolors -b)"
+eval "$(dircolors -b ~/.config/dircolors/my.dircolors)"
 
 # set window title
 case "$TERM" in

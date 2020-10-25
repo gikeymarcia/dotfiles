@@ -4,9 +4,11 @@
 # shellcheck disable=SC2086
 
 action=$1
-echo $action
 # for development use
-[ -z "$1" ] && action="status"
+if [ -z "$1" ]; then
+    action="status"
+    echo $action
+fi
 # shellcheck source=/home/mikey/.bash_personal
 . ~/.bash_personal
 

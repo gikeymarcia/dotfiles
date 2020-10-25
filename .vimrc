@@ -37,10 +37,8 @@ source ~/.vim/plug-config/lightline.vim
 source ~/.vim/plug-config/goyo.vim
 source ~/.vim/plug-config/vim-easy-align.vim
 source ~/.vim/plug-config/undotree.vim
-source ~/.vim/plug-config/gruvbox.vim
 "source ~/.vim/plug-config/SimpylFold.vim
 "source ~/.vim/plug-config/FastFold.vim
-
 "         _
 "   _  __(_)_ _  ________
 " _| |/ / /  ' \/ __/ __/
@@ -53,18 +51,23 @@ set noswapfile
 set nobackup
 set undodir=~/.vim/undo
 set undofile
+"       _               _
 " _  __(_)__ __ _____ _/ /__
 "| |/ / (_-</ // / _ `/ (_-<
 "|___/_/___/\_,_/\_,_/_/___/ allow italics
-" https://jsatk.us/posts/a-descent-into-madness-with-vim-tmux-and-italics/
+" https://jsatk.us/posts/a-descent-into-madness-with-vim-tmux-and-italics
 set t_ZH=[3m
 set t_ZR=[23m
+" dark colorscheme
+source ~/.vim/plug-config/gruvbox.vim
+" light colorscheme
+" colorscheme Atelier_ForestLight
+" set background=light
 " page visual tweaks
 set showcmd                  " show command in bottom bar
 set lazyredraw               " redraw only when we need to.
 set linebreak                " don't break up words during line wrapping
 set colorcolumn=80
-set background=dark
 " hightlight position with <leader>h
 highlight ColorColumn ctermbg=darkgrey guibg=lightgrey
 highlight cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
@@ -106,8 +109,8 @@ set wildmenu                " visual autocomplete for command menu
 set showmatch               " highlight matching {},(),[]
 set browsedir=buffer        " set working directory based on opening file location
 " markdown stuff
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'vim', 'css' , 'json']
-nnoremap <Leader>m :w<CR>:!~/.scripts/pandoc/markdown-preview.sh % &<CR><CR>
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'vim', 'css' , 'json', 'dosini']
+nnoremap <Leader>m :w<CR>:!markdown-watch.sh % &<CR><CR>
 nnoremap <Leader>dm /^_date modified:.*<CR>C_date modified: <ESC>:read !date +"\%Y-\%m-\%d"<CR>kJA_<ESC>:nohlsearch<CR>
 
 " search settings
@@ -116,7 +119,6 @@ set hlsearch                " highlight search matches
 set ignorecase              " use case insensitive search
 set smartcase               " case sensitive search when using capital letters
 nnoremap <Leader><Leader> :nohlsearch<CR>
-
 " _     _           _ _
 "| |__ (_)_ __   __| (_)_ __   __ _ ___
 "| '_ \| | '_ \ / _` | | '_ \ / _` / __|
@@ -135,6 +137,8 @@ nnoremap <Down> gj
 nnoremap <Right> :bn<CR>
 nnoremap <Left> :bp<CR>
 nnoremap <Leader>s :source ~/.vimrc<CR>
+" format paragraph
+nnoremap <Leader>q vipgq
 " TODO make below command send full path to :!tmux set-buffer
 nnoremap <Leader>p :! echo <C-r>%<cr>
 nnoremap <Leader>gf 0f(lyt):!firefox -private <C-r>" &<CR><CR>
@@ -146,7 +150,7 @@ nnoremap <Leader>x 0f[lrXWj
 nnoremap <Leader>X 0fXr<space><Esc>2wj
 " splits
 set splitbelow splitright
-nnoremap <Leader>f :sp<CR>:Files<CR>
+nnoremap <Leader>F :sp<CR>:Files<CR>
 "" change window
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -158,6 +162,7 @@ nnoremap <Leader>' ciW''<Esc>P
 nnoremap <Leader>( ciW()<Esc>P
 nnoremap <Leader>< ciW<><Esc>P
 nnoremap <Leader>` ciW``<Esc>P
+nnoremap <Leader>_ ciW__<Esc>P
 "" spellcheck
 nnoremap <F7> :set spell!<CR>
 
@@ -167,21 +172,19 @@ nnoremap <Leader><Localleader><Localleader> :edit!<CR>
 " manual syntax highlighting
 nnoremap <LocalLeader>m :set filetype=messages<CR>
 map <F11> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-"
 "             _                           _
 "  __ _ _   _| |_ ___   ___ _ __ ___   __| |
 " / _` | | | | __/ _ \ / __| '_ ` _ \ / _` |
 "| (_| | |_| | || (_) | (__| | | | | | (_| |
 " \__,_|\__,_|\__\___/ \___|_| |_| |_|\__,_|
 " remove trailing white space before writing file
-let blacklist = ['patch', 'diff']
+let blacklist = ['patch', 'diff', 'markdown']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | :%s/\s\+$//e
 " custom extension syntax highlighting
 autocmd BufNewFile,BufRead *.Xresources,*.xcolors,*.xfonts set syntax=xdefaults
 " AUTO-RELOAD PROGRAMS
 autocmd BufWritePost ~/.Xresources      :!xrdb -merge ~/.Xresources
 autocmd BufWritePost ~/.config/i3/*     :!~/.scripts/i3/build-config.sh
-"
 "                         _                _         __  __
 " __ _ _ _  _ _  ___ _  _(_)_ _  __ _   __| |_ _  _ / _|/ _|
 "/ _` | ' \| ' \/ _ \ || | | ' \/ _` | (_-<  _| || |  _|  _|

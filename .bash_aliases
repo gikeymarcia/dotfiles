@@ -37,6 +37,7 @@ alias clipmenu="env CM_LAUNCHER=fzf clipmenu"
 alias vim="nvim"
 alias r="ranger"
 alias mdp=~/.scripts/pandoc/markdown-preview.sh
+alias mdw=~/.scripts/pandoc/markdown-watch.sh
 alias rhist='source ~/.scripts/commands/delete-history-entry.sh'
 alias ghost='source ~/.scripts/commands/ghost.sh'
 alias power=~/.scripts/power-settings/power-profile.sh

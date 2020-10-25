@@ -171,6 +171,7 @@ tar -czf "$HOME/$tarball" \
     ".scripts/commands/search.sh" \
     ".scripts/dotfiles/fzf-preview.sh" \
     ".config/bookmarks-dirs.dirs" \
+    ".config/dircolors/my.dircolors" \
     ".scripts/sys-info/bookmark-paths.sh" \
     .vim/ftplugin/*.vim \
     .vim/plug-config/*.vim

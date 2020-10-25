@@ -1,31 +1,25 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # make HTML webpages from markdown documents
-# optionally, pass a directory and see most recently edited file as HTML
-# dependencies: pandoc fd firefox
-
-
-# shellcheck disable=SC2034
-# TODO monitor and rebuild vs one-time mode
-# TODO when a directory is passed automatically monitor for new files
+# dependencies: pandoc
 
 markdown="$1"
-[ -d "$1" ] && markdown="$(fd -t f -e md . "$2" --changed-within 2s | head -n 1)"
+html_file=/tmp/pandoc_conv.html
+[ -n "$2" ] && html_file=$2
 
-pagetitle=$(basename "$markdown")
-# html_preview=$(mktemp --suffix .html)
-html_preview=/tmp/pandoc_conv.html
+# use local stylesheet if available
 stylesheet_web=https://gist.githubusercontent.com/dashed/6714393/raw/ae966d9d0806eb1e24462d88082a0264438adc50/github-pandoc.css
 stylesheet=~/.scripts/pandoc/github-pandoc.css
 stylesheet=~/.scripts/pandoc/mikey-pandoc.css
-
-# use local stylesheet if available
 css=$stylesheet_web
 [ -r "$stylesheet" ] && css=$stylesheet
 
+pagetitle=$(basename "$markdown")
 pandoc --metadata pagetitle="$pagetitle" -V lang=en \
     --css="$css" --self-contained \
-    "$markdown" --to=html5 -s -o "$html_preview"
+    "$markdown" --to=html5 -s -o "$html_file"
 
-# launch preview
-firefox -private "$html_preview" &
+# retiring this functionality for another script
+# TODO when a directory is passed automatically monitor for new files
+# optionally, pass a directory and see most recently edited file as HTML
+#[ -d "$1" ] && markdown="$(fd -t f -e md . "$2" --changed-within 2s | head -n 1)"

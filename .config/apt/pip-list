@@ -9,6 +9,7 @@ meson
 #notebook
 numpy
 pandas
+pynvim
 td-watson
 torch
 torchvision
