@@ -174,6 +174,7 @@ OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
 # audio formats
 .mp3 00;36
 .webm 00;36
+.opus 00;36
 .flac 00;36
 .m4a 00;36
 .aup 00;36
@@ -188,7 +189,6 @@ OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
 .wav 00;36
 # https://wiki.xiph.org/MIME_Types_and_File_Extensions
 .oga 00;36
-.opus 00;36
 .spx 00;36
 .xspf 00;36
 # documents

@@ -15,6 +15,8 @@ get_extension(){
 
 if [ -d "$1" ]; then
     ls --color=always -c --group-directories-first -F "$1"
+elif [ "${1: -4}" == ".mkv" ]; then
+    ~/.scripts/ranger/media-metadata.sh "$1"
 elif [ "${1: -4}" == ".mp3" ]; then
     ~/.scripts/ranger/media-metadata.sh "$1"
 elif [ "${1: -6}" == ".quote" ]; then

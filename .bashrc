@@ -43,10 +43,11 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     PROMPT_DIRTRIM=1
     # shellcheck disable=SC2154
     # TODO figure out the shell expansion going on below
-    PS1=" ${debian_chroot:+($debian_chroot)}${USERatCOMP}${PROMPT_LOC} ${Color_Off}"
+    #PS1=" ${debian_chroot:+($debian_chroot)}${USERatCOMP}${PROMPT_LOC} ${Color_Off}"
+    PS1="${USERatCOMP}${PROMPT_LOC} ${Color_Off}"
 else
     # NO COLOR PROMPT
-    PS1=' \A ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\A ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
 

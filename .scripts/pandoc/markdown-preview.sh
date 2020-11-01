@@ -19,6 +19,8 @@ pandoc --metadata pagetitle="$pagetitle" -V lang=en \
     --css="$css" --self-contained \
     "$markdown" --to=html5 -s -o "$html_file"
 
+# TODO table of contents `--toc`
+
 # retiring this functionality for another script
 # TODO when a directory is passed automatically monitor for new files
 # optionally, pass a directory and see most recently edited file as HTML

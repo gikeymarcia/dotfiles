@@ -163,6 +163,7 @@ nnoremap <Leader>( ciW()<Esc>P
 nnoremap <Leader>< ciW<><Esc>P
 nnoremap <Leader>` ciW``<Esc>P
 nnoremap <Leader>_ ciW__<Esc>P
+nnoremap <Leader>[ ciW[]<Esc>P
 "" spellcheck
 nnoremap <F7> :set spell!<CR>
 

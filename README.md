@@ -1,4 +1,4 @@
-# dotfiles @gikeymarcia
+# Dotfiles by @gikeymarcia
 
 Welcome to my public dotfile configuration. Here you'll find a treasure trove of
 ideas and implemented solutions for making a CLI-based Linux experience easier
@@ -24,7 +24,7 @@ on.
     * `~/.scripts/commands/bookmark-actions.sh`
     * `~/.scripts/launchers/*`
 
-### main features and programs
+### Main Features and Programs
 
 - **`tmux`** configuration with vim-like bindings
 - **`nvim`** IDE-like configuration with autocompletion
@@ -34,9 +34,11 @@ on.
 - various scripts to automate setting up google cloud compute machines to feel
 comfy and familiar to my personal configs. see `~/.scripts/gcloud`
 
-### fork and feedback
+### Fork and Feedback
 
 In the spirit of open-source, feel free to fork an play with any of what's here.
 If you find ways you can improve or expand functionality I'm always interested
 to see what you've done. I hope these files are useful to you in your computing
-journey.
+journey. _~ Mikey_
+
+_date modified: 2020-11-01_

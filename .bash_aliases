@@ -41,7 +41,7 @@ alias mdw=~/.scripts/pandoc/markdown-watch.sh
 alias rhist='source ~/.scripts/commands/delete-history-entry.sh'
 alias ghost='source ~/.scripts/commands/ghost.sh'
 alias power=~/.scripts/power-settings/power-profile.sh
-alias ytdl-audio="youtube-dl -x --audio-format mp3"
+alias ytdl-audio="youtube-dl --config-location ~/.config/youtube-dl/audio"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

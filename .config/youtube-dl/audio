@@ -7,5 +7,6 @@
 --restrict-filenames
 --playlist-random
 
-# max quality
---format "best[height<=1080]"
+# audio only
+-x
+--audio-format best

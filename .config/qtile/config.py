@@ -379,8 +379,8 @@ floating_layout = layout.Floating(
     ]
 )
 
-# set to 'LG3D' by default for Java UI toolki reasons. Changing to true WM name
-# until something breaks
+# set to 'LG3D' by default for Java UI toolkit reasons. Changing to true WM
+# name until something breaks
 wmname = "qtile"
 #              _            _             _
 #   __ _ _   _| |_ ___  ___| |_ __ _ _ __| |_
@@ -400,7 +400,7 @@ def batch_run(programs):
 @hook.subscribe.startup_once
 def enter_the_qtile():
     programs = [
-        ["~/.scripts/system/set-wallpaper.sh"],
+        # ["~/.scripts/system/set-wallpaper.sh"],
         ["~/.scripts/launchers/notification-manager.sh"],
         ["~/.scripts/launchers/audio-tray.sh"],
         ["~/.scripts/launchers/network-manager-tray.sh"],
