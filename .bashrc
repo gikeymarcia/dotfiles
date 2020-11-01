@@ -47,7 +47,8 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     PS1="${USERatCOMP}${PROMPT_LOC} ${Color_Off}"
 else
     # NO COLOR PROMPT
-    PS1='\A ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    #PS1='\A ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\A \u@\h:\w\$ '
 fi
 
 
@@ -83,8 +84,7 @@ eval "$(dircolors -b ~/.config/dircolors/my.dircolors)"
 # set window title
 case "$TERM" in
     xterm*|rxvt*|st*|alacritty)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1";;
 esac
 
 
@@ -105,19 +105,19 @@ bind -f ~/.config/bind/my-bindings
 # begin with quick selector by default
 if [ -z "$TMUX" ]; then
     figlet -f smslant "enter the tmux"
-    ~/.scripts/tmux/tmux-quick-launcher.sh
+    tmux-quick-launcher.sh
 fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/mikey/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/mikey/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/mikey/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/mikey/anaconda3/bin:$PATH"
+        export PATH="$HOME/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
