@@ -2,6 +2,7 @@
 # Mikey Garcia, @gikeymarcia
 # pass a directory and get a pretty tree preview of contents in less
 # not a full listing but configured to fit my common needs
+# TODO some sort of longer description mode
 
 [ -z "$1" ] && target="$(pwd)" || target="$1"
 

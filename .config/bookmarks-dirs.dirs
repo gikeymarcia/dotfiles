@@ -1,48 +1,51 @@
 h    ~
 
 ## jobs
-sta  ~/Desktop/magicstat
+# sta  ~/Desktop/freelancing/past-contracts/fatih--magicstat
 
 ## source code
 sc   ~/.scripts
 cmd  ~/.scripts/commands
-fai  ~/Documents/git_repos/fast-ai
 repo ~/Documents/git_repos
+ans  ~/Documents/git_repos/ansible-control-host
+jay  ~/Documents/git_repos/dotfiles/learn-linux-tv--ansible-personal
+lltv ~/local-library/learn-linux-tv
 
 ## library locations
 dh   ~/library/dharma
 pc   ~/library/podcasts
 lec  ~/library/lectures
-y    ~/library/misc-videos/workouts/yoga
-mu   ~/library/music
-mo   ~/library/movies
-hm   ~/library/misc-videos/homemovies
-tv   ~/library/tv-shows
-ab   ~/library/audiobooks
-ss   ~/library/sound-shields
+med  ~/local-library/
+gb   ~/local-library/game~b
+yog  ~/local-library/yoga
+ss   ~/local-library/sound-shields
+#mu   ~/library/music
+#mo   ~/library/movies
+#hm   ~/library/misc-videos/homemovies
+#tv   ~/library/tv-shows
+#ab   ~/library/audiobooks
 
 ## captain's log
 ll   ~/dll
 jrn  ~/dll/writing/journals
 pln  ~/dll/plans/days
-U    ~/dll/logs/.U
 q    ~/dll/inputs/quotes
 
 ## documents
 dl   ~/Downloads
 dt   ~/Desktop
-dl   ~/Dropbox
-whf  ~/Desktop/coronavirus
-shel ~/Desktop/shell-tests
-iso  ~/Documents/iso-images
+#dl   ~/Dropbox
+whf  ~/Desktop/pandas-for-data-wrangling/COVID-Analysis
+shel ~/Desktop/scripting
+spy  ~/Desktop/scripting/python-os-util
 usb  /mnt/thumb-drive
-deb  ~/Documents/debs
-c    ~/Documents/courses
-nlp  ~/Documents/courses/nlp
-ai   ~/Documents/courses/ai-for-programmers
-lal  ~/Documents/courses/computational-linear-algebra
-w    ~/library/pictures/wallpapers
-tor  ~/Torrents/seeding
+c    ~/local-library/courses
+lltv ~/local-library/learn-linux-tv/ansible
+#nlp  ~/Documents/courses/nlp
+#lal  ~/Documents/courses/computational-linear-algebra
+ai   ~/local-library/courses/fastai2020
+w    ~/Pictures/wallpapers
+tor  /Torrents/seeding
 
 ## TV Shows
 #tbil ~/library/tv-shows/billions/Season-04/
@@ -54,16 +57,16 @@ vim  ~/.vim
 plg  ~/.vim/plug-config
 fnt  ~/.fonts
 not  ~/.notes
-urx  ~/.urxvt/ext
-dyn  ~/.dynamic-colors/colorschemes
 sysd ~/.system-files/systemd-unit-files
 
-
 ## system locations
+ssh  ~/.ssh/
 apt  /etc/apt
+sshd /etc/ssh/ssh_config.d
 sysd /usr/lib/systemd/user
 mnt  /mnt
 log  /var/log
-del  /var/lib/deluge/.config/deluge
+tran /etc/transmission-daemon/
+#del  /var/lib/deluge/.config/deluge
 ss   /var/lib/samba/usershares
 udev /etc/udev/rules.d

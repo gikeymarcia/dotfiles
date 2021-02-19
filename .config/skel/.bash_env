@@ -1,0 +1,15 @@
+#!/bin/sh
+# Mikey Garcia, @gikeymarcia
+
+# environment variables
+export CUST_TMUX_TERM=screen-256color
+
+# preferences
+export NMON="cMMM"
+export FZF_DEFAULT_OPTS="--extended --cycle --layout=reverse --height=70% --ansi -m"
+
+# apps
+export EDITOR="vim"
+export TERMINAL="alacritty"
+export TERMCMD="alacritty"
+export FILE_MANAGER="ranger"

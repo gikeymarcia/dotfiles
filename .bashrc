@@ -3,16 +3,17 @@
 # began as Ubuntu 18.04 default ~/.bashrc
 
 # https://tldp.org/LDP/Bash-Beginners-Guide/html/Bash-Beginners-Guide.html#sect_01_02
-# Other relevant locations
+# Other shell config locations
 # /etc/profile          system-wide profile
 # /etc/bash.bashrc      system-wide bashrc
 # ~/.profile            login shell
-# ~/.bash_profile       to setup bash upon login (I think)
-# ~/.bashrc             non-login shell (you are here)
+# ~/.bash_profile       runs on each new shell
+# ~/.bashrc             interactive shell config
 # ~/.inputrc            readline options
 # My own tweaks
 # ~/.bash_personal      useful system paths and login greeting
 # ~/.bash_env           environment variables I want
+# ~/.bash_func          helper functions
 
 # If not running interactively, don't do anything
 case $- in
@@ -27,28 +28,21 @@ esac
 source-existing () {
     [ -r "$1" ] && source "$1"
 }
+# https://unix.stackexchange.com/a/3174
+[ -r /etc/debian_chroot ] && debian_chroot=$(cat /etc/debian_chroot)
 
-# hacks for running on GoogleComputePlatform
-source-existing ~/.bash_gcp
+source-existing ~/.bash_gcp  # hack for GoogleComputePlatform
 
-### PIMP MY BASH PROMPT
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # COLOR PROMPT
-    source-existing ~/.bash_color_codes           # BASH color escape sequences
-    chrome="${BICyan}"
-    usap="${BBlue}"
-    # TIME="${BIWhite}\A"
-    USERatCOMP="${chrome}[${usap}\u${chrome}@${usap}\h${chrome}]"
-    PROMPT_LOC="${BICyan}\w${BIWhite}\$"
-    PROMPT_DIRTRIM=1
-    # shellcheck disable=SC2154
-    # TODO figure out the shell expansion going on below
-    #PS1=" ${debian_chroot:+($debian_chroot)}${USERatCOMP}${PROMPT_LOC} ${Color_Off}"
-    PS1="${USERatCOMP}${PROMPT_LOC} ${Color_Off}"
-else
-    # NO COLOR PROMPT
-    #PS1='\A ${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='\A \u@\h:\w\$ '
+### PIMP MY BASH PROMPT (man bash /PROMPTING)
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then # COLOR PROMPT
+    # https://unix.stackexchange.com/a/124409
+    source-existing ~/.bash_color_codes
+    user="${debian_chroot:+}${BBlue}\u${BICyan}@${BBlue}\H"
+    workdir="${White}:${Blue}\w${Color_Off}"
+    time="${White}\A"
+    PS1="$user$workdir $time$Color_Off\n"
+else # NO COLOR PROMPT
+    PS1="\A ${debian_chroot:+}\u@\h:\w\$ "
 fi
 
 
@@ -68,14 +62,16 @@ HISTSIZE=15000
 HISTFILESIZE=1000000
 HISTIGNORE='ls:ll:clear:..'
 HISTCONTROL=ignoreboth:erasedups
-# shared terminal history-- https://unix.stackexchange.com/a/18443
-#PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # enable programmable completion features
 if ! shopt -oq posix; then
     source-existing /usr/share/bash-completion/bash_completion
     source-existing ~/.config/completion/watson.completion
-    eval "$(pandoc --bash-completion)"
+    source-existing ~/.config/completion/buku-completion.bash
+    [ -x pandoc ] && eval "$(pandoc --bash-completion)"
+    # Anaconda bash completion
+    # CONDA_ROOT=~/anaconda3
+    # source-existing $CONDA_ROOT/etc/profile.d/bash_completion.sh
 fi
 
 # enable ls color support
@@ -84,28 +80,29 @@ eval "$(dircolors -b ~/.config/dircolors/my.dircolors)"
 # set window title
 case "$TERM" in
     xterm*|rxvt*|st*|alacritty)
-    PS1="\[\e]0;\u@\h: \w\a\]$PS1";;
+    PS1="\[\e]0;${debian_chroot:+}\u@\h: \w\a\]$PS1"
+    ;;
 esac
 
 
 # shell integrations
 source-existing ~/.fzf.bash
-source-existing ~/.anaconda3/etc/profile.d/conda.sh
-source-existing ~/.dynamic-colors/completions/dynamic-colors.bash
+# source-existing ~/.anaconda3/etc/profile.d/conda.sh
 
 # paths / defaults / aliases
+source-existing ~/.bash_env
 source-existing ~/.bash_personal
 source-existing ~/.bash_aliases
 source-existing ~/.bash_funcs
 source-existing ~/.bash_gcp
 
 # https://www.computerhope.com/unix/bash/bind.htm
-bind -f ~/.config/bind/my-bindings
+#bind -f ~/.config/bind/my-bindings
+bind '"\C-l": clear-screen'
 
-# begin with quick selector by default
+# begin with tmux quick selector by default
 if [ -z "$TMUX" ]; then
-    figlet -f smslant "enter the tmux"
-    tmux-quick-launcher.sh
+    ~/.scripts/tmux/tmux-quick-launcher.sh
 fi
 
 # >>> conda initialize >>>

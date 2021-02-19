@@ -4,8 +4,9 @@
 # if no parmaters are passed then open a file manager at the selected location
 
 choice=$(
-    fd -H --type d . "$DLL" | sed "s ^$DLL log " |
-    fzf --height=100% --prompt="move $1 ->  " |
+    cd "$DLL" || exit
+    fd -H --type d . "$DLL" --color always|
+    fzf --height=100% --ansi --prompt="move $1 ->  " --preview="fzf-preview.py {}" |
     sed "s ^log $DLL "
 )
 if [ -z "$choice" ]; then

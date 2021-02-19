@@ -6,3 +6,4 @@ ExecStart=/home/mikey/.scripts/system/mac-function-keys-first.sh
 
 [Install]
 WantedBy=multi-user.target
+# : vim: filetype=systemd :

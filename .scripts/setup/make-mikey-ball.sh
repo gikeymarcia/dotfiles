@@ -169,7 +169,7 @@ tar -czf "$HOME/$tarball" \
     ".scripts/commands/jump.sh" \
     ".scripts/commands/delete-history-entry.sh" \
     ".scripts/commands/search.sh" \
-    ".scripts/dotfiles/fzf-preview.sh" \
+    ".scripts/dotfiles/fzf-preview.py" \
     ".config/bookmarks-dirs.dirs" \
     ".config/dircolors/my.dircolors" \
     ".scripts/sys-info/bookmark-paths.sh" \

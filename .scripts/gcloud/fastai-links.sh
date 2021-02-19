@@ -1,6 +1,7 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
-# launch firefox with windows open for fastai course
+# launch $BROWSER with windows open for fastai course
+# environment: $BROWSER
 
 links+=("https://pytorch.org/docs/stable/tensors.html?highlight=zero_#torch.Tensor.zero_")
 links+=("http://localhost:8080/tree/fast-ai-for-coders/nbs/dl1")
@@ -18,4 +19,4 @@ get_links () {
 }
 
 # shellcheck disable=SC2046
-firefox -private $(get_links) &
+$BROWSER $(get_links) &

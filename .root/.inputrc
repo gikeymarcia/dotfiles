@@ -1,0 +1,22 @@
+# Mikey Garcia, @gikeymarcia
+# https://wiki.archlinux.org/index.php/Readline
+$include /etc/inputrc
+
+# https://wiki.hackzine.org/development/misc/readline-color-prompt.html
+# tell me if I'm in insert or VI command mode
+set show-mode-in-prompt on
+# set vi-ins-mode-string INS
+# set vi-cmd-mode-string cmd
+set vi-ins-mode-string \001\e[01;97m\002 #  \001\e[0m\002
+set vi-cmd-mode-string \001\e[00;32m\002[N] \001\e[0m\002
+
+# auto-completion visual niceties
+set colored-stats On
+set visible-stats On
+set mark-symlinked-directories On
+# make auto-completions friendlier to use
+# https://www.topbug.net/blog/2017/07/31/inputrc-for-humans/
+set completion-ignore-case On
+set completion-prefix-display-length 3
+set show-all-if-ambiguous On
+set show-all-if-unmodified On

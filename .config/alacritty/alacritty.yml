@@ -1,4 +1,4 @@
-background_opacity: 0.9
+background_opacity: 0.95
 colors:
   bright:
     black: '#37474f'
@@ -26,21 +26,21 @@ cursor:
   unfocused_hollow: true
 font:
   bold:
-    family: JetBrainsMono Nerd Font Mono
+    family: mononoki Nerd Font Mono
     style: Bold
   bold_italic:
-    family: JetBrainsMono Nerd Font Mono
+    family: mononoki Nerd Font Mono
     style: Bold Italic
   italic:
-    family: JetBrainsMono Nerd Font Mono
+    family: mononoki Nerd Font Mono
     style: Italic
   normal:
-    family: JetBrainsMono Nerd Font Mono
+    family: mononoki Nerd Font Mono
     style: Regular
-  size: 13
+  size: 15
 live_config_reload: true
 mouse:
-  hide_when_typing: true
+  hide_when_typing: false
   launcher:
     args:
     - -private

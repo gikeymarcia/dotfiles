@@ -1,17 +1,19 @@
-ack
+#ack # ansible CLI
+alacritty
+ansible
 apt-transport-https
 arc-theme
 audacity
 awesome
 awesome-doc
 awesome-extra
-#bat
-bleachbit
+#bat # ansible CLI
+#bleachbit # ansible CLI
 bluez
 brave-browser
-cmatrix
+# cmatrix # ansible CLI
 coreutils
-cowsay
+# cowsay # ansible CLI
 cpufrequtils
 deluge
 deluge-console
@@ -19,96 +21,118 @@ deluged
 display-dhammapada
 dstat
 dunst
-entr
-#fd-find
+efibootmgr
+# entr # ansible CLI
+# fd-find # ansible CLI
 feh                 # set background
-figlet
-finger
+# figlet # ansible CLI
+# finger # ansible CLI
 firefox
+fish
 flameshot
 fonts-font-awesome
+fonts-noto
 fonts-symbola
-fzf
+# fzf # ansible CLI
 gimp
-git-all
+# git-all # ansible CLI
 gnome-calendar
 gnome-font-viewer
 gparted
 gtk-chtheme
-handbrake
 handbrake-cli
-highlight
-htop
+handbrake-gtk
+# highlight # ansible CLI
+# htop # ansible CLI
 i3
 i3lock
 imagemagick
+iputils-ping
 irssi
+# jq # ansible CLI
 keepassxc
 lcdf-typetools
 libgtk-3-dev
+libjs-mathjax
 libnotify-bin
 libreoffice
 libreoffice-help-en-us
 libxfixes3
 libxft-dev
-lolcat
+# lolcat # ansible CLI
 lxappearance
 mediainfo
 mesa-utils
+mkusb
+mkusb-nox
 mpd
 mpg123
 mpv
-ncdu
+# ncdu # ansible CLI
 ncmpcpp
-neofetch
-neovim
+# neofetch # ansible CLI
+# neovim # ansible CLI
 net-tools
 network-manager
 network-manager-gnome
-nmon
+# nmon # ansible CLI
 nodejs
 npm
 ntfs-3g
 numlockx
 obs-studio
+okular
+openssh-client
+openssh-server
 pandoc
 pasystray
-patchutils
+# patchutils # ansible CLI
 pavucontrol
 pipenv
+playerctl
 poppler-utils
-pop-theme
+#pop-theme
+ppa-purge
+python3-argcomplete
 python3-gpg
+python3-pip
 python3-pytest
 python-is-python3
 qpdf
+qt5-style-kvantum # ppa:papirus/papirus
+qt5-style-kvantum-themes # ppa:papirus/papirus
 qt5-style-plugins
-ranger
+# ranger # ansible CLI
 redshift
-redshift-gtk
-#ripgrep
+# ripgrep # ansible CLI # problem with Ubuntu 20.04
 rustc
 rxvt-unicode
-screen
-shellcheck
-signal-desktop
+# screen # ansible CLI
+# shellcheck # ansible CLI
 slop
 sqlite3
+sshfs
 sxhkd
+sxiv
 testdisk
+texlive-latex-recommended
 thunar
 tipp10
-tldr
-tmux
+# tldr # ansible CLI
+# tmux # ansible CLI
+transmission-cli
 transmission-common
+transmission-daemon
 transmission-gtk
-tree
+# tree # ansible CLI
 tty-clock
 unrar
-vim
+usb-pack-efi
+# vim # ansible CLI
 vim-doc
 vim-gui-common
 vim-scripts
+# vim: set filetype=dosini :
 virtualbox
 x11-apps
 xclip
@@ -120,3 +144,4 @@ youtube-dl
 zathura
 zfsutils-linux
 zim
+zsh

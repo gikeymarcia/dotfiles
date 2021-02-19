@@ -8,9 +8,10 @@ thelab="$cfg_dir/desktop-config"
 macbook="$cfg_dir/laptop-config"
 live="$cfg_dir/config"
 
-if [ "$(hostname)" = "macbook" ]; then
+# TODO moving all this to a python script
+if [ "$(hostname)" = "dell" ]; then
     cat "$master" "$macbook" > "$live"
-elif [ "$(hostname)" = "thelab" ]; then
+elif [ "$(hostname)" = "gserver" ]; then
     cat "$master" "$thelab" > "$live"
 fi
 ls -lh "$live"

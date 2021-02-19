@@ -1,0 +1,92 @@
+#!/bin/bash
+# Mikey Garcia, @gikeymarcia
+# common tasks / making the shell comfy
+
+# cd with bells and whistles
+# cd to files, preview dir contents
+function c (){
+    if [ -z "$1" ]; then    target=$HOME
+    elif [ -d "$1" ]; then  target=$1
+    elif [ -f "$1" ]; then  target=$(dirname "$1")
+    fi
+    cd "$target" || return
+    ls --color=auto -F
+    pwd
+    unset -v target
+}
+
+# interactively choose files to open in $EDITOR
+fo () {
+    choice=$(fd -t f -H | 
+	     fzf --preview="cat {}" --prompt="Choose a file")
+    # shellcheck disable=SC2086
+    [ -n "$choice" ] && $EDITOR $choice
+    [ -z "$choice" ] && echo "selection cancelled."
+    unset choice
+}
+
+# mkdir and cd into it
+mcd () {
+    mkdir -pv "$1"
+    cd "$1" || echo "could not cd to '$1'"
+}
+
+# grep for details of running processes
+seegrep () {
+    pids=$(pgrep "$1")
+    if [ -n "$pids" ]; then
+        echo "$pids" | xargs ps
+    fi
+    unset -v pids
+}
+
+# make new executable shell script file
+touchx () {
+    if [ -z "$1" ]; then
+        echo "must give a filename."
+    else
+        touch "$1"
+        chmod -v +x "$1"
+        echo "#!/bin/bash" >> "$1"
+        $EDITOR "$1"
+    fi
+}
+
+# search for packages, pick one, show details
+apts () {
+    pkg=$(apt-cache search "$1" | fzf --prompt="which package?")
+    p=$(printf "%s" "$pkg" | awk '{print $1}')
+    if [ -n "$p" ]; then
+        apt show "$p"
+        echo "$pkg"
+        ~/.scripts/commands/get-clip.sh "$p"
+    fi
+    unset -v p; unset -v pkg
+}
+
+# sort a file and show the diff
+sort_file () {
+    if [ -r "$1" ]; then
+        cp -v "$1" /tmp/unsorted_version
+        sort "$1"  > /tmp/sorted_version
+        mv -v /tmp/sorted_version "$1"
+        diff -u /tmp/unsorted_version "$1"
+    fi
+}
+
+# which apt -- show where a binary is and what installed it
+wapt () {
+    binary=$(which "$1")
+    apt=$(dpkg -S "$binary" | sed -E "s/^(.*):.*$/\1/")
+    apt show "$apt"
+    echo "$binary"
+    unset -v binary; unset -v apt
+}
+
+whichp () {
+    dpkg -S "$(which "$1")"
+}
+
+gpath () {
+    echo "$PATH" | tr ':' '\n' | fzf --prompt="Choose from \$PATH: " --multi
+}

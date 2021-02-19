@@ -150,7 +150,7 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = JetBrainsMono Nerd Font Mono-14:style=Regular:antialias=true:hinting=true;0
+font-0 = JetBrainsMono Nerd Font Mono-11:style=Regular:antialias=true:hinting=true;0
 font-1 = Symbola:fontformat=Regular:size=14:antialias=true;1
 font-2 = siji:pixelsize=10;2
 
@@ -173,7 +173,7 @@ cursor-scroll = ns-resize
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:50:...%
-label-empty = @macbook
+label-empty = @dell
 label-empty-foreground = ${colors.dim-grey}
 
 

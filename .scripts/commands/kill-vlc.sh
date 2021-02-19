@@ -2,6 +2,7 @@
 # Mikey Garcia, @gikeymarcia
 # fzf select which instances of VLC to kill
 # dependencies: fzf
+# TODO use xargs and let the script kill more than one instance at a time
 
 pids=$(pgrep vlc)
 if [ -n "$pids" ]; then

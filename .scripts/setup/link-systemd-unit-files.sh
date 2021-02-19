@@ -12,7 +12,7 @@ link_to_systemd () {
     fi
 }
 link_to_systemd  "$localunit/clipmenud.service"
-link_to_systemd  "$localunit/function-first.service"
+#link_to_systemd  "$localunit/function-first.service"
 #link_to_systemd  "$localunit/deluged.service"
 #link_to_systemd  "$localunit/deluge-web.service"
 

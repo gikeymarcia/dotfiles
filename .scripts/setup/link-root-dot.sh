@@ -2,6 +2,8 @@
 # Mikey Garcia, @gikeymarcia
 # install niceities for the system root user
 # dependencies:
+# DEPRECATED for an ansible playbook
+# https://www.thegeekdiary.com/understanding-the-etc-skel-directory-in-linux/
 
 set -o nounset    # error when referencing undefined variable
 set -o errexit    # exit when command fails
@@ -17,7 +19,7 @@ sudo cp -v "$HOME/.root/root_bash_profile"  /root/.bash_profile
 sudo cp -v "$HOME/.root/root_color_codes"   /root/.bash_color_codes
 sudo cp -v "$HOME/.root/root_rc"            /root/.bashrc
 sudo cp -v "$HOME/.root/root_env"           /root/.bash_env
-sudo cp -v "$HOME/.inputrc"                 /root/.inputrc
+sudo cp -v "$HOME/.root/.inputrc"           /root/.inputrc
 sudo cp -v "$HOME/.root/root_profile"       /root/.profile
 sudo cp -v "$HOME/.selected_editor"         /root/.selected_editor
 
@@ -36,7 +38,7 @@ sudo cp -v "$HOME/.root/root_vimrc"         /root/.vimrc
 
 # fzf
 sudo cp -v "$HOME/.fzf.bash" /root/.fzf.bash
-fzf_comp=/root/Documents/git_repos/fzf/shell
-[ ! -d "$fzf_comp" ] && sudo mkdir -pv "$fzf_comp"
-sudo cp -v "$HOME/Documents/git_repos/fzf/shell/completion.bash"   "$fzf_comp"
-sudo cp -v "$HOME/Documents/git_repos/fzf/shell/key-bindings.bash" "$fzf_comp"
+fzf_completion=/root/.fzf
+[ ! -d "$fzf_completion" ] && sudo mkdir -pv "$fzf_completion"
+sudo cp -v "$HOME/.fzf/completion.bash"   "$fzf_completion"
+sudo cp -v "$HOME/.fzf/key-bindings.bash" "$fzf_completion"

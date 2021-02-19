@@ -1,0 +1,24 @@
+#!/bin/bash
+# shellcheck shell=bash
+# Mikey Garcia, @gikeymarcia
+
+# paths
+export DOTFILES="$HOME/.config/dotfiles/"
+export PUB_DOTFILES="$HOME/.config/pub-dotfiles/"
+export WALLPAPERS="$HOME/Pictures/wallpapers"
+
+# probabalistic welcome message
+welcome () {
+    upper=15
+    case "$(seq "$upper" | shuf -n 1)" in
+        "1" ) quote="If the users don't control the program, the program controls the users. ~Richard Stallman (rms)" ;;
+        "2" ) quote="Plough deep while Sluggards sleep; and you shall have Corn to sell and to keep. ~Benjamin Franklin" ;;
+        "3" ) quote="Men give me credit for some genius. All the genius I have lies in this; when I have a subject in hand, I study it profoundly. Day and night it is before me. My mind becomes pervaded with it. Then the effort that I have made is what people are pleased to call the fruit of genius. It is the fruit of labor and thought. ~Alexander Hamilton" ;;
+    esac
+    echo $quote | fold -s -w 60
+    unset upper; unset quote
+}
+
+case "$-" in
+    *i*) welcome ;;
+esac

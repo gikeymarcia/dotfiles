@@ -1,10 +1,10 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
-# script to build and install qtile window manager from pip3
+# script to build and install qtile window manager from pip3 (Ubuntu 20.10)
 # dependencies: pip3
 # http://docs.qtile.org/en/latest/manual/install/index.html#installing-from-source
 
-apt_dependencies="libxcb-render0-dev libffi-dev libpangocairo-1.0-0 python-dbus"
+apt_dependencies="libxcb-render0-dev libffi-dev libpangocairo-1.0-0 python3-dbus"
 # shellcheck disable=SC2086
 sudo apt install $apt_dependencies
 # https://github.com/qtile/qtile/issues/994#issuecomment-497984551
@@ -28,5 +28,6 @@ EOF
 # move it to the right place
 xsession=/usr/share/xsessions/qtile.desktop
 sudo mv -v $tmpx $xsession
+sudo chown root:root  $xsession
 ls -l /usr/share/xsessions
 bat $xsession

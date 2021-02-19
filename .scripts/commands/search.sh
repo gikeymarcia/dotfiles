@@ -1,6 +1,7 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # find paths to files/directories using fzf
+# dependencies: fzf fd fzf-preview.py
 
 
 # TODO let me pass parameters which will modify fd
@@ -16,11 +17,11 @@ if [ -n "$1" ] ; then
 fi
 [ -z "$1" ] && target="$(pwd)"
 
+printf "\nSeaching in '%s':\n" "$target"
 selection=$(
     cd "$target" || exit
     fd -c always -H . . | fzf --ansi --height=80% \
-        --prompt="searching in '$target' " \
-        --preview="~/.scripts/dotfiles/fzf-preview.sh '$target/{}'")
+        --preview="fzf-preview.py '$target/{}'")
 
 # copy to clipboard
 if [ -n "$selection" ]; then

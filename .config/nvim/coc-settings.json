@@ -8,12 +8,11 @@
     "python.jediEnabled": true,
     "python.jediMemoryLimit": 500,
     "python.jediPath": "/home/mikey/.local/lib/python3.8/site-packages",
-    "python.pythonPath": "/usr/bin/python",
+    "python.pythonPath": "/usr/bin/python3",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
     "python.formatting.provider": "autopep8",
-    "sh.highlightParsingErrors": true,
     "yank.highlight.duration": 750,
     "coc.preferences.snippets.enable": true
 }

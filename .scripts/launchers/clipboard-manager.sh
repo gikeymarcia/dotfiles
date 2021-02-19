@@ -9,7 +9,7 @@
 on () {
     clipctl enable
     printf "%s" "on" > /tmp/clipman
-    notify-send -t 5000 -a clipmenu \
+    notify-send -t 1000 -a clipmenu \
         -h string:x-canonical-private-synchronous:clipmenu \
         "saving clipboard history" &
 
@@ -18,10 +18,9 @@ on () {
 off () {
     clipctl disable
     printf "%s" "off" > /tmp/clipman
-    notify-send -t 5000 -a clipmenu \
+    notify-send -t 1000 -a clipmenu \
         -h string:x-canonical-private-synchronous:clipmenu \
         "DISABLE clipboard history" &
-
 }
 
 case "$1" in

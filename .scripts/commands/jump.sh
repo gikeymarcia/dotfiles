@@ -1,7 +1,7 @@
 #!/bin/sh
 # Mikey Garcia, @gikeymarcia
 # list child directories from current location (or param) and cd to them
-# dependencies: fd fzf tree fzf-preview.sh
+# dependencies: fd fzf tree fzf-preview.py
 
 if [ -z "$1" ]; then
     target="$(pwd)"
@@ -11,8 +11,8 @@ fi
 
 selection=$(
     cd "$target" || exit
-    fd -H -t d --color always . . | fzf --ansi +m \
-        --preview="fzf-preview.sh $target/{}"
+    fd -H -t d --color always . . | fzf --ansi --no-multi \
+        --preview="fzf-preview.py {}"
 )
 if [ -n "$selection" ]; then
     selection="$target/$selection"

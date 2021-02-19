@@ -40,10 +40,13 @@ exec        --no-startup-id $HOME/.dropbox-dist/dropboxd
 ### PROGRAM SHORTCUTS -- Windows + (KEY)
 # (ENTER) open a terminal
 bindsym $win+Return         exec --no-startup-id alacritty
-bindsym $win+Shift+Return   exec --no-startup-id urxvt
-bindsym Control+$win+Return exec --no-startup-id $HOME/.scripts/dmenu/change-terminal-xcolors.sh
+# bindsym $win+Shift+Return   exec --no-startup-id urxvt
+bindsym Control+$win+Return exec --no-startup-id $HOME/.scripts/dmenu/term-colorscheme.sh
+bindsym Shift+$win+Return   exec --no-startup-id $HOME/.scripts/dmenu/term-font.sh
 # (d)menu -- run command
 bindsym $win+d exec --no-startup-id $HOME/.scripts/launchers/run-menu.sh
+# (e)xplorer -- open GUI file manager
+bindsym $win+e exec --no-startup-id thunar
 # (D)ate -- gnome-calendar
 bindsym $win+Shift+d exec --no-startup-id gnome-calendar
 # (w)eb browsers
@@ -80,19 +83,21 @@ bindsym $win+Shift+b exec --no-startup-id "$HOME/.scripts/dmenu/bookmark-to-clip
 bindsym $win+Control+g exec --no-startup-id "$HOME/.scripts/launchers/google-services.sh"
 
 ### MEDIA KEYS
+# media controls
+bindcode 172 exec --no-startup-id playerctl play-pause
 # volume control
 bindcode 121 exec --no-startup-id pulseaudio-ctl mute
 bindcode 122 exec --no-startup-id pulseaudio-ctl down
 bindcode 123 exec --no-startup-id pulseaudio-ctl up
 # screen backlight control
-bindcode 232 exec --no-startup-id $HOME/.scripts/commands/macbook-backlight.sh down
-bindcode 233 exec --no-startup-id $HOME/.scripts/commands/macbook-backlight.sh up
+bindcode 232 exec --no-startup-id $HOME/.scripts/commands/backlight.sh down
+bindcode 233 exec --no-startup-id $HOME/.scripts/commands/backlight.sh up
 # keyboard LED backlight control
 bindcode 237 exec --no-startup-id $HOME/.scripts/commands/macbook-keyboard-led.sh down
 bindcode 238 exec --no-startup-id $HOME/.scripts/commands/macbook-keyboard-led.sh up
 
 ### SYSTEM COMMANDS
-bindsym $win+Shift+q   exit
+bindsym $win+Control+q   exit
 bindsym $win+Control+r restart
 bindsym $win+Control+c exec --no-startup-id $HOME/.scripts/launchers/compositor.sh
 bindsym $win+Control+w exec --no-startup-id $HOME/.scripts/system/set-wallpaper.sh choose
@@ -154,7 +159,7 @@ mode "GiGi" {
         bindsym v exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh vroom.mp3
         bindsym w exec --no-startup-id $HOME/.scripts/system/set-wallpaper.sh                              # (w)allpaper change (random)
         bindsym x exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh xylophone.mp3
-        bindsym z exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh zipper.mp3
+        bindsym z exec --no-startup-id $HOME/.scripts/commands/sound-fx.sh zipper.mp3 baby-laughing.mp3
 
         # kill sound
         bindsym BackSpace  exec --no-startup-id killall mpg123

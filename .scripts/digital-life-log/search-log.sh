@@ -10,7 +10,7 @@ choice=$(
     cd "$DLL" || exit
     fd -H -t f -t d --color always . . |
         fzf --height=100% --ansi --prompt="searching digitial life log... " \
-        --preview='~/.scripts/dotfiles/fzf-preview.sh {}'
+        --preview='~/.scripts/dotfiles/fzf-preview.py {}'
 )
 
 

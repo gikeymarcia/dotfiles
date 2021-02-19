@@ -1,7 +1,11 @@
-deluge-team/stable
+# deluge-team/stable
 libreoffice/ppa
+mkusb/ppa
 mmstick76/alacritty
+neovim-ppa/stable
 obsproject/obs-studio
+papirus/papirus
 phoerious/keepassxc
-system76/pop
-# these are the installed PPAs I use
+stebbins/handbrake-releases
+#system76/pop      # could be causing system instability
+transmissionbt/ppa

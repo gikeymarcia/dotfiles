@@ -19,3 +19,4 @@ _watson_completionetup() {
 }
 
 _watson_completionetup;
+# vim: set filetype=bash :

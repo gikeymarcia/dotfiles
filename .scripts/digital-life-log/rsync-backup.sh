@@ -13,7 +13,7 @@ if ! ping -c 1 -W 1 "$host" > /dev/null ; then
     user=mikey && host=gikeymarcia.duckdns.org
 fi
 echo "backing up to '$user@$host'"
-rsync -e ssh --info=progress2 -raul "$src" $user@$host:~/dll/ || \
+rsync -e ssh --info=progress2 -raul "$src" $user@$host:~ || \
     echo "backup failed"
 
 # rsync flags

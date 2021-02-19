@@ -11,6 +11,7 @@ padding="  "
 if [ -r "$1" ]; then
     quote=$1
 else
+    [ ! -d "$QUOTES" ] && exit
     ## choose random quote
     files=$(fd --type f . "$QUOTES")
     maybe=$(shuf -n 1 <(printf "%s\n" "$files"))

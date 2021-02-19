@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Mikey Garcia, @gikeymarcia config for qtile v0.16.0
 # development: view logs with
 # tail -f ~/.local/share/qtile/qtile.log
@@ -34,28 +34,47 @@ def script(syspath, param=None):
         return str(os.path.expanduser(syspath) + " " + param)
 
 
+# watson time-tracker widget
+def watson_project():
+    proj = subprocess.check_output(
+        ['watson', 'status', '-p'], text=True).rstrip()
+    if proj == "No project started.":
+        return "-"
+    else:
+        return proj
+
+
+def watson_elapsed():
+    proj = subprocess.check_output(
+        ['watson', 'status', '-p'], text=True).rstrip()
+    # TODO -- figure out how to get mouse callback working
+    time = subprocess.check_output(['watson', 'status', '-e'], text=True)
+    subprocess.run(['notify-send', '-a', 'watson', proj, time])
+
+
 # UI settings
 my = {
-    "font": "JetBrainsMono Nerd Font Mono",
-    "fontsize": 20,
-    "margin": 10,
-    "border_width": 5,
-    "bar_height": 40,
+    "font": 'JetBrainsMono Nerd Font Mono',
+    "fontsize": 14,
+    "margin": 3,
+
+    "border_width": 3,
+    "bar_height": 27,
 }
 # colors
 clr = {
-    "urgent": "#cc0000",
-    "background": "#000000",
-    "foreground": "#ffffff",
-    "fg_dim": "#ababab",
-    "bg_dim": "#232323",
-    "hilight": "#1a4460",
-    "hilight_alt": "#603e1a",
-    "hi_blue": "#005fff",
-    "hi_green": "#609611",
-    "dim": "#333222",
-    "dim_red": "#641400",
-    "dim_orange": "#4d3715",
+    "urgent": '#cc0000',
+    "background": '#000000',
+    "foreground": '#ffffff',
+    "fg_dim": '#ababab',
+    "bg_dim": '#232323',
+    "hilight": '#1a4460',
+    "hilight_alt": '#603e1a',
+    "hi_blue": '#005fff',
+    "hi_green": '#609611',
+    "dim": '#333222',
+    "dim_red": '#641400',
+    "dim_orange": '#4d3715',
 }
 #  _              _     _           _ _
 # | | _____ _   _| |__ (_)_ __   __| (_)_ __   __ _ ___
@@ -63,38 +82,40 @@ clr = {
 # |   <  __/ |_| | |_) | | | | | (_| | | | | | (_| \__ \
 # |_|\_\___|\__, |_.__/|_|_| |_|\__,_|_|_| |_|\__, |___/
 #           |___/                             |___/
+
 keys = [
     # quick-switch between groups
-    Key([mod], "o", lazy.screen.toggle_group(), desc="desktop quick toggle"),
-    Key([mod], "n", lazy.screen.next_group(), desc="next desktop"),
-    Key([mod, "shift"], "n", lazy.screen.prev_group(), desc="prev desktop"),
+    Key([mod], "o", lazy.screen.toggle_group(), desc='desktop quick toggle'),
+    Key([mod], "n", lazy.screen.next_group(), desc='next desktop'),
+    Key([mod, "shift"], "n", lazy.screen.prev_group(), desc='prev desktop'),
     # traversing the stack
-    Key([mod], "k", lazy.layout.up(), desc="focus up stack"),
-    Key([mod], "j", lazy.layout.down(), desc="focus down stack"),
-    Key([mod], "h", lazy.layout.left(), desc="focus left"),
-    Key([mod], "l", lazy.layout.right(), desc="focus right"),
+    Key([mod], "k", lazy.layout.up(), desc='focus up stack'),
+    Key([mod], "j", lazy.layout.down(), desc='focus down stack'),
+    Key([mod], "h", lazy.layout.left(), desc='focus left'),
+    Key([mod], "l", lazy.layout.right(), desc='focus right'),
     # rearrange the stack
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move upward"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move downward"),
-    Key([mod, "shift"], "h", lazy.layout.swap_left(), desc="Move pane left"),
-    Key([mod, "shift"], "l", lazy.layout.swap_right(), desc="Move pane right"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc='Move upward'),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc='Move downward'),
+    Key([mod, "shift"], "h", lazy.layout.swap_left(), desc='Move pane left'),
+    Key([mod, "shift"], "l", lazy.layout.swap_right(), desc='Move pane right'),
     # manipulate layout
-    Key([mod, "shift"], "space", lazy.prev_layout(), desc="previous layout"),
-    Key([mod], "space", lazy.next_layout(), desc="next layout"),
-    Key([mod], "BackSpace", lazy.layout.normalize(), desc="reset layout"),
-    Key([mod], "m", lazy.layout.maximize(), desc="mazimize"),
-    Key([mod], "Tab", lazy.layout.flip(), desc="flip master and stack"),
+    Key([mod, "shift"], "space", lazy.prev_layout(), desc='previous layout'),
+    Key([mod], "space", lazy.next_layout(), desc='next layout'),
+    Key([mod], "BackSpace", lazy.layout.normalize(), desc='reset layout'),
+    Key([mod], "m", lazy.layout.maximize(), desc='mazimize'),
+    Key([mod], "Tab", lazy.layout.flip(), desc='flip master and stack'),
     # resizing
-    Key([mod, "control"], "h", lazy.layout.shrink(), desc="shrink window"),
-    Key([mod, "control"], "l", lazy.layout.grow(), desc="grow window"),
+    Key([mod, "control"], "h", lazy.layout.shrink(), desc='shrink window'),
+    Key([mod, "control"], "l", lazy.layout.grow(), desc='grow window'),
     # window actions
-    Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
+    Key([mod, "shift"], "c", lazy.window.kill(), desc='Kill focused window'),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc='toggle fullscreen'),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack"),
     # programs
-    Key([mod], "Return", lazy.spawn(terminal), desc="Alacritty terminal"),
-    Key([mod], "d", lazy.spawn(script("~/.scripts/launchers/run-menu.sh")),
+    Key([mod], "Return", lazy.spawn(terminal), desc='Alacritty terminal'),
+    Key([mod], "e", lazy.spawn("thunar"), desc='thunar file manager'),
+    Key([mod], "d", lazy.spawn(script('~/.scripts/launchers/run-menu.sh')),
         desc="dmenu_run launcher"),
     Key([mod], "p", lazy.spawn("firefox -private"), desc="firefox -private"),
     Key([mod, "shift"], "p", lazy.spawn("brave-browser --incognito"),
@@ -118,11 +139,14 @@ keys = [
     Key([], "XF86AudioMute",
         lazy.spawn(script("~/.scripts/system/volume-control.sh", "mute")),
         desc="mute volume"),
+    Key([], "XF86AudioPlay",
+        lazy.spawn("playerctl play-pause"),
+        desc="play/pause toggle"),
     Key([], "XF86MonBrightnessUp",
-        lazy.spawn(script("~/.scripts/commands/macbook-backlight.sh", "up")),
+        lazy.spawn(script("~/.scripts/commands/backlight.sh", "up")),
         desc="screen backlight up"),
     Key([], "XF86MonBrightnessDown",
-        lazy.spawn(script("~/.scripts/commands/macbook-backlight.sh", "down")),
+        lazy.spawn(script("~/.scripts/commands/backlight.sh", "down")),
         desc="screen backlight down"),
     Key([], "XF86KbdBrightnessUp",
         lazy.spawn(
@@ -144,9 +168,12 @@ keys = [
     Key([mod, "control"], "w",
         lazy.spawn(script("~/.scripts/system/set-wallpaper.sh", "choose")),
         desc="change wallpaper"),
+    Key([mod, "shift"], "Return",
+        lazy.spawn(script("~/.scripts/dmenu/term-font.sh")),
+        desc="change terminal fonts"),
     Key([mod, "control"], "Return",
-        lazy.spawn(script("~/.scripts/dmenu/change-terminal-xcolors.sh")),
-        desc="change terminal colors and fonts"),
+        lazy.spawn(script("~/.scripts/dmenu/term-colorscheme.sh")),
+        desc="change terminal colorscheme"),
     Key([mod, "control"], "c",
         lazy.spawn(script("~/.scripts/launchers/compositor.sh")),
         desc="change compositor profile"),
@@ -163,8 +190,16 @@ keys = [
         lazy.spawn(script("~/.scripts/launchers/keystrokes.sh", "toggle")),
         desc="toggle screenkey"),
     # selectors
-    Key([mod], "F1", lazy.spawn(script("~/.scripts/launchers/news.sh")),
+    Key([mod], "F1", lazy.spawn(
+        script("~/.scripts/launchers/documentation-selector.sh")),
+        desc="documentation quick selector"),
+    Key([mod, "shift"], "F1", lazy.spawn(
+        script("~/.scripts/launchers/note-selector.sh")),
+        desc="quick launcher to read my ~/.notes"),
+    Key([mod], "F2", lazy.spawn(script("~/.scripts/launchers/news.sh")),
         desc="open a news source"),
+    Key([mod], "F4", lazy.spawn(script("~/.scripts/launchers/watson.py")),
+        desc="Start / Switch watson project"),
     Key([mod], "c", lazy.spawn(script("~/.scripts/launchers/chat-apps.sh")),
         desc="launch a chat app"),
     Key([mod, "control"], "y",
@@ -186,40 +221,80 @@ keys = [
 # | (_| | | | (_) | |_| | |_) \__ \
 #  \__, |_|  \___/ \__,_| .__/|___/
 #  |___/                |_| desktops / workspaces
+
+
+# TODO icon
+# https://pybit.es/python-subclasses.html
+class Comfy(layout.xmonad.MonadTall):
+
+    def __init__(self, **config):
+        # config["border_focus"] = clr["hilight"]
+        # config["border_width"] = my["border_width"]
+        # config["margin"] = 85
+        super().__init__(**config)
+
+
 default_layouts = [
     layout.MonadTall(**{
         "border_focus": clr["hilight"],
         "border_width": my["border_width"],
         "margin": my["margin"],
     }),
+    layout.Max(),
+    Comfy(**{
+        "border_focus": clr["hilight"],
+        "border_width": my["border_width"],
+        "margin": 85,
+    }),
     layout.MonadWide(**{
         "border_focus": clr["hilight"],
         "border_width": my["border_width"],
         "margin": my["margin"],
     }),
+]
+
+media_layouts = [
+    layout.MonadWide(**{
+        "border_focus": clr["hilight"],
+        "border_width": my["border_width"],
+        "margin": my["margin"],
+    }),
+    layout.Matrix(**{
+        "margin": my['margin'],
+        "border_width": my['border_width'],
+        "border_focus": clr['hilight'],
+    }),
     layout.Max(),
 ]
 my_groups = [
+    {
+        "name": "r", "label": '📸',
+        # TODO mod `widget.GroupBox` so groups can declare label pango markup
+        # "fmt": '<span foreground="blue">{}</span>',
+        "layouts": default_layouts,
+        "matches": [
+            Match(wm_class=['obs']),
+        ],
+    },
     {"name": "1", "label": "1", "layouts": default_layouts},
     {"name": "2", "label": "2", "layouts": default_layouts},
     {"name": "3", "label": "3", "layouts": default_layouts},
     {"name": "4", "label": "4", "layouts": default_layouts},
     {
         "name": "5", "label": "5",
-        "layouts": default_layouts + [layout.Matrix()],
+        "layouts": media_layouts,
         "layout": "matrix",
     },
     {"name": "6", "label": "6", "layouts": default_layouts},
-    {"name": "7", "label": "7", "layouts": default_layouts},
+    {"name": "7", "label": "7 ⚙", "layouts": default_layouts},
     {"name": "8", "label": "8", "layouts": default_layouts},
     {
-        "name": "9", "label": "9",
+        "name": "9", "label": "9", "layouts": default_layouts,
         "matches": [
-            Match(wm_class=['TelegramDesktop', 'Slack']),
+            Match(wm_class=['TelegramDesktop', 'Slack', 'yakyak']),
             Match(title=["Mikey's Passwords - KeePassXC"]),
         ],
-        "layout": "matrix",
-        "layouts": default_layouts + [layout.Matrix()]
+
     },
     {"name": "0", "label": "!?!", "layouts": default_layouts},
 ]
@@ -247,8 +322,17 @@ widget_defaults = dict(
     fontsize=my["fontsize"],
     padding=3,
 )
-widget_cfg = {
-    "GroupBox": {
+
+my_bar = [
+    widget.GenPollText(**{
+        "fmt": '<span weight="{}" foreground="{}">{}</span>'.format(
+            "bold", clr['hi_blue'], "{}"),
+        "func": watson_project,
+        "update_interval": 3,
+        "padding": 12,
+        "mouse_callbacks": {"Button1": lambda: watson_elapsed()},
+    }),
+    widget.GroupBox(**{
         "active": clr["foreground"],
         "inactive": "#404040",
         "highlight_method": "block",
@@ -257,34 +341,35 @@ widget_cfg = {
         "urgent_border": clr["urgent"],
         "hide_unused": True,
         "fontshadow": None,
-    },
-    "TaskList": {
+        "disable_drag": True,
+    }),
+    widget.Sep(**{
+        "linewidth": 2,
+        "padding": 15,
+        "size_percent": 65,
+    }),
+    widget.Prompt(),
+    widget.TaskList(**{
         "background": clr["background"],
-        "max_title_width": 400,
+        "max_title_width": 250,
         "title_width_method": "uniform",
         "highlight_method": "block",
-        "padding": 10,
+        "txt_maximized": '[] ',
+        "padding": 5,
         "icon_size": int(my["bar_height"] * 0.65),
         "margin_y": 0,
         "margin_x": 8,
-    },
-    "Pomodoro": {
-        "prefix_inactive": "🍅",
-        "prefix_paused": "⛔",
-        "prefix_break": "🌴relax🌴",
-        "background": clr["bg_dim"],
-        "color_inactive": clr["fg_dim"],
-        "padding": 10,
-    },
-    "CurrentLayout": {
-        "padding": 10,
-        "foreground": clr["fg_dim"],
-        "background": clr["dim_red"],
-    },
-    "Battery": {
-        "charge_char": "⚡",
-        "discharge_char": "🔋",
-        "full_char": "⛽",
+    }),
+    widget.CurrentLayoutIcon(),
+    # widget.CurrentLayout(**{
+    #    "padding": 10,
+    #    "foreground": clr["fg_dim"],
+    #    "background": clr["dim_red"],
+    # }),
+    widget.Battery(**{
+        "charge_char": " ⚡ ",
+        "discharge_char": " 🔋 ",
+        "full_char": " ⛽ ",
         "update_interval": 5,
         "format": "{percent:2.0%}{char}{hour:d}:{min:02d}",
         "padding": 10,
@@ -292,56 +377,40 @@ widget_cfg = {
         "low_foreground": clr["urgent"],
         "low_percentage": 0.2,
         "show_short_text": False,
-    },
-    "Clock": {
+    }),
+    # widget.Volume(**{
+    # "background": clr["background"],
+    # "emoji": True,
+    # "get_volume_command": ,
+    # }),
+    # widget.Backlight(),
+    widget.Pomodoro(**{
+        "prefix_inactive": "🍅",
+        "prefix_paused": "⛔",
+        "prefix_break": "🌴relax🌴",
+        "background": clr["bg_dim"],
+        "color_inactive": clr["fg_dim"],
+        "padding": 10,
+    }),
+    widget.Systray(**{
+        "background": clr["bg_dim"],
+    }),
+    widget.Clock(**{
         "format": "%Y-%m-%d %a %H:%M",
         "background": clr["bg_dim"],
         "padding": 10,
-    },
-    "Sep": {
-        "linewidth": 2,
-        "padding": 15,
-        "size_percent": 65,
-    },
-    "WindowName": {
-        "foreground": clr["fg_dim"],
-        "background": clr["bg_dim"],
-        "padding": 10,
-    },
-    "CurrentLayoutIcon": {},
-    "Prompt": {},
-    "Systray": {
-        "background": clr["bg_dim"],
-    },
-    # this one doesn't seem to be working
-    "Volume": {
-        "background": clr["background"],
-        "emoji": True,
-        # "get_volume_command": script("~/.scripts/system/get-vol.sh"),
-    },
-    "Chord": {
-        "chords_colors": {
-            "launch": ("#ff0000", "#ffffff"),
-        },
-        "name_transform": lambda name: name.upper(),
-    },
-}
-
-my_bar = [
-    widget.GroupBox(**widget_cfg["GroupBox"]),
-    widget.Sep(**widget_cfg["Sep"]),
-    widget.Prompt(**widget_cfg["Prompt"]),
-    widget.TaskList(**widget_cfg["TaskList"]),
-    widget.CurrentLayoutIcon(**widget_cfg["CurrentLayoutIcon"]),
-    # widget.CurrentLayout(**widget_cfg['CurrentLayout']),
-    widget.Battery(**widget_cfg["Battery"]),
-    # widget.Volume(**widget_cfg['Volume']),
-    # widget.Backlight(),
-    widget.Pomodoro(**widget_cfg["Pomodoro"]),
-    widget.Systray(**widget_cfg["Systray"]),
-    widget.Clock(**widget_cfg["Clock"]),
-    # widget.Chord(**widget_cfg['Chord']),
-    # widget.WindowName(**widget_cfg['WindowName']),
+    }),
+    # widget.Chord(**{
+    # "chords_colors": {
+    #    "launch": ("#ff0000", "#ffffff"),
+    # },
+    # "name_transform": lambda name: name.upper(),
+    # }),
+    # widget.WindowName(**{
+    # "foreground": clr["fg_dim"],
+    # "background": clr["bg_dim"],
+    # "padding": 10,
+    # }),
 ]
 
 screens = [
@@ -379,8 +448,8 @@ floating_layout = layout.Floating(
     ]
 )
 
-# set to 'LG3D' by default for Java UI toolkit reasons. Changing to true WM
-# name until something breaks
+# set to 'LG3D' by default for Java UI toolki reasons. Changing to true WM name
+# until something breaks
 wmname = "qtile"
 #              _            _             _
 #   __ _ _   _| |_ ___  ___| |_ __ _ _ __| |_
@@ -393,32 +462,32 @@ def batch_run(programs):
     for p in programs:
         if len(p) == 1:
             subprocess.run(os.path.expanduser(p[0]))
-        elif len(p) == 2:
-            subprocess.call([os.path.expanduser(p[0]), p[1]])
+        elif len(p) > 1:
+            subprocess.call([os.path.expanduser(i) for i in p])
 
 
-@hook.subscribe.startup_once
+@ hook.subscribe.startup_once
 def enter_the_qtile():
     programs = [
-        # ["~/.scripts/system/set-wallpaper.sh"],
+        ["~/.scripts/system/set-wallpaper.sh"],
         ["~/.scripts/launchers/notification-manager.sh"],
         ["~/.scripts/launchers/audio-tray.sh"],
         ["~/.scripts/launchers/network-manager-tray.sh"],
-        ["~/.scripts/launchers/clipboard-manager.sh", "on"],
         ["~/.scripts/launchers/nightmode.sh", "on"],
         ["~/.scripts/launchers/compositor.sh", "on"],
-        ["dropbox", "start"],
+        # ["dropbox", "start"],
     ]
     batch_run(programs)
 
 
-@hook.subscribe.startup
+@ hook.subscribe.startup
 def restart_qtile():
     programs = [
+        ["~/.scripts/launchers/clipboard-manager.sh", "on"],
         ["~/.scripts/system/set-wallpaper.sh"],
+        ["xmodmap", "~/.Xmodmap"],
         # ["~/.scripts/launchers/audio-tray.sh"],
         # ["~/.scripts/launchers/network-manager-tray.sh"],
-        # ["~/.scripts/launchers/clipboard-manager.sh", "on"],
     ]
     batch_run(programs)
 

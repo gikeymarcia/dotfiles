@@ -9,7 +9,7 @@ export WORDS=$DLL/inputs/words
 export DOTFILES="$HOME/.config/dotfiles/"
 export PUB_DOTFILES="$HOME/.config/pub-dotfiles/"
 export SOUNDS=~/.config/notificaton-sounds
-export WALLPAPERS=~/library/pictures/wallpapers
+export WALLPAPERS=$HOME/Pictures/wallpapers
 export COURSES=~/Documents/courses
 
 

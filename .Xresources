@@ -4,7 +4,7 @@
 !   |   // ___/ _ \/ ___/ __ \/ / / / ___/ ___/ _ \/ ___/
 !  /   |/ /  /  __(__  ) /_/ / /_/ / /  / /__/  __(__  )
 ! /_/|_/_/   \___/____/\____/\__,_/_/   \___/\___/____/
-Xft.dpi: 125
+Xft.dpi: 90
 ! FONTS and COLORS
 #include "/home/mikey/.scripts/xcolors/material-dark.xcolors"
 #include "/home/mikey/.scripts/xfonts/jet-brains-NF.xfonts"

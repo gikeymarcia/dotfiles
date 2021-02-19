@@ -1,15 +1,24 @@
 #!/bin/sh
 # Mikey Garcia, @gikeymarcia
+
 # environment variables
+export PYTHONPATH=~/.scripts/python
+export QT_STYLE_OVERRIDE=kvantum
+export COWPATH="$HOME/.config/cowsay/cows"
+export CUST_TMUX_TERM=screen-256color
+export ACK_PAGER_COLOR="less -R"
+export XDG_CONFIG_HOME="$HOME/.config/"
+
 
 # apps
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export TERMCMD="alacritty"
 export FILE_MANAGER="ranger"
+export BROWSER="brave-browser --incognito --new-window"
 # preferences
 export NMON="cMMM"
-export FZF_DEFAULT_OPTS="--extended --cycle --layout=reverse --height=70% --ansi -m"
+export FZF_DEFAULT_OPTS="--extended --cycle --layout=reverse --height=90% --ansi -m"
 export DMENU_FONT="mononoki Nerd Font Mono-17:style=Regular:antialias=true:hinting=true"
 export DMENU_COLORS='-sf #e6e1dc -sb #005fd7 -nf white -nb #2b2b2b'
 
@@ -21,3 +30,9 @@ export CM_IGNORE_WINDOW="KeePassXC$"
 export CM_DIR=~/.cache/clipmenud/
 export CM_HISTLENGTH=30
 export CM_OWN_CLIPBOARD=1
+export CM__SELECTIONS="clipboard"
+export CM_MAX_CLIPS=500
+
+# qtile hacking
+export SCREEN_SIZE=1600x900
+export LOG_LEVEL=DEBUG

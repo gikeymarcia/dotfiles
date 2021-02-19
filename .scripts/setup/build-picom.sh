@@ -2,7 +2,6 @@
 # Mikey Garcia, @gikeymarcia
 # build and install picom from git repo
 # dependencies: git
-# script=~/.scripts/setup/build-picom.sh; echo $script | entr -rpc $script
 
 # install system dependencies
 deb_dependencies="libxext-dev libxcb1-dev libxcb-damage0-dev \
@@ -17,17 +16,24 @@ sudo pip3 install meson
 
 
 # get repo contents
-picomgit=~/Documents/git_repos/picom
+repo=https://github.com/yshui/picom.git
+repo=https://github.com/jonaburg/picom.git
+picomgit=~/Downloads/picom-git
+branch="next"
 [ ! -d $picomgit ] && mkdir -pv $picomgit
 cd $picomgit || exit 1
 if [ -d ./.git ]; then
     git status
     git stash
-    git checkout master
+    git checkout $branch
     git pull
 else
-    git clone https://github.com/yshui/picom.git -b master $picomgit
+    git clone "$repo" -b $branch $picomgit
 fi
+
+# tag=$(git tag -l "v*" | tail -n 2 | head -n 1)  # penultimate release
+tag=$(git tag -l "v*" | tail -n 1)              # latest release
+git checkout "$tag"
 
 
 # install instructions from picom github
@@ -36,7 +42,8 @@ meson --buildtype=release . build
 ninja -C build
 sudo ninja -C build install
 
-#sudo rm -r "$picomgit"
+# remove files when we're done with them
+sudo rm -r "$picomgit"
 
 
 # references:

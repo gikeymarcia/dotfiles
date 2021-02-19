@@ -1,3 +1,4 @@
 #!/bin/sh
 export EDITOR="nvim"
 export TERMINAL="alacritty"
+export FZF_DEFAULT_OPTS="--extended --cycle --layout=reverse --height=70% -m"

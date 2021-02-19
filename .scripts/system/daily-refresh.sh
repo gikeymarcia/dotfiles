@@ -7,4 +7,6 @@ sudo apt update -y
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo apt autoclean -y
-sudo youtube-dl -U
+sudo npm install -g npm
+youtube-dl -U
+pip install -U pip

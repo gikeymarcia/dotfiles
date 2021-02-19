@@ -1,5 +1,4 @@
 " Mikey Garcia, @gikeymarcia
-" https://vimways.org/2018/you-should-be-using-tags-in-vim/
 "       _             _
 " _ __ | |_   _  __ _(_)_ __  ___
 "| '_ \| | | | |/ _` | | '_ \/ __|
@@ -14,29 +13,35 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-easy-align'
     Plug 'junegunn/goyo.vim'
     Plug 'tpope/vim-surround'
-    "Plug 'tmhedberg/SimpylFold'
+    Plug 'tpope/vim-commentary'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+    Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 " utils
     " https://github.com/junegunn/fzf.vim
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'mbbill/undotree'
-    " Plug 'kevinoid/vim-jsonc'
     Plug 'tpope/vim-fugitive'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'honza/vim-snippets'
 " statusbar
     Plug 'itchyny/lightline.vim'
 " MAYBE
-    "Plug 'Konfekt/FastFold'
+    " Plug 'tmhedberg/SimpylFold'
+    " Plug 'kevinoid/vim-jsonc'
+    " Plug 'Konfekt/FastFold'
     " Plug 'junegunn/vim-peekaboo'
     " Plug 'ap/vim-css-color'
 call plug#end()
 " PLUGIN CONFIGURATION
 source ~/.vim/plug-config/coc.vim
-source ~/.vim/plug-config/lightline.vim
 source ~/.vim/plug-config/goyo.vim
 source ~/.vim/plug-config/vim-easy-align.vim
 source ~/.vim/plug-config/undotree.vim
+source ~/.vim/plug-config/ansible.vim
+" source ~/.vim/plug-config/lightline.vim
+" NOT Installed
 "source ~/.vim/plug-config/SimpylFold.vim
 "source ~/.vim/plug-config/FastFold.vim
 "         _
@@ -49,8 +54,8 @@ set mouse=a
 " swap file madness
 set noswapfile
 set nobackup
-set undodir=~/.vim/undo
 set undofile
+set undodir=~/.vim/undo
 "       _               _
 " _  __(_)__ __ _____ _/ /__
 "| |/ / (_-</ // / _ `/ (_-<
@@ -78,7 +83,7 @@ nnoremap <Leader>c :Colors<CR>
 "            _    _
 " _ _ ___ __(_)__(_)_ _  __ _
 "| '_/ -_|_-< |_ / | ' \/ _` |
-"|_| \___/__/_/__|_|_||_\__, |
+"|_| \___/__/_/__|_|_||_\__, | (RESIZE)
 " resizing windows      |___/
 nnoremap <C-Up> :resize +1<cr>
 nnoremap <C-Down> :resize -1<cr>
@@ -88,29 +93,31 @@ nnoremap <C-Left> :vert resize -2<cr>
 " _        _
 "| |_ __ _| |__ ___
 "|  _/ _` | '_ (_-<
-" \__\__,_|_.__/__/
+" \__\__,_|_.__/__/ (TABS)
 " https://medium.com/@arisweedler/tab-settings-in-vim-1ea0863c5990
 set expandtab           " turn all TAB->4(space)
 set softtabstop=4       " # of spaces inserted when TAB is pressed
 set tabstop=4           " # of spaces per TAB read from file
 set shiftwidth=4        " # of spaces inserted when TAB is pressed
-set smartindent         " auto indent to correct level
+set autoindent          " auto indent (copy previous line)
 filetype plugin indent on
 " code folding
-set foldmethod=manual
+set foldmethod=indent
+set foldlevelstart=1
 "
 " ___ ___  ___
 "|_ _|   \| __|
 " | || |) | _|
-"|___|___/|___|-like environment variables
+"|___|___/|___|-like environment variables (IDE)
 syntax on                   " enable syntax highlighting
 set number relativenumber   " left panel numbering relative to cursor position
 set wildmenu                " visual autocomplete for command menu
+set completeopt=longest,menuone
 set showmatch               " highlight matching {},(),[]
 set browsedir=buffer        " set working directory based on opening file location
 " markdown stuff
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'vim', 'css' , 'json', 'dosini']
-nnoremap <Leader>m :w<CR>:!markdown-watch.sh % &<CR><CR>
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'vim', 'html', 'css' , 'json', 'dosini', 'ini', 'sshconfig', 'yaml']
+nnoremap <Leader>m :w<CR>:!markdown-watch.sh % &<CR>
 nnoremap <Leader>dm /^_date modified:.*<CR>C_date modified: <ESC>:read !date +"\%Y-\%m-\%d"<CR>kJA_<ESC>:nohlsearch<CR>
 
 " search settings
@@ -123,7 +130,7 @@ nnoremap <Leader><Leader> :nohlsearch<CR>
 "| |__ (_)_ __   __| (_)_ __   __ _ ___
 "| '_ \| | '_ \ / _` | | '_ \ / _` / __|
 "| |_) | | | | | (_| | | | | | (_| \__ \
-"|_.__/|_|_| |_|\__,_|_|_| |_|\__, |___/
+"|_.__/|_|_| |_|\__,_|_|_| |_|\__, |___/ (KEYBINDS)
 "                             |___/
 "visual mode
 " yank to clipboard
@@ -131,20 +138,24 @@ vnoremap <C-y> "+y<CR>
 " insert mode
 " paste from clipboard
 inoremap <C-v> <ESC>:set paste<CR>a<C-r>+<esc>:set nopaste<CR>a
+" paste link as reference format link from clipboard
+inoremap <C-l> <CR><CR>[shortname]: <<ESC>:set paste<CR>a<C-r>+<esc>:set nopaste<CR>a><CR>"Long Description of Link"<ESC>0kfnciw
+" folding
+nnoremap <Tab> za
+" nnoremap <C-]> zr
 " normal mode
 nnoremap <Up> gk
 nnoremap <Down> gj
 nnoremap <Right> :bn<CR>
 nnoremap <Left> :bp<CR>
 nnoremap <Leader>s :source ~/.vimrc<CR>
-" format paragraph
-nnoremap <Leader>q vipgq
 " TODO make below command send full path to :!tmux set-buffer
 nnoremap <Leader>p :! echo <C-r>%<cr>
 nnoremap <Leader>gf 0f(lyt):!firefox -private <C-r>" &<CR><CR>
-nnoremap <localLeader>l :set linebreak!<CR>
+nnoremap <localLeader>l :set wrap!<CR>
 "nnoremap <localLeader>c :syntax sync fromstart<CR>
 "" todo lists
+nnoremap <Leader>\| yy2p:s/[^ \|]/-/g<CR>:set hlsearch!<CR>
 nnoremap <Leader>- o-<space>[<space>]<space>
 nnoremap <Leader>x 0f[lrXWj
 nnoremap <Leader>X 0fXr<space><Esc>2wj
@@ -170,8 +181,7 @@ nnoremap <F7> :set spell!<CR>
 " file shortcuts
 nnoremap <Leader><Localleader><Localleader> :edit!<CR>
 
-" manual syntax highlighting
-nnoremap <LocalLeader>m :set filetype=messages<CR>
+" toggle dark/light
 map <F11> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 "             _                           _
 "  __ _ _   _| |_ ___   ___ _ __ ___   __| |
@@ -183,6 +193,7 @@ let blacklist = ['patch', 'diff', 'markdown']
 autocmd BufWritePre * if index(blacklist, &ft) < 0 | :%s/\s\+$//e
 " custom extension syntax highlighting
 autocmd BufNewFile,BufRead *.Xresources,*.xcolors,*.xfonts set syntax=xdefaults
+autocmd BufNewFile,BufRead *.m3u,*.m3u8 set syntax=dosini
 " AUTO-RELOAD PROGRAMS
 autocmd BufWritePost ~/.Xresources      :!xrdb -merge ~/.Xresources
 autocmd BufWritePost ~/.config/i3/*     :!~/.scripts/i3/build-config.sh
@@ -194,5 +205,3 @@ autocmd BufWritePost ~/.config/i3/*     :!~/.scripts/i3/build-config.sh
 nnoremap Q <nop>
 nnoremap <F1> <nop>
 inoremap <F1> <nop>
-nnoremap o o<Esc>i
-nnoremap O O<Esc>i

@@ -29,8 +29,7 @@
 !   ~/.fonts/hasklug/Hasklug.Nerd.Font--Semibold_Italic.otf: Hasklug Nerd Font,Hasklig Semibold:style=Semibold Italic,Italic
 !   ~/.fonts/hasklug/Hasklug.Nerd.Font--ExtraLight_Italic.otf: Hasklug Nerd Font,Hasklig ExtraLight:style=ExtraLight Italic,Italic
 
-
-URxvt.font:             xft:Hasklug Nerd Font Mono-14:style=Medium:antialias=true:hinting=true
-URxvt.boldFont:         xft:Hasklug Nerd Font Mono-14:style=Bold:antialias=true:hinting=true
-URxvt.italicFont:       xft:Hasklug Nerd Font Mono-14:style=Light Italic:antialias=true:hinting=true
-URxvt.bolditalicFont:   xft:Hasklug Nerd Font Mono-14:style=Bold Italic:antialias=true:hinting=true
+*.font:             xft:Hasklug Nerd Font Mono-13:style=Medium:antialias=true:hinting=true
+*.boldFont:         xft:Hasklug Nerd Font Mono-13:style=Bold:antialias=true:hinting=true
+*.italicFont:       xft:Hasklug Nerd Font Mono-13:style=Light Italic:antialias=true:hinting=true
+*.bolditalicFont:   xft:Hasklug Nerd Font Mono-13:style=Bold Italic:antialias=true:hinting=true

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
-# launch keepassxc using the gtk theme
+# launch keepassxc
 
-passDB=~/.config/keepassxc/MikeyPasswords.kdbx
-env QT_QPA_PLATFORMTHEME=gtk2 keepassxc $passDB &
+passDB="$HOME/.config/keepassxc/MikeyPasswords.kdbx"
+keepassxc "$passDB" &

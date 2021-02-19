@@ -3,12 +3,14 @@
 # launch browser directly into a youtube playlist
 # dependencies: brave-browser dmenu
 # environment: $DMENU_FONT $DMENU_COLORS
+# TODO -- turn this into python
 
 # list of short names and associated youtube playlist URLs
 playlists+=("Now!                      https://www.youtube.com/playlist?list=PLpJPyYfmqUWyUm2cLj9g-ZRwR4SzOXWab")
 playlists+=("Sound_Shields             https://www.youtube.com/playlist?list=PLpJPyYfmqUWwlm9XejjZEGpXjEVxAKCkw")
 playlists+=("Podcast_Q                 https://www.youtube.com/playlist?list=PLpJPyYfmqUWxhA8hzu6-1RvQA9sgANm1Q")
 playlists+=("Game~B                    https://www.youtube.com/playlist?list=PLpJPyYfmqUWxCx0cofc3TbkesXMerxfPu")
+playlists+=("Linux_Guides              https://www.youtube.com/playlist?list=PLpJPyYfmqUWxOslaP4J4QR19W3frR9c25")
 playlists+=("Linux_Q                   https://www.youtube.com/playlist?list=PLpJPyYfmqUWwFDQRvzPVXJh2s49kN5YAl")
 playlists+=("Yoga_Q                    https://www.youtube.com/playlist?list=PLpJPyYfmqUWwy0Hx9H00TssUDejdmXlMI")
 playlists+=("Meditation_Q              https://www.youtube.com/playlist?list=PLpJPyYfmqUWzLZ3pyIYW74n3qgZQq5g3i")

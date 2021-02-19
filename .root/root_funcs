@@ -1,0 +1,143 @@
+#!/bin/bash
+# Mikey Garcia, @gikeymarcia
+# common tasks / making the shell comfy
+
+# cd with bells and whistles
+# cd to files, preview dir contents
+function c (){
+    if [ -z "$1" ]; then    target=$HOME
+    elif [ -d "$1" ]; then  target=$1
+    elif [ -f "$1" ]; then target=$(dirname "$1")
+    fi
+    cd "$target" || return
+    ls --color=auto -F
+    pwd
+    unset -v target
+}
+
+# search application on cheat.sh
+function cheat(){
+    [ -n "$1" ] && curl -s "cheat.sh/$1" | less -R
+}
+
+# interactively choose files to open in $EDITOR
+function fo () {
+    choice=$(fd -t f |
+             fzf --preview="fzf-preview.py {}" --prompt="Choose a file: ")
+    # shellcheck disable=SC2086
+    [ -n "$choice" ] && $EDITOR $choice
+    [ -z "$choice" ] && echo "selection cancelled."
+    unset choice
+}
+
+# interactively choose files to open in $EDITOR (include hidden)
+function foa () {
+    choice=$(fd -H -t f |
+             fzf --preview="fzf-preview.py {}" --prompt="Choose a file: ")
+    # shellcheck disable=SC2086
+    [ -n "$choice" ] && $EDITOR $choice
+    [ -z "$choice" ] && echo "selection cancelled."
+    unset choice
+}
+
+#
+function here () {
+    if [ -d "$1" ]; then
+        target=$1
+    else
+        target="$(pwd)"
+    fi
+    du -sh "$target"
+    ls -ldh "$target"
+    echo "$target"
+}
+
+# open files and background
+function xo () {
+    xdg-open "$1" 2> /dev/null &
+}
+
+# mkdir and cd into it
+function mcd () {
+    mkdir -pv "$1"
+    cd "$1" || echo "could not cd to '$1'"
+}
+
+# grep for details of running processes
+function seegrep () {
+    pids=$(pgrep "$1")
+    if [ -n "$pids" ]; then
+        echo "$pids" | xargs ps
+    fi
+    unset -v pids
+}
+
+# search for, then through a file
+function skim () {
+    fd="fd --color=always -H -t f ."
+    if [ -f "$1" ]; then
+        pick=$1
+    elif [ -d "$1" ]; then
+        pick=$( $fd "$1" | fzf --ansi -m --prompt="Pick a file: ")
+    else
+        pick=$( $fd   .  | fzf --ansi -m --prompt="Pick a file: ")
+    fi
+    if [ -n "$pick" ]; then
+        # shellcheck disable=SC2002
+        bat --color=always "$pick" | fzf --ansi --prompt="Looking in '$pick': " --multi
+    fi
+    unset pick; unset fd
+}
+
+# make new executable shell script file
+function touchx () {
+    if [ -z "$1" ]; then
+        echo "must give a filename."
+    else
+        touch "$1"
+        chmod -v +x "$1"
+        echo "#!/bin/bash" >> "$1"
+        $EDITOR "$1"
+    fi
+}
+
+# search for packages, pick one, show details
+function apts () {
+    pkg=$(apt-cache search "$1" | fzf --prompt="which package?")
+    p=$(printf "%s" "$pkg" | awk '{print $1}')
+    if [ -n "$p" ]; then
+        apt show "$p"
+        echo "$pkg"
+        ~/.scripts/commands/get-clip.sh "$p"
+    fi
+    unset -v p; unset -v pkg
+}
+
+# sort a file and show the diff
+function sort_file () {
+    if [ -r "$1" ]; then
+        cp -v "$1" /tmp/unsorted_version
+        sort "$1"  > /tmp/sorted_version
+        mv -v /tmp/sorted_version "$1"
+        diff -u /tmp/unsorted_version "$1"
+    fi
+}
+
+# which apt -- show where a binary is and what installed it
+function wapt () {
+    binary=$(which "$1")
+    apt=$(dpkg -S "$binary" | sed -E "s/^(.*):.*$/\1/")
+    apt show "$apt"
+    echo "$binary"
+    unset -v binary; unset -v apt
+}
+
+function whichp () {
+    dpkg -S "$(which "$1")"
+}
+
+# interactively select entries from $PATH
+function gpath () {
+    echo "$PATH" | tr ':' '\n' | fzf --prompt="Choose from \$PATH: " --multi
+}
+# vim: set foldlevel=0 :

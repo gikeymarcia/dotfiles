@@ -13,5 +13,4 @@ cd ~/.config/coc/extensions
 [ ! -f package.json ] && echo '{"dependencies":{}}' > package.json
 
 # Change extension names to the extensions you need
-npm install coc-json coc-sh coc-python coc-yank coc-yaml coc-snippets \
-    --ignore-scripts --no-bin-links --no-package-lock --only=prod
+nvim -c "CocInstall coc-json coc-python coc-yank coc-vimlsp coc-snippets"

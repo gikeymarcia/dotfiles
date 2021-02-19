@@ -2,6 +2,28 @@
 # Mikey Garcia, @gikeymarcia
 # common tasks / making the shell comfy
 
+# open bookmarks in $BROWSER
+function bk () {
+    url=$(buku -p -f4 | fzf -m --reverse --preview "buku -p {1}" \
+                        --preview-window=down:30%:wrap | cut -f2)
+    echo "$url"
+    if [ -n "$url" ]; then
+        $BROWSER "$url" 2> /dev/null &
+        echo "$url"
+    fi
+    unset url
+}
+# copy bookmark url to system clipboard
+function bkg () {
+    url=$(buku -p -f4 | fzf -m --reverse --preview "buku -p {1}" \
+                        --preview-window=down:30%:wrap | cut -f2)
+
+    if [ -n "$url" ]; then
+        printf "%s" "$url" | xclip -selection clipboard
+        echo "$url"
+    fi
+    unset url
+}
 # cd with bells and whistles
 # cd to files, preview dir contents
 function c (){
@@ -11,44 +33,101 @@ function c (){
     fi
     cd "$target" || return
     ls --color=auto -F
-    echo "~"
     pwd
+    unset -v target
+}
+
+# search application on cheat.sh
+function cheat(){
+    [ -n "$1" ] && curl -s "cheat.sh/$1" | less -R
+}
+
+# interactively choose file to open in $EDITOR
+function fo () {
+    choice=$(fd -t f |
+             fzf --preview='fzf-preview.py {}' --no-multi \
+                 --prompt="Choose a file: ")
+    # shellcheck disable=SC2086
+    [ -n "$choice" ] && $EDITOR "$choice"
+    [ -z "$choice" ] && echo "selection cancelled."
+    unset choice
+}
+
+# interactively choose file to open in $EDITOR (include hidden)
+function foa () {
+    choice=$(fd -H -t f |
+             fzf --preview="fzf-preview.py {}" --no-multi \
+                 --prompt="Choose a file: ")
+    # shellcheck disable=SC2086
+    [ -n "$choice" ] && $EDITOR "$choice"
+    [ -z "$choice" ] && echo "selection cancelled."
+    unset choice
+}
+
+#
+function here () {
+    if [ -d "$1" ]; then
+        target=$1
+    else
+        target="$(pwd)"
+    fi
+    du -sh "$target"
+    ls -ldh "$target"
+    echo "$target"
 }
 
 # open files and background
-o () {
-    xdg-open "$1" &
+function xo () {
+    xdg-open "$1" 2> /dev/null &
 }
 
 # mkdir and cd into it
-mcd () {
+function mcd () {
     mkdir -pv "$1"
     cd "$1" || echo "could not cd to '$1'"
 }
 
 # grep for details of running processes
-seegrep () {
+function seegrep () {
     pids=$(pgrep "$1")
     if [ -n "$pids" ]; then
         echo "$pids" | xargs ps
     fi
-    unset pids
+    unset -v pids
+}
+
+# search for, then through a file
+function skim () {
+    fd="fd --color=always -H -t f ."
+    if [ -f "$1" ]; then
+        pick=$1
+    elif [ -d "$1" ]; then
+        pick=$( $fd "$1" | fzf --ansi -m --prompt="Pick a file: ")
+    else
+        pick=$( $fd   .  | fzf --ansi -m --prompt="Pick a file: ")
+    fi
+    if [ -n "$pick" ]; then
+        # shellcheck disable=SC2002
+        bat --color=always "$pick" | fzf --ansi --prompt="Looking in '$pick': " --multi
+    fi
+    unset pick; unset fd
 }
 
 # make new executable shell script file
-touchx () {
+function touchx () {
     if [ -z "$1" ]; then
         echo "must give a filename."
     else
         touch "$1"
         chmod -v +x "$1"
+        echo "#!/usr/bin/env python3" >> "$1"
         echo "#!/bin/bash" >> "$1"
         $EDITOR "$1"
     fi
 }
 
 # search for packages, pick one, show details
-apts () {
+function apts () {
     pkg=$(apt-cache search "$1" | fzf --prompt="which package?")
     p=$(printf "%s" "$pkg" | awk '{print $1}')
     if [ -n "$p" ]; then
@@ -56,16 +135,47 @@ apts () {
         echo "$pkg"
         ~/.scripts/commands/get-clip.sh "$p"
     fi
-    unset p
-    unset pkg
+    unset -v p; unset -v pkg
 }
 
 # sort a file and show the diff
-sort_file () {
+function sort_file () {
     if [ -r "$1" ]; then
         cp -v "$1" /tmp/unsorted_version
         sort "$1"  > /tmp/sorted_version
         mv -v /tmp/sorted_version "$1"
         diff -u /tmp/unsorted_version "$1"
+    else
+        echo "$1 is not a file."
     fi
 }
+
+# use fzf selector to open a video in VLC
+function vo () {
+    pick=$(fd -t f -e mp4 -e mkv -e webm -e avi --no-multi --color=always . .|
+           fzf --ansi --prompt="Pick a video: ")
+    vlc "$pick" 2> /dev/null
+    unset pick
+}
+# which apt -- show where a binary is and what installed it
+function wapt () {
+    binary=$(which "$1")
+    apt=$(dpkg -S "$binary" | sed -E "s/^(.*):.*$/\1/")
+    apt show "$apt"
+    echo "$binary"
+    unset -v binary; unset -v apt
+}
+
+function whichp () {
+    dpkg -S "$(which "$1")"
+}
+
+# copy contents into the clipboard
+function xc () {
+    [ -n "$1" ] && printf "%s" "$1" | xclip -selection clipboard
+}
+# interactively select entries from $PATH
+function gpath () {
+    echo "$PATH" | tr ':' '\n' | fzf --prompt="Choose from \$PATH: " --multi
+}
+# vim: set foldlevel=0 :

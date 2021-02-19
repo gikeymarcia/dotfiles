@@ -1,5 +1,5 @@
 ! Mikey Garcia, @gikeymarcia
-URxvt.font:             xft:DejaVuSansMono Nerd Font Mono-12:style=Book:antialias=true:hinting=true
-URxvt.boldFont:         xft:DejaVuSansMono Nerd Font-12:style=Bold:antialias=true:hinting=true
-URxvt.italicFont:       xft:DejaVuSansMono Nerd Font-12:style=Oblique:antialias=true:hinting=true
-URxvt.bolditalicFont:   xft:DejaVuSansMono Nerd Font Mono-12:style=Bold Oblique:antialias=true:hinting=true
+*.font:             xft:DejaVuSansMono Nerd Font Mono-14:style=Book:antialias=true:hinting=true
+*.boldFont:         xft:DejaVuSansMono Nerd Font-14:style=Bold:antialias=true:hinting=true
+*.italicFont:       xft:DejaVuSansMono Nerd Font-14:style=Oblique:antialias=true:hinting=true
+*.bolditalicFont:   xft:DejaVuSansMono Nerd Font Mono-14:style=Bold Oblique:antialias=true:hinting=true

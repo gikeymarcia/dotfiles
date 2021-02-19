@@ -1,5 +1,5 @@
 ! Mikey Garcia, @gikeymarcia
-URxvt.font:             xft:RobotoMono Nerd Font Mono-12:style=Regular:antialias=true:hinting=true
-URxvt.boldFont:         xft:RobotoMono Nerd Font Mono-12:style=Bold:antialias=true:hinting=true
-URxvt.italicFont:       xft:RobotoMono Nerd Font Mono-12:style=Italic:antialias=true:hinting=true
-URxvt.bolditalicFont:   xft:RobotoMono Nerd Font Mono-12:style=Bold Italic:antialias=true:hinting=true
+*.font:             xft:RobotoMono Nerd Font Mono-14:style=Regular:antialias=true:hinting=true
+*.boldFont:         xft:RobotoMono Nerd Font Mono-14:style=Bold:antialias=true:hinting=true
+*.italicFont:       xft:RobotoMono Nerd Font Mono-14:style=Italic:antialias=true:hinting=true
+*.bolditalicFont:   xft:RobotoMono Nerd Font Mono-14:style=Bold Italic:antialias=true:hinting=true

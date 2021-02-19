@@ -5,6 +5,9 @@
 # dependencies: fzf bookmark-paths.sh bookmark-preview.sh
 # environment: $FILE_MANAGER $EDITOR
 
+# TODO default behavior should jump to dir then offer fzf search to descend
+#      deeper into the directory structure. Really useful for pointing at a
+#      project and immediately jumping down to a subsection of the project
 # TODO expand this thing to do lots of stuff
 # bm mv = move to bookmark
 # bm shell = search to
@@ -13,20 +16,10 @@
 
 selection=$(
     bookmark-paths.sh | sort -k 2 |
-    fzf --height=100% --preview="bookmark-preview.sh {}" |
+    fzf --tiebreak=begin,length,end,index --height=100% \
+        --no-multi --preview="bookmark-preview.sh {}" |
     awk '{print $2}' | sed "s ^~ $HOME "
 )
-
-try_local_library () {
-    if [ -d "$1" ]; then
-        printf "%s" "$1"
-    else
-        library=~/library
-        local_library=~/local-library
-        printf "%s" "$1" | sed "s|^$library|$local_library|"
-    fi
-}
-selection=$(try_local_library "$selection" )
 
 if [ -d "$selection" ]; then
     printf "from:\t%s\n" "$(pwd)"

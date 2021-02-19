@@ -1,6 +1,7 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # dmenu select a google service and open in the brave-browser
+# dependencies: brave-browser dmenu
 
 # shellcheck source=/home/mikey/.bash_env
 . ~/.bash_env

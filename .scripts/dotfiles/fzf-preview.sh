@@ -5,6 +5,8 @@
 # dependencies: media-metadata.sh random-quote.sh
 
 # IDEA -- maybe this should be a python3 script
+echo "this is now being done in python"
+exit
 
 get_extension(){
    echo "this is the future."
@@ -17,6 +19,8 @@ if [ -d "$1" ]; then
     ls --color=always -c --group-directories-first -F "$1"
 elif [ "${1: -4}" == ".mkv" ]; then
     ~/.scripts/ranger/media-metadata.sh "$1"
+elif [ "${1: -4}" == ".mp4" ]; then
+    ~/.scripts/ranger/media-metadata.sh "$1"
 elif [ "${1: -4}" == ".mp3" ]; then
     ~/.scripts/ranger/media-metadata.sh "$1"
 elif [ "${1: -6}" == ".quote" ]; then
@@ -25,6 +29,8 @@ elif [ "${1: -4}" == ".pdf" ]; then
     pdftotext "$1" -
 elif [ "${1: -4}" == ".deb" ]; then
     dpkg-deb --info "$1"
+elif [ "${1: -4}" == ".flf" ]; then
+    figlet -f "$1" "eat sin EAT SIN --$(basename "$1" flf )"
 elif [ "${1: -4}" == ".cow" ]; then
     echo "howdy! I am a cow file" | cowsay -f "$(basename "$1")"
 elif [ -f "$1" ]; then

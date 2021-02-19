@@ -77,6 +77,9 @@ case "$extension" in
     7z)
         # avoid password prompt by providing empty password
         try 7z -p l "$path" && { dump | trim; exit 0; } || exit 1;;
+    json)
+        # pretty print (and maybe scrub youtube-dl dumps)
+        try "$PYTHONPATH/json-preview.py" "$path" && { dump | trim; exit 0; } || exit 1;;
     # PDF documents:
     pdf)
         try pdftotext -l 10 -nopgbrk -q "$path" - && \
@@ -121,7 +124,7 @@ case "$mimetype" in
     video/* | audio/*)
         exiftool "$path" && exit 5
         # Use sed to remove spaces so the output fits into the narrow window
-        try "/home/mikey/.scripts/ranger/media-metadata.sh" "$path" && { dump | trim | sed 's/  \+:/: /;';  exit 5; } || exit 1;;
+        try "$PYTHONPATH/media-info.py" "$path" && { dump | trim | sed 's/  \+:/: /;';  exit 5; } || exit 1;;
 esac
 
 exit 1

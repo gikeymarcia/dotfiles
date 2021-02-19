@@ -2,6 +2,7 @@
 # Mikey Garcia, @gikeymarcia
 # tool to manage, search, backup, and version control my lifelog
 # shellcheck disable=SC2086
+# TODO : This should be python
 
 action=$1
 # for development use
@@ -43,7 +44,7 @@ case "$action" in
     ;;
     # functionality
     "backup" )
-        "$DLL/scripts/rsync-backup.sh"
+        "$HOME/.scripts/remote/backups.py"
     ;;
     "quote" )
         "$DLL/scripts/random-quote.sh"
@@ -59,7 +60,7 @@ case "$action" in
             cd "$days" || exit
             fd -t f -e md . . | sort |
                 fzf --no-multi --tac --prompt="choose a file to open" \
-                --preview="$HOME/.scripts/dotfiles/fzf-preview.sh {}"
+                --preview="$HOME/.scripts/dotfiles/fzf-preview.py {}"
         )"
         [ -r "$choice" ] && $EDITOR "$choice"
     ;;

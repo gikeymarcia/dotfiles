@@ -4,9 +4,15 @@
 # dependencies: handbrake-cli
 
 INPUT="$1"
-OUTPUT="$2"
+OUTPUT="./720p--x265--21--$(basename "$1")"
 HandBrakeCLI \
-    --encoder x264 --x264-preset medium --x264-profile high --x264-tune film \
-    --quality 19 --two-pass --turbo \
-    --rate 29.97 --maxHeight 720 --maxWidth 1280 \
+    --encoder x265 --encoder-preset medium --quality 21 --no-two-pass \
+    --rate 30 --pfr --maxHeight 720 --maxWidth 1280 \
     -i "$INPUT" -o "$OUTPUT"
+du -h "$INPUT"
+du -h "$OUTPUT"
+
+OGs=./put-back.m3u
+pairs=./pairs.m3u
+echo "mv -v '$OUTPUT' '$INPUT'" >> "$OGs"
+echo "$OUTPUT:$INPUT" >> "$pairs"

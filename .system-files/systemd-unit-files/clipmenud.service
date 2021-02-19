@@ -1,16 +1,10 @@
 [Unit]
-Description=Clipmenu-daemon
+Description=Clipmenu daemon
 
 [Service]
-User=mikey
-Group=mikey
-Environment=XAUTHORITY=/home/mikey/.Xauthority
-Environment=DISPLAY=:0
-Environment=CM_IGNORE_WINDOW="KeePassXC$"
-Environment=CM_DIR=/home/mikey/.cache/clipmenud
-Environment=CM_SELECTIONS=clipboard
-Environment=CM_MAX_CLIPS=500
 ExecStart=/usr/bin/clipmenud
+Environment=CM_MAX_CLIPS=500
+Environment=CM_SELECTIONS=clipboard
 Restart=always
 RestartSec=500ms
 
@@ -21,6 +15,11 @@ ProtectKernelTunables=yes
 RestrictAddressFamilies=
 RestrictRealtime=yes
 
+# We don't need to do any clean up, so if something hangs (borked xclip, etc),
+# it's going to stay that way. Just forcefully kill and get it over with.
+TimeoutStopSec=2
+
 [Install]
 WantedBy=graphical.target
-# https://askubuntu.com/questions/676007/how-do-i-make-my-systemd-service-run-via-specific-user-and-start-on-boot
+# https://askubuntu.com/a/676022
+# : vim: filetype=systemd :

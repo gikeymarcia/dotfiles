@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Mikey Garcia, @gikeymarcia
 # toggle visibility of qtile bars
 # dependencies: qtile

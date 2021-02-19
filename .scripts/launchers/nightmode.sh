@@ -11,7 +11,7 @@ on () {
         -h string:x-canonical-private-synchronous:redshift_notification \
         "redshift ON" \
         "Adjusting colors for less nighttime eyestrain"
-    redshift_ops="-l 34.052235:-118.243683 -t 6500:3000 -b 1.0:0.8"
+    redshift_ops="-l 34.052235:-118.243683 -t 6500:3400 -b 1.0:1.0"
     # shellcheck disable=SC2086
     redshift $redshift_ops &
 }

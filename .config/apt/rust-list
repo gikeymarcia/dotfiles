@@ -1,0 +1,3 @@
+#bat        # seems broken on ubuntu 20.04 2020-11-06
+fd-find
+ripgrep
