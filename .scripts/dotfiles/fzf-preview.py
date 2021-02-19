@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Mikey Garcia, @gikeymarcia
 # preview fzf selections
-# dependencies: media-metadata.sh random-quote.sh
+# dependencies: media-info.py random-quote.sh
 #               bat lcdf-typetools poppler-utils jq figlet
 #               genisoimage
 
@@ -39,7 +39,7 @@ def preview_file(path):
 
 def media_func(path):
     # preview for media files
-    cmd = [os.path.expanduser('~/.scripts/ranger/media-metadata.sh'), path]
+    cmd = [os.path.expanduser('~/.scripts/python/media-info.py'), path]
     subprocess.run(cmd)
 
 
