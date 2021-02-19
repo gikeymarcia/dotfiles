@@ -302,14 +302,8 @@ globalkeys = gears.table.join(
                     highlight_focused_screen()
                 end, {description = "focus other screen", group = "screen"}),
     -- swap screens -- win + tab (TODO)
-    -- awful.key({ modkey,           }, "Tab",
-    --     function ()
-    --         local start = awful.tag.screen
-    --         awful.screen.focus_relative(1)
-    --         awful.screen.swap(start)
-    --         awful.screen.focus_relative(1)
-    --     end,
-    --     {description = "swap screens", group = "client"}),
+    awful.key({ modkey }, "Tab", function () awful.spawn('rofi -show window') end,
+        {description = "swap screens", group = "client"}),
 
 -- LAUNCHERS
     -- run menu
@@ -459,7 +453,7 @@ clientkeys = gears.table.join(
         function (c) c:swap(awful.client.getmaster()) end,
         {description = "move client to master position", group = "layout"}),
     awful.key({ modkey, shift  }, "i", function (c) c:move_to_screen() end,
-         {description = "move client to next screen", group = "client"})
+         {description = "move client to next screen", group = "client"}),
 -- change client properties
     awful.key({ modkey,           }, "m",
         function (c)
@@ -489,13 +483,13 @@ clientkeys = gears.table.join(
               {description = "close", group = "client"}),
 -- float toggle
     awful.key({ modkey, shift }, "f",  awful.client.floating.toggle,
-              {description = "toggle floating", group = "layout"}),
+              {description = "toggle floating", group = "layout"})
+)
 
 -- UNUSED
     -- awful.key({ modkey, ctrl  }, "t",
     --     function (c) c.ontop = not c.ontop  end,
     --     {description = "toggle keep on top", group = "client"}),
-)
 -- }}}
 
 -- {{{ Bind all key numbers to tags.
