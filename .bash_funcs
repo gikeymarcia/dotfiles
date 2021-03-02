@@ -5,7 +5,7 @@
 # open bookmarks in $BROWSER
 function bk () {
     url=$(buku -p -f4 | fzf -m --reverse --preview "buku -p {1}" \
-                        --preview-window=down:30%:wrap | cut -f2)
+                        --preview-window=up:30%:wrap | cut -f2)
     echo "$url"
     if [ -n "$url" ]; then
         $BROWSER "$url" 2> /dev/null &
@@ -16,7 +16,7 @@ function bk () {
 # copy bookmark url to system clipboard
 function bkg () {
     url=$(buku -p -f4 | fzf -m --reverse --preview "buku -p {1}" \
-                        --preview-window=down:30%:wrap | cut -f2)
+                        --preview-window=up:30%:wrap | cut -f2)
 
     if [ -n "$url" ]; then
         printf "%s" "$url" | xclip -selection clipboard
@@ -37,6 +37,16 @@ function c (){
     unset -v target
 }
 
+# make files or folders family accessible
+function fam () {
+if [ -f "$1" ]; then
+    chown mikey:family "$1"
+    chmod g+w "$1"
+elif [ -d "$1" ]; then
+    chown mikey:family -R "$1"
+    chmod 775 "$1"
+fi
+}
 # search application on cheat.sh
 function cheat(){
     [ -n "$1" ] && curl -s "cheat.sh/$1" | less -R
@@ -45,8 +55,8 @@ function cheat(){
 # interactively choose file to open in $EDITOR
 function fo () {
     choice=$(fd -t f |
-             fzf --preview='fzf-preview.py {}' --no-multi \
-                 --prompt="Choose a file: ")
+             fzf --preview='fzf-preview.py {}' --preview-window=down:81%:wrap \
+                 --no-multi --prompt="Choose a file: ")
     # shellcheck disable=SC2086
     [ -n "$choice" ] && $EDITOR "$choice"
     [ -z "$choice" ] && echo "selection cancelled."

@@ -1,16 +1,13 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
-# dmenu quick selector for my markdown notes
-#   selected item gets turned into html file and opened in $BROWSER
-# dependencies: dmenu pandoc markdown-preview.sh
-# environment: $DMENU_FONT $DMENU_COLORS $BROWSER
-# shellcheck disable=SC2086
+# quick selector to view markdown notes as html webpages
+# dependencies: rofi pandoc markdown-preview.sh
+# environment:
 
 # choose markdown file
 notes_dir="$HOME/.notes"
 cd "$notes_dir" || exit
-md_stub=$(fd -e md .  | shuf |
-           dmenu -l 20 -i -fn "$DMENU_FONT" $DMENU_COLORS -p "notes!")
+md_stub=$(fd -e md .  | shuf | rofi -dmenu -l 20 -i -p "notes!")
 
 # generate preview
 html_dir="$HOME/.cache/my-notes"
@@ -24,3 +21,7 @@ if [ -n "$md_stub" ]; then
     ls -lh "$html_path"
     firefox -private -new-window "$html_path" &
 fi
+
+# notes: previously used $BROWSER but after switching to brave-browser I
+# found it didnt work as well for me as firefox so switched this script
+# back to firefox

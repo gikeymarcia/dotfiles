@@ -1,23 +1,24 @@
-autopep8
-beautifulsoup4
-black
-buku
-dash==1.18.1
-dmenu
-feedparser
-fire
-flake8
-iterfzf
-jedi
-matplotlib
-meson
-numpy
-pandas
-pynvim
-scipy
-td-watson
-torch
-torchvision
-ueberzug
-yamllint
-yapf
+# vim:filetype=cfg:
+# autopep8
+# beautifulsoup4
+# black
+# buku
+# dash==1.18.1
+# dmenu
+# feedparser
+# fire
+# flake8
+# iterfzf
+# jedi
+# matplotlib
+# meson
+# numpy
+# pandas
+# pynvim
+# scipy
+# td-watson
+# torch
+# torchvision
+# ueberzug
+# yamllint
+# yapf

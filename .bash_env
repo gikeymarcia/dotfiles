@@ -8,6 +8,7 @@ export COWPATH="$HOME/.config/cowsay/cows"
 export CUST_TMUX_TERM=screen-256color
 export ACK_PAGER_COLOR="less -R"
 export XDG_CONFIG_HOME="$HOME/.config/"
+export REPOS="$HOME/Documents/git_repos"
 
 
 # apps

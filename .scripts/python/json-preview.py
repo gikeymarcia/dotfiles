@@ -1,27 +1,20 @@
 #!/usr/bin/env python3
 # Mikey Garcia, @gikeymarcia
-import mikey  # noqa: F401
+# dependencies: jq
 import json
-# import os
-import sys
-# from pprint import pprint
+from sys import argv
+from subprocess import run
 
-filename = sys.argv[1]
+filename = argv[1]
 
 with open(filename, 'r') as fp:
     data = json.load(fp)
 
-# keys = [print(k) for k in data]
-
-sel = [
-    'id',
-    'uploader',
-    'title',
-    'url',
-    'channel_url',
-    'description',
-    'duration',
-]
-
-for s in sel:
-    print(f"{s}: {data.get(s)}")
+if filename[-9:] == 'info.json':
+    sel = [
+        'id', 'uploader', 'title', 'webpage_url', 'channel_url',
+        'description', 'duration', ]
+    for s in sel:
+        print(f"{s}: {data.get(s)}")
+else:
+    run(['jq', '-C', '.', filename])

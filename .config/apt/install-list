@@ -105,7 +105,7 @@ qt5-style-plugins
 # ranger # ansible CLI
 redshift
 # ripgrep # ansible CLI # problem with Ubuntu 20.04
-rofi
+# rofi
 rustc
 rxvt-unicode
 # screen # ansible CLI

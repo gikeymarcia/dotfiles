@@ -50,12 +50,14 @@ if [ "$status" == "Connected" ]; then
     city=$(pull_val "City")
     country=$(pull_val "Country")
     tech=$(pull_val "Current technology")
-    choice=$(all_commands | dmenu -i -l 18 \
-                            -p "$tech $status to $city, $country" \
-                            -fn "$DMENU_FONT" $DMENU_COLORS )
+    # choice=$(all_commands | dmenu -i -l 18 \
+    #                         -p "$tech $status to $city, $country" \
+    #                         -fn "$DMENU_FONT" $DMENU_COLORS )
+    choice=$(all_commands | rofi -dmenu -i -p "$tech $status to $city, $country")
     [ -n "$choice" ] && $choice
 else
-    choice=$(all_commands | dmenu -i -l 18 -p "VPN $status" \
-                        -fn "$DMENU_FONT" $DMENU_COLORS )
+    choice=$(all_commands | rofi -dmenu -i -p "VPN $status" )
+    # choice=$(all_commands | dmenu -i -l 18 -p "VPN $status" \
+    #                     -fn "$DMENU_FONT" $DMENU_COLORS )
     $choice
 fi

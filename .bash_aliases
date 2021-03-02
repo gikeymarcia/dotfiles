@@ -70,6 +70,7 @@ alias rsync="rsync --info=progress2"
 alias ytdl-audio="youtube-dl -x --prefer-free-formats"
 alias ytdl-list='youtube-dl -o "./%(autonumber)s--%(title)s.%(ext)s"'
 alias ytdl-info='~/.scripts/commands/ytdl-info.sh'
+alias tor='transmission-remote -n "$(cat ~/.config/transmission-remote/cred.txt)"'
 # nordvpn
 alias ns="nordvpn status"
 alias nd="nordvpn disconnect"

@@ -248,9 +248,9 @@ globalkeys = gears.table.join(
               {description = "jump to urgent client", group = "client"}),
 
 -- Window Gaps
-    awful.key({ modkey,           }, "g",  function() awful.tag.incgap(1) end,
+    awful.key({ modkey,           }, "g",  function() awful.tag.incgap(2) end,
               {description = "grow window gaps", group = "tag"}),
-    awful.key({ modkey, shift     }, "g",  function() awful.tag.incgap(-1) end,
+    awful.key({ modkey, shift     }, "g",  function() awful.tag.incgap(-2) end,
               {description = "shrink window gaps", group = "tag"}),
 
 -- Changing focused client -- win + [ h, j, k, l ]
@@ -301,9 +301,11 @@ globalkeys = gears.table.join(
                     awful.screen.focus_relative(1)
                     highlight_focused_screen()
                 end, {description = "focus other screen", group = "screen"}),
-    -- swap screens -- win + tab (TODO)
+    -- quick swap windows -- win + tab / alt + tab
     awful.key({ modkey }, "Tab", function () awful.spawn('rofi -show window') end,
-        {description = "swap screens", group = "client"}),
+        {description = "rofi select window (anywhere)", group = "client"}),
+    awful.key({ alt }, "Tab", function () awful.spawn('rofi -show windowcd') end,
+        {description = "rofi select window (current desktop)", group = "client"}),
 
 -- LAUNCHERS
     -- run menu

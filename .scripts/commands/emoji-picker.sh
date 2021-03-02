@@ -1,7 +1,7 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # use fzf to pick an emoji and copy it to tmux buffer
-# dependencies: fzf
+# dependencies: fzf tmux
 # environment:
 
 emoji_file=~/.config/unicode/emoji.txt

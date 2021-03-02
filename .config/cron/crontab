@@ -23,4 +23,5 @@
 # min   hr  doM  Mon  doW   command
 */10    *   *     *    *    env DISPLAY=:0 ~/.scripts/system/set-wallpaper.sh
 */15    *   *     *    *    ~/.scripts/remote/backups.py
+0       *   *     *    *    ~/.scripts/python/sort_downloads.py
 #*/15 *  *   *   *   ~/.config/duckdns/duck.sh

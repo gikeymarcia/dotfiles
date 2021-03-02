@@ -118,6 +118,9 @@ repos = {
     "dt": {
         'remote': "https://gitlab.com/dwt1/dotfiles.git",
         'basedir': 'dotfiles'},
+    "engineer-man-yt": {
+        'remote': "https://github.com/engineer-man/youtube.git",
+        'basedir': 'dotfiles'},
     "lukesmith": {
         'remote': "https://github.com/LukeSmithxyz/voidrice.git",
         'basedir': 'dotfiles'},

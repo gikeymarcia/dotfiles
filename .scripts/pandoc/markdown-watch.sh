@@ -1,6 +1,7 @@
 #!/bin/bash
 # Mikey Garcia, @gikeymarcia
 # make HTML webpages from markdown documents
+# updates the HTML preview file each time the file is edited
 # dependencies: entr pandoc markdown-preview.sh
 # environment: $BROWSER
 

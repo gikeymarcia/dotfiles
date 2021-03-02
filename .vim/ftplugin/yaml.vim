@@ -9,5 +9,5 @@ setlocal foldlevelstart=2
 " lint yaml files on write
 if !exists("yamllint")
     let yamllint = 1
-    autocmd BufWritePost *.yml,*.yaml :!yamllint -f standard %
+    autocmd BufWritePost *.yml,*.yaml :!yamllint -f standard --no-warnings %
 endif
