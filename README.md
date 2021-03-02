@@ -1,8 +1,8 @@
 # dotfiles @gikeymarcia
 
-- **Built on:** Ubuntu 20.04
+- **Built on:** Ubuntu 20.10
 - **Window Managers:** Qtile, i3, awesome
-- **Key Programs:** `nvim tmux fzf fd dmenu git pandoc ranger alacritty`
+- **Key Programs:** `nvim tmux fzf fd rofi dmenu git pandoc ranger alacritty`
 
 Welcome to my public dotfile configuration. Here you'll find a treasure trove of ideas and implemented solutions for making a CLI-based Linux experience easier and more powerful. Wherever possible I've tried to ditch the mouse and make simple scripts which can be easily customized with your inputs to do common tasks. These are a continual work-in-progress but I've tried my best to clearly document script dependencies so you can more easily make use of these tools.
 
@@ -53,7 +53,7 @@ In the spirit of open-source, feel free to fork an play with any of what's here.
 
 If you're new to managing dotfiles using git I highly recommend you checkout [this article][atlassian dotfiles] for the rundown.
 
-_date modified: 2021-02-05_
+_date modified: 2021-03-01_
 
 
 [atlassian dotfiles]: <https://www.atlassian.com/git/tutorials/dotfiles>
